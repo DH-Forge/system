@@ -1,0 +1,228 @@
+# Contributing to DH Forge System (DHFS)
+
+First off, thank you for considering contributing to DHFS! It's people like you that make the open-source community such a great place.
+
+> [!IMPORTANT]
+> 1. All contributors should read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+> 2. We recommend [filing an issue](https://github.com/DH-Forge/system/issues/new/choose) before starting work on a new feature. This helps to avoid duplicate work or effort that might not align with the project's goals and could be rejected.
+
+## Table of Contents
+
+- [Contributing to DH Forge System (DHFS)](#contributing-to-dh-forge-system-dhfs)
+	- [Table of Contents](#table-of-contents)
+	- [Getting Started](#getting-started)
+		- [Prerequisites](#prerequisites)
+		- [Installation](#installation)
+	- [Project Structure](#project-structure)
+		- [Root](#root)
+		- [Packages](#packages)
+			- [📦 Models](#-models)
+			- [📦 Helpers](#-helpers)
+			- [📦 TypeScript Config](#-typescript-config)
+		- [Apps](#apps)
+			- [⚡️ Docs](#️-docs)
+			- [⚡️ schema](#️-schema)
+		- [GitHub](#github)
+		- [Changeset](#changeset)
+	- [Tech Stack](#tech-stack)
+	- [Development Workflow](#development-workflow)
+		- [Running Locally](#running-locally)
+		- [Building Packages](#building-packages)
+	- [Submitting Changes](#submitting-changes)
+		- [Branching](#branching)
+		- [Committing](#committing)
+		- [Creating a Changeset](#creating-a-changeset)
+		- [Pull Requests](#pull-requests)
+	- [Versioning and Publishing Packages](#versioning-and-publishing-packages)
+
+## Getting Started
+
+This section will guide you through setting up the project locally.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) - we recommend using [fnm](https://github.com/Schniz/fnm).
+- [pnpm](https://pnpm.io/installation).
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/DH-Forge/system.git dh-forge-system
+    cd dh-forge-system
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
+
+## Project Structure
+
+This repository is a monorepo managed with pnpm workspaces and Turborepo. Here's a breakdown of the key directories:
+
+### Root
+`/`
+Contains core project configuration (`package.json`, `turbo.json`, `pnpm-workspace.yaml`), top-level documentation (`README.md`, `LICENSE`, `GOVERNANCE.md`, `CODE_OF_CONDUCT.md`), and this `CONTRIBUTING.md` file.
+
+### Packages
+`/packages/`
+Houses the individual, publishable Node.js packages.
+
+#### 📦 Models
+`/packages/forge-models`
+This is the core of DHFS. It contains the Zod schemas that define all DHFS data structures. TypeScript types and JSON Schemas are generated from these schemas.
+
+#### 📦 Helpers
+`/packages/forge-helpers`
+Provides utility functions for resolving and formatting data related to DHFS.
+
+#### 📦 TypeScript Config
+`/packages/forge-tsconfig`
+Contains shared TypeScript configurations used across the monorepo to ensure consistency.
+
+### Apps
+`/apps/`
+Contains applications built using the DHFS packages.
+
+#### ⚡️ Docs
+`/apps/docs`
+The source code for the official [Documentation Website](https://docs.dhfs.dev), built with Starlight (Astro).
+
+#### ⚡️ schema
+`/apps/schema`
+Infrastructure for publishing and hosting the generated JSON Schema files, making them available at [schema.dhfs.dev](https://schema.dhfs.dev).
+
+### GitHub
+`/.github/`
+Contains GitHub-specific files, including workflow definitions for CI/CD.
+
+### Changeset
+`/.changeset/`
+Manages versioning and publishing of packages using [Changesets](https://github.com/changesets/changesets).
+
+## Tech Stack
+
+-   **Monorepo Management**: [pnpm workspaces](https://pnpm.io/workspaces) & [Turborepo](https://turbo.build/repo)
+-   **Package Management**: [pnpm](https://pnpm.io/)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Schema Definition & Validation**: [Zod](https://zod.dev/)
+-   **Documentation Site**: [Astro Starlight](https://starlight.astro.build/)
+-   **Linting/Formatting**: [BiomeJS](https://biomejs.dev/) (based on `biome.json`)
+-   **Versioning & Publishing**: [Changesets](https://github.com/changesets/changesets)
+
+## Development Workflow
+
+### Running Locally
+
+Each application and package has its own development scripts. Refer to the `package.json` in the respective directory for specific commands. Generally, you can run development servers or watch modes using:
+
+-   **For `apps/docs` (Documentation Site):**
+    ```bash
+    pnpm --filter @forge/docs dev
+    ```
+    This will typically start a local development server at `localhost:4321`.
+
+-   **For packages (e.g., `forge-models`, `forge-helpers`):**
+    These packages usually have a `dev` script for building in watch mode.
+    ```bash
+    pnpm --filter @forge/models dev
+    pnpm --filter @forge/helpers dev
+    ```
+
+Turborepo helps optimize running these scripts across the monorepo. You can also run scripts from the root:
+
+```bash
+pnpm dev # Runs the dev script for all packages and apps simultaneously
+```
+
+### Building Packages
+
+To build all packages and apps for production:
+
+```bash
+pnpm build
+```
+
+You can also build specific packages:
+
+```bash
+pnpm --filter @forge/models build
+```
+
+## Submitting Changes
+
+We follow a standard GitHub flow for contributions: fork, branch, commit, push, and pull request.
+
+### Branching
+
+Create a descriptive branch name for your feature or bug fix. Some common prefixes:
+
+-   `feat/`: For new features (e.g., `feat/add-new-ancestry-schema`)
+-   `fix/`: For bug fixes (e.g., `fix/resolve-validation-issue`)
+-   `docs/`: For documentation changes (e.g., `docs/update-contributing-guide`)
+-   `chore/`: For maintenance tasks, refactoring, etc. (e.g., `chore/upgrade-dependencies`)
+
+Example:
+```bash
+git checkout -b feat/your-awesome-feature
+```
+
+### Committing
+
+-   Write clear, concise commit messages.
+-   Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification if possible, though it's not strictly enforced for every commit. It helps in generating automated changelogs.
+
+### Creating a Changeset
+
+If your changes affect any of the publishable packages in the `/packages` directory (e.g., you've changed code in `forge-models` or `forge-helpers`), you **must** include a changeset. This is crucial for versioning and changelog generation.
+
+1.  **After committing your changes, run:**
+    ```bash
+    pnpm changeset
+    ```
+2.  **Follow the prompts:**
+    -   Select which packages have been changed.
+    -   Indicate whether the change is a `patch`, `minor`, or `major` update for each affected package according to [Semantic Versioning](https://semver.org/).
+    -   Write a concise summary of the change. This summary will be used in the changelog.
+
+    This will create a new markdown file in the `/.changeset` directory. Commit this file along with your other changes.
+
+    *Example changeset message:*
+    ```
+    ---
+    "@forge/models": minor
+    ---
+    Add support for `newOptionalField` in the Character schema.
+    ```
+
+### Pull Requests
+
+1.  Push your branch to your fork:
+    ```bash
+    git push origin feat/your-awesome-feature
+    ```
+2.  Open a Pull Request (PR) against the `main` branch of the `DH-Forge/system` repository.
+3.  Provide a clear description of your changes in the PR. Link to any relevant issues.
+4.  Ensure that all automated checks (CI, linting, tests) pass.
+5.  A maintainer will review your PR. Be prepared to address any feedback.
+
+## Versioning and Publishing Packages
+
+Package publishing has been configured using [Changesets](https://github.com/changesets/changesets). Please review their [documentation](https://github.com/changesets/changesets#documentation) to familiarize yourself with the workflow.
+
+This project comes with automated npm releases setup in a [GitHub Action](https://github.com/changesets/action). When PRs with changesets are merged to `main`, the "Release" action will:
+1.  Consume the changeset files.
+2.  Bump the versions of the affected packages.
+3.  Generate/update changelogs.
+4.  Create a "Version Packages" PR.
+5.  Once the "Version Packages" PR is merged, it will publish the updated packages to npm.
+
+To get this automation working fully if you are setting up a fork or similar project:
+- You will need to create an `NPM_TOKEN` (with publish permissions for your npm scope) and a `GITHUB_TOKEN` (usually automatically available to actions, but might need `contents: write` and `pull-requests: write` permissions for the Changesets action to create PRs) in your repository's secrets.
+- You should also install the [Changesets bot](https://github.com/apps/changeset-bot) on your GitHub repository. It helps manage changesets, for example, by reminding authors to add one if it's missing.
+
+For more information about this automation, refer to the official [changesets documentation on automating with GitHub Actions](https://github.com/changesets/changesets/blob/main/docs/automating-changesets.md).
+
+---
+
+Thank you for contributing!

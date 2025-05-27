@@ -1,0 +1,7 @@
+{
+	"extends": "@forge/tsconfig/library.json",
+	"include": ["src"],
+	"compilerOptions": {
+		"outDir": "dist"
+	}
+}

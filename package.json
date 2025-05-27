@@ -1,0 +1,29 @@
+{
+	"name": "dh-forge-system",
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"format": "biome format --write",
+		"lint": "biome lint --write .",
+		"lint:fix": "biome check --write .",
+		"clean": "turbo run clean && rm -rf node_modules",
+		"changeset": "changeset",
+		"version-packages": "changeset version",
+		"prepare": "npx lint-staged",
+		"release": "turbo run build --filter=@forge/docs^... && changeset publish"
+	},
+	"lint-staged": {
+		"*.{json,css,html,ts,tsx,js,jsx}": "biome format --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@changesets/cli": "^2.29.4",
+		"lint-staged": "^16.0.0",
+		"turbo": "^2.5.3"
+	},
+	"packageManager": "pnpm@8.15.6",
+	"engines": {
+		"node": ">=18"
+	}
+}

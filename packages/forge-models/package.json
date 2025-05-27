@@ -1,0 +1,27 @@
+{
+	"name": "@forge/models",
+	"description": "DHFS Models for defining and validating data",
+	"version": "0.0.0",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"sideEffects": false,
+	"license": "MIT",
+	"files": ["dist/**"],
+	"scripts": {
+		"build": "tsup src/index.ts --format esm,cjs --dts",
+		"dev": "tsup src/index.ts --format esm,cjs --watch --dts",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+	},
+	"devDependencies": {
+		"@forge/tsconfig": "workspace:*",
+		"tsup": "^8.5.0",
+		"typescript": "5.8.3"
+	},
+	"dependencies": {
+		"zod": "^3.25.30"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

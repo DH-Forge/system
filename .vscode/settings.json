@@ -1,0 +1,31 @@
+{
+	// Triggers biome formatting on save.
+	"[json][typescript][javascript][tsx][html][css][postcss][sql]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.ts": "explicit",
+			"source.organizeImports": "explicit"
+		},
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+
+	// Enables tailwind intellisense in typescript
+	"tailwindCSS.experimental.classRegex": [
+		"class:\\s*?[\"'`]([^\"'`]*).*?,",
+		"className:\\s*?[\"'`]([^\"'`]*).*?,",
+		"([\"'`][^\"'`]*.*?[\"'`])",
+		"[\"'`]([^\"'`]*).*?[\"'`]"
+	],
+	"tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css",
+	"files.associations": {
+		"*.css": "tailwindcss",
+		"CONTRIBUTING": "md"
+	},
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+
+	// Excludes generated files in explorer
+	"files.watcherExclude": {
+		"**/node_modules": true
+	}
+}

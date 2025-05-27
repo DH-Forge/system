@@ -1,0 +1,17 @@
+{
+	"recommendations": [
+		// Tailwind CSS - Intellisense
+		"bradlc.vscode-tailwindcss",
+
+		// Biome - Code Linting + Formatting
+		"biomejs.biome",
+
+		// Astro - Syntax Highlighting
+		"astro-build.astro-vscode",
+
+
+		// MDX - JSX in markdown
+		"unifiedjs.vscode-mdx"
+	],
+	"unwantedRecommendations": []
+}
