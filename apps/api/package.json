@@ -12,7 +12,6 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.4.0",
-		"@forge/models": "workspace:*",
 		"@tailwindcss/vite": "^4.1.8",
 		"astro": "^5.8.0",
 		"tailwindcss": "^4.1.8",

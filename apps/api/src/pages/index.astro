@@ -1,23 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { appVersions } from "../versions";
-
-// Group versions by major version number and sort in reverse order
-const groupedVersions = appVersions.reduce(
-	(acc, version) => {
-		const majorVersion = version.split(".")[0];
-		if (!acc[majorVersion]) {
-			acc[majorVersion] = [];
-		}
-		acc[majorVersion].push(version);
-		return acc;
-	},
-	{} as Record<string, string[]>,
-);
-
-const sortedMajorVersions = Object.keys(groupedVersions).sort(
-	(a, b) => Number(b) - Number(a),
-);
+import { sortedVersions } from "../lib/versions";
 
 const exampleUsage = JSON.stringify(
 	{
@@ -62,15 +45,25 @@ const exampleUsage = JSON.stringify(
 
 	<h2>Available Schema Versions:</h2>
 	{
-		sortedMajorVersions.map((majorVersion) => (
+		sortedVersions.map(({majorVersion,versions}) => (
 			<div>
 				<h3>Version {majorVersion}</h3>
-				<ul>
-					{groupedVersions[majorVersion]
-						.sort((a, b) => b.localeCompare(a))
+				<ul class="font-mono">
+					{versions
 						.map((version) => (
 							<li>
-								<a href={`/${version}/schema.json`}>{version}</a>
+								<p class="mb-0 font-medium">{version}</p>
+								<ul class="text-sm leading-tight">
+									<li>
+										<a href={`/${version}/character.json`}>/{version}/character.json</a>
+									</li>
+									<li>
+										<a href={`/${version}/registry-core.json`}>/{version}/registry-core.json</a>
+									</li>
+									<li>
+										<a href={`/${version}/registry-campaign.json`}>/{version}/registry-campaign.json</a>
+									</li>
+								</ul>
 							</li>
 						))}
 				</ul>

@@ -26,9 +26,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.4.0
         version: 3.4.0
-      '@forge/models':
-        specifier: workspace:*
-        version: link:../../packages/forge-models
       '@tailwindcss/vite':
         specifier: ^4.1.8
         version: 4.1.8(vite@6.3.5(@types/node@20.11.24)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0))
@@ -67,9 +64,6 @@ importers:
 
   apps/example-registry:
     dependencies:
-      '@forge/models':
-        specifier: workspace:*
-        version: link:../../packages/forge-models
       hono:
         specifier: ^4.7.10
         version: 4.7.10
