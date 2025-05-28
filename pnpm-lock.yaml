@@ -39,9 +39,15 @@ importers:
 
   apps/schema:
     dependencies:
+      '@forge/models':
+        specifier: workspace:*
+        version: link:../../packages/forge-models
       hono:
         specifier: ^4.7.10
         version: 4.7.10
+      zod:
+        specifier: ^3.25.30
+        version: 3.25.30
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: ^1.2.3

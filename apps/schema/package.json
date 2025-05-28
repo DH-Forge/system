@@ -1,8 +1,8 @@
 {
-	"name": "@forge/schema",
-	"version": "0.0.0",
-	"private": true,
-	"type": "module",
+  "name": "@forge/schema",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,12 +11,14 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
-    "hono": "^4.7.10"
+    "@forge/models": "workspace:*",
+    "hono": "^4.7.10",
+    "zod": "^3.25.30"
   },
   "devDependencies": {
-		"@forge/tsconfig": "workspace:*",
     "@cloudflare/vite-plugin": "^1.2.3",
     "@cloudflare/workers-types": "^4.20240722.0",
+    "@forge/tsconfig": "workspace:*",
     "vite": "^6.3.5",
     "vite-ssr-components": "^0.1.0",
     "wrangler": "^4.17.0"
