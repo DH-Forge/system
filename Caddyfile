@@ -1,0 +1,16 @@
+{
+	local_certs
+	email contact@dhfs.dev
+}
+
+
+dhfs.localhost {
+	encode gzip
+
+	# Vide node modules
+	handle /node_modules/* {
+		reverse_proxy localhost:3000
+	}
+
+	reverse_proxy localhost:5173
+}

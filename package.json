@@ -4,6 +4,7 @@
 	"scripts": {
 		"build": "turbo run build",
 		"dev": "turbo run dev",
+		"caddy": "caddy run --config Caddyfile",
 		"format": "biome format --write",
 		"lint": "biome lint --write .",
 		"lint:fix": "biome check --write .",
