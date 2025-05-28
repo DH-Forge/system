@@ -1,20 +1,31 @@
 import { Hono } from "hono";
-import { registryCampaign } from "src/v1/campaign";
-import { registryCore } from "src/v1/core";
 import type { z } from "zod/v4";
+import { registryCampaign } from "./v1/campaign";
+import { registryCore } from "./v1/core";
 
 const app = new Hono();
 
+const versions = ["v1"] as const;
+type Version = (typeof versions)[number];
+
 const modelToFilename = {
-	"core.json": registryCore,
-	"campaign.json": registryCampaign,
-} satisfies Record<string, z.ZodSafeParseResult<unknown>>;
+	"core.json": {
+		v1: registryCore,
+	},
+	"campaign.json": {
+		v1: registryCampaign,
+	},
+} satisfies Record<string, Record<Version, z.ZodSafeParseResult<unknown>>>;
 
 const isFilename = (name: string): name is keyof typeof modelToFilename => {
 	return Object.keys(modelToFilename).includes(name);
 };
+const isVersion = (version: string): version is Version => {
+	return versions.includes(version as Version);
+};
 
-app.get("/v1/:fileName", (c) => {
+app.get("/:version/:fileName", (c) => {
+	const version = c.req.param("version");
 	const fileName = c.req.param("fileName");
 
 	if (!fileName.endsWith(".json")) {
@@ -22,6 +33,14 @@ app.get("/v1/:fileName", (c) => {
 		return c.json({
 			error: "Bad Request",
 			message: "File name must end with .json",
+		});
+	}
+
+	if (!isVersion(version)) {
+		c.status(404);
+		return c.json({
+			error: "Not Found",
+			message: `Version '${version}' not found`,
 		});
 	}
 
@@ -42,7 +61,7 @@ app.get("/v1/:fileName", (c) => {
 	// Consider re-enabling cache control for production:
 	// c.header("Cache-Control", "public, max-age=3600, must-revalidate"); // e.g., 1 hour cache
 
-	const model = modelToFilename[fileName];
+	const model = modelToFilename[fileName][version];
 
 	if (!model.success) {
 		c.status(500);

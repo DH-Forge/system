@@ -1,5 +1,5 @@
+import { appVersions } from "@forge/models";
 import { createSchemaRoute } from "../../lib/resolve-schema";
-import { appVersions } from "../../lib/versions";
 
 export const GET = createSchemaRoute(
 	(models) => models.registryCampaign,

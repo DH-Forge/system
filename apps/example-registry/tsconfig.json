@@ -3,8 +3,6 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"@forge/models": ["../../packages/forge-models/src/index.ts"],
-			"@forge/models/*": ["../../packages/forge-models/src/*"]
 		},
 		"types": ["vite/client", "@cloudflare/workers-types"],
 		"jsxImportSource": "hono/jsx"

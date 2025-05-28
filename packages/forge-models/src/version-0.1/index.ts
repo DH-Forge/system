@@ -1,4 +1,4 @@
-import type { VersionModelMap } from "../types";
+import type { VersionModelMap } from "../lib/types";
 import { characterSchema } from "./character";
 import { registryCampaignSchema } from "./registry-campaign";
 import { registryCoreSchema } from "./registry-core";

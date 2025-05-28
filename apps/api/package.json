@@ -8,9 +8,12 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"check": "tsc --noEmit",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
 	},
 	"dependencies": {
+		"@forge/models": "workspace:*",
 		"@astrojs/sitemap": "^3.4.0",
 		"@tailwindcss/vite": "^4.1.8",
 		"astro": "^5.8.0",

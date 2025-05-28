@@ -1,5 +1,6 @@
-import type { VersionID, VersionModelMap } from "./types";
+import type { VersionID, VersionModelMap } from "./lib/types";
 import { schema as schemaV0_1 } from "./version-0.1";
+export type { VersionID, VersionModelMap } from "./lib/types";
 
 export const versionMap = {
 	"0.1.x": schemaV0_1,

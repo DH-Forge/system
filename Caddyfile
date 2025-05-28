@@ -26,3 +26,15 @@ docs.localhost {
 
 	reverse_proxy localhost:4322
 }
+
+
+registry.localhost {
+	encode gzip
+
+	# Vide node modules
+	handle /node_modules/* {
+		reverse_proxy localhost:5173
+	}
+
+	reverse_proxy localhost:5173
+}

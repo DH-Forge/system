@@ -8,9 +8,12 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"check": "tsc --noEmit",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
 	},
 	"dependencies": {
+		"@forge/models": "workspace:*",
 		"@astrojs/starlight": "^0.34.3",
 		"astro": "^5.6.1",
 		"sharp": "^0.34.2"
