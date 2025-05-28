@@ -90,11 +90,11 @@ The source code for the official [Documentation Website](https://docs.dh-forge.c
 
 #### ⚡️ schema
 `/apps/schema`
-Infrastructure for publishing and hosting the generated JSON Schema files, making them available at [schema.dh-forge.com](https://schema.dh-forge.com).
+Infrastructure for publishing and hosting the generated JSON Schema files, making them available at [api.dh-forge.com](https://api.dh-forge.com).
 
 #### ⚡️ registry
 `/apps/registry`
-A working demonstration of a hosted repository. Available at [repo.dh-forge.com](https://repo.dh-forge.com).
+A working demonstration of a hosted repository. Available at [registry.dh-forge.com](https://registry.dh-forge.com).
 
 ### GitHub
 `/.github/`
