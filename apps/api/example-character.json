@@ -1,4 +1,4 @@
 {
-	"$schema": "https://api.localhost/0.1.x/schema.json",
-	"name": "John Doe"
+	"$schema": "https://api.dh-forge.com/0.1.x/character.json",
+	"type": "character"
 }

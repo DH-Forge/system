@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://docs.dh-forge.com",
 	server: {
 		port: 4322,
 	},
