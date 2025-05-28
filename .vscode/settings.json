@@ -1,6 +1,6 @@
 {
 	// Triggers biome formatting on save.
-	"[json][typescript][javascript][tsx][html][css][postcss][sql]": {
+	"[json][typescript][javascript][tsx][html][css][postcss][sql][astro]": {
 		"editor.codeActionsOnSave": {
 			"source.fixAll.ts": "explicit",
 			"source.organizeImports": "explicit"

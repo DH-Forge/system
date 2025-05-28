@@ -1,0 +1,25 @@
+{
+	"name": "@forge/api",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.4.0",
+		"@forge/models": "workspace:*",
+		"@tailwindcss/vite": "^4.1.8",
+		"astro": "^5.8.0",
+		"tailwindcss": "^4.1.8",
+		"zod": "^3.25.30"
+	},
+	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.16",
+		"typescript": "5.8.3"
+	}
+}
