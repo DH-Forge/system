@@ -2,8 +2,7 @@
 	"extends": "@forge/tsconfig/node.json",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"paths": {
-		},
+		"paths": {},
 		"types": ["vite/client", "@cloudflare/workers-types"],
 		"jsxImportSource": "hono/jsx"
 	}
