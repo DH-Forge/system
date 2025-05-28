@@ -1,0 +1,29 @@
+{
+	"name": "@forge/registry",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "$npm_execpath run build && vite preview",
+		"deploy": "$npm_execpath run build && wrangler deploy",
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"check": "tsc --noEmit",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+	},
+	"dependencies": {
+		"@forge/models": "workspace:*",
+		"hono": "^4.7.10",
+		"zod": "^3.25.32"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.2.3",
+		"@cloudflare/workers-types": "^4.20250528.0",
+		"@forge/tsconfig": "workspace:*",
+		"vite": "^6.3.5",
+		"vite-ssr-components": "^0.1.0",
+		"wrangler": "^4.17.0",
+		"typescript": "5.8.3"
+	}
+}

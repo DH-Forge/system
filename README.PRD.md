@@ -4,104 +4,154 @@
 
 ### 1.1. Project Overview
 
-Daggerheart is a collaborative fantasy tabletop roleplaying game (TTRPG) focusing on heroics and shared world-building. Like other TTRPGs (e.g., Dungeons & Dragons, Pathfinder), players create and manage detailed characters. Currently, character data is often siloed within specific tools (character builders, virtual tabletops, etc.).
+Daggerheart is a collaborative fantasy tabletop roleplaying game (TTRPG) focusing on heroics and shared world-building. Like other TTRPGs, players create and manage detailed characters. Currently, character data is often siloed within specific tools.
 
-This project aims to create an **open, unofficial API specification** for Daggerheart player character data. The goal is to establish a common standard that allows different tools to easily create, read, and understand character information, fostering a more interconnected and user-friendly ecosystem.
+This project aims to create an **open, unofficial system** for Daggerheart player character data. The goal is to establish a common standard that allows different tools to easily read and understand character information, fostering a more interconnected and user-friendly ecosystem.
 
-This specification focuses on **defining the structure, relationships, and referencing mechanisms** for character data, primarily using JSON. It is inspired by open standards and registry models but tailored for Daggerheart's specific needs.
+This specification focuses on **defining the structure, relationships, and referencing mechanisms** for character data, primarily using JSON. It is inspired by open standards (like [RSS](https://www.rssboard.org/rss-specification), and [Schema.org](https://schema.org/)) and registry models but tailored for Daggerheart's specific needs.
 
 ### 1.2. Problem Statement
 
 - **Data Silos:** Player character data is locked into specific applications, making it difficult to move characters between tools.
 - **Interoperability Challenges:** Developers wanting to build tools for Daggerheart must create bespoke solutions for handling character data, increasing development time and limiting compatibility.
-- **Homebrew Complexity:** TTRPGs thrive on "homebrew." Existing systems often struggle to represent and share homebrew content in a structured, interoperable way.
+- **Homebrew Complexity:** TTRPGs thrive on homebrew content. Existing systems often struggle to represent and share homebrew content in a structured, interoperable way.
 
-### 1.3. Goals & Objectives
+### 1.3. Project Components & Deliverables
 
-- **Define an Open Standard:** Create a clear, publicly available specification for Daggerheart character data structure and relationships.
-- **Ensure Interoperability:** Enable different tools to _understand_ the same character data, even if their internal processing differs.
-- **Support Homebrew:** Provide a robust mechanism for incorporating custom game content alongside official rules.
+To address these problems effectively, the DH Forge System comprises three core components:
+
+1.  **The DHFS Standard (JSON Schema):** This is the heart of the project – the universal, open system for defining character and campaign data tructures. It will be published as a machine-readable JSON Schema, derived from Zod definitions, acting as the common language.
+2.  **DHFS Server Utilities (TS/JS Package):** An official, server-compatible Typescript/Javascript package. Its primary purpose is to **simplify osting** DHFS registries. It will provide utilities for:
+    - Resolving Core Registry dependencies.
+    - Implementing the **mandated server-side merge** logic for Campaign Registries.
+    - Serving registry data according to the DHFS standard.
+    - This directly addresses the increased complexity for Campaign Registry providers.
+3.  **DHFS Client Utilities (TS/JS Package):** An official, browser- and server-compatible Typescript/Javascript package designed for **tool evelopers**. It will offer:
+    - Utilities for fetching and consuming DHFS data.
+    - Type-safe interfaces based on the standard.
+    - Potential helpers for validation and change detection logic.
+
+**While official support focuses on TS/JS, the DHFS standard is designed to be platform-agnostic, and community contributions for other languages (e.g., Python, Rust, PHP) are encouraged and welcome.**
+
+### 1.4. Goals & Objectives
+
+- **Define an Open Standard:** Create a clear, publicly available JSON Schema for Daggerheart character data.
+- **Ensure Interoperability:** Enable different tools to _understand_ the same character data.
+- **Support Homebrew:** Provide a robust mechanism and **tooling** for incorporating custom game content.
 - **Focus on Web & JSON:** Prioritize a format suitable for modern web applications and APIs.
-- **Prioritize Data Structure & Relations:** Define how character data is organized and how different elements relate, while remaining storage-agnostic.
-- **Handle Game Mechanics (Modifiers):** Define a standard way to _represent_ how game elements modify core character statistics.
-- **Maintain Simplicity:** Avoid unnecessary complexity, particularly in hosting and accessing core/custom data.
-- **Clarification:** This specification defines _how data is stored and referenced_. It does **not** define or mandate the specific _implementation logic_ for resolving or calculating character data (like final stats). It provides the building blocks for 3rd parties to implement their own consistent resolution logic.
+- **Simplify Data Consumption:** Provide client libraries to ease the integration of DHFS data into tools.
+- **Simplify Data Hosting:** Provide server libraries to manage the complexities of serving merged Campaign Registries.
+- **Handle Game Mechanics:** Define a standard way to _represent_ game element modifiers.
+- **Clarification:** This specification defines _how data is structured, referenced, and served_. The provided libraries will offer reference implementations, but the specification remains the core standard.
 
 ## 2. Core Concepts
 
 ### 2.1. Daggerheart Basics
 
-At its core, Daggerheart involves players creating **Characters**. Each character has:
+At its core, Daggerheart involves players creating **Characters**. Each character has: Core Stats, Heritage, Class & Subclass, Domains & Domain Cards, and Inventory. Many of these elements can confer Modifiers.
 
-- **Core Stats:** Evasion, Armour, HP, and six Abilities (Strength, Finesse, Spirit, Instinct, Presence, Knowledge).
-- **Heritage:** Ancestry and Community.
-- **Class & Subclass:** Defines primary abilities and roles.
-- **Domains & Domain Cards:** Specific powers and abilities.
-- **Inventory:** Weapons, Armour, Items.
+### 2.2. The Registry Model (Server-Merged)
 
-Many of these elements can confer bonuses or penalties (Modifiers) to Core Stats.
+DHFS uses a **Registry Model** with two main types:
 
-### 2.2. The Registry Model (Core + Campaign)
+- **Core Registry:** Provides the foundational game rules, classes, items, and other elements as defined by Daggerheart's official content (likely based on the SRD). It represents the baseline game experience.
+- **Campaign Registry:** Allows Game Masters and creators to introduce _modifications_ and _additions_ for their specific games—new items, altered abilities, unique classes, or entirely custom content. It defines what makes a specific campaign unique.
+  **Why Merge?** A character exists within a specific campaign's context; they need access to both the base rules _and_ any changes or additions that apply only to that game. A merge is necessary to create a single, consistent view of the _effective ruleset_ for that character in that campaign.
+  **Key Decision: Server-Side Merge**
+  DHFS **mandates a server-side merge model** to simplify tool development. The _server_ hosting a Campaign Registry is responsible for fetching its declared Core Registry dependency and serving a pre-merged dataset. **This specification defines _how_ this merge should behave (e.g., Campaign overrides Core), while the official DHFS Server Utilities package provides a reference TS/JS implementation. Community-provided solutions in other languages are expected to follow the same merge principles.**
 
-We use a **Registry Model** with two primary sources:
+### 2.3. Versioning Philosophy
 
-1.  **Core Registry:** A JSON file (or set) with standard, official Daggerheart game elements.
-2.  **Campaign Registry:** An _optional_ JSON file with homebrew or campaign-specific elements, acting as an _overlay_.
+DHFS uses **Semantic Versioning (SemVer)**.
 
-A **Character Sheet** references one Core Registry and optionally one Campaign Registry. Tools should **check the Campaign Registry first**, then the Core Registry, when looking up items.
+- **Internal Versioning:** Every Registry file _must_ contain its full SemVer number (e.g., `1.2.9`) within its `meta`.
+- **URL Versioning (`X.Y.x` Format):** Registry URLs _must_ use a `Major.Minor.x` format (e.g., `https://schema.dhfs.dev/core/1.2.x.json`). This URL _always_ serves the _latest patch version_ within that minor release, allowing automatic non-breaking updates.
+- **Specification Versioning:** The DHFS specification itself follows SemVer.
 
 ## 3. API Specification
 
-This section details the proposed method for structuring and referencing data.
+### 3.1. Registry Identification (Character Sheet)
 
-### 3.1. Registry Identification
-
-A character sheet declares its registries via URLs in its `meta` section.
+A character sheet declares its registry via a single `registry` URL and stores the `version` it was last saved with.
 
 ```json
 {
-	"characterSheet": {
-		"meta": {
-			"apiVersion": "0.3",
-			"core": "https://daggerheart.example.com/registry/v1/core.json",
-			"campaign": "https://my-game-night.com/our-campaign-homebrew.json"
-		}
-		// ... rest of the character data
-	}
+  "characterSheet": {
+    "meta": {
+      "registry": "https://my-game-night.com/campaigns/shadow-isles/1.0.x.json",
+      "version": "1.0.3"
+    }
+    // ... rest of the character data
+  }
 }
 ```
 
-### 3.2. Registry JSON Structure
+- `registry`: The URL (using `X.Y.x` format) pointing to the primary registry (Core or Campaign).
+- `version`: The _full_ SemVer number read from the `meta` of the registry file at the time the character sheet was last saved. Its primary purpose is **change detection**.
 
-Core and Campaign JSON files share a structure: a top-level object where keys are **Data Types** and values are objects containing items keyed by their **ID**.
+### 3.2. Registry JSON Structure (Core)
 
-- **Data Type Keys:** Use `category/type` format (e.g., `class/primary`, `inventory/weapon`). Allowed characters: alphanumeric, hyphens (`-`), and underscores (`_`). **Colons (`:`) are forbidden.**
-- **ID Keys:** Use alphanumeric, hyphens (`-`), and underscores (`_`). **Colons (`:`) and slashes (`/`) are forbidden.**
+A Core Registry file contains its version and compatibility information.
 
 ```json
-// Example: core.json (Partial)
+// Example: https://schema.dhfs.dev/core/1.2.x.json (serving 1.2.9)
 {
-	"class/primary": {
-		"warrior": { "name": "Warrior" /* ... */ }
-	},
-	"inventory/armour": {
-		"leather_armour": {
-			"name": "Leather Armour",
-			"modifiers": [{ "target": "armour", "type": "set", "value": 2 }]
-		}
-	},
-	"heritage/ancestry": {
-		"elf": {
-			"name": "Elf",
-			"modifiers": [
-				{ "target": "abilities.finesse", "type": "add", "value": 1 }
-			]
-		}
-	}
+  "meta": {
+    "name": "Daggerheart Core Rules",
+    "version": "1.2.9",
+    "compatibleVersions": [
+		"1.1.x",
+		"1.2.x",
+	]
+  },
+  "class/primary": {
+    "warrior": { "name": "Warrior" /* ... */ }
+  }
 }
 ```
 
-### 3.3. Item Identification & Referencing (`type:id`)
+### 3.3. Registry JSON Structure (Campaign - Unmerged)
+
+This defines the Campaign _before_ the server merges it, introducing the `homebrewContent` key for clarity.
+
+```json
+{
+  "meta": {
+    "name": "Shadow Isles Campaign",
+    "version": "1.0.3",
+    "compatibleVersions": ["1.0.x"],
+    "extendsCore": "https://schema.dhfs.dev/core/1.2.x.json"
+  },
+  "campaignInfo": { /* Optional Campaign-specific metadata */ },
+  "homebrewContent": { // ALL game data changes MUST be under this key
+    "inventory/item": {
+      "healing_potion": { /* Override definition */ }
+    }
+  }
+}
+```
+
+- `extendsCore`: Specifies the Core Registry dependency.
+- `homebrewContent`: This is the **key innovation** for simplifying server merges. It isolates all game data changes, making it unambiguous for the server what needs to be overlaid onto the Core Registry.
+
+### 3.4. Registry JSON Structure (Campaign - Merged Response)
+
+This is what a tool receives when it fetches a Campaign Registry URL. The `homebrewContent` key is gone, its contents merged in.
+
+```json
+{
+  "meta": {
+    "name": "Shadow Isles Campaign (DHFS Merged)",
+    "version": "1.0.3", // Campaign Version
+    "compatibleVersions": ["1.0.x"],
+    "mergedCoreVersion": "1.0.2" // States the Core version used
+  },
+  "class/primary": { /* Core data */ },
+  "inventory/item": { /* Merged data, Campaign overrides Core */ }
+}
+```
+
+### 3.5. Item Identification & Referencing (`type:id`)
 
 We use a single string format for references: `category/type:id`.
 
@@ -109,85 +159,47 @@ We use a single string format for references: `category/type:id`.
 - The part _after_ the **single colon** is the item's ID key (e.g., `stalwart`).
 - Parsing is unambiguous: split the string at the _only_ colon.
 
-**Examples:**
+* **Important:** Data Type keys and ID keys use alphanumeric, hyphens, and underscores. Colons and slashes are forbidden in IDs. `category/type` must not contain colons.
 
-- `class/primary:warrior`
-- `class/subclass:stalwart`
-- `inventory/weapon:long_sword`
+- When used in URLs, these **must be URL-encoded**.
 
-**Important Note on Slashes (`/`):** While `/` implies hierarchy, these are **identifiers, not URL paths**. When using these references within URLs (e.g., query parameters), they **must be URL-encoded** (e.g., `inventory%2Fweapon:longsword`).
+### 3.6. Lookup Mechanism & Server Responsibility
 
-### 3.4. Character Sheet Structure (Examples)
+The DHFS standard defines a clear separation of responsibilities between the server (Registry Provider) and the client (Tool) to ensure consistent data delivery and consumption, regardless of the underlying technology.
+**Server Responsibilities (Universal):**
+Any server hosting a Campaign Registry _must_:
 
-```json
-{
-	"characterSheet": {
-		"meta": {
-			/* ... */
-		},
-		"name": "Kaelen Swiftblade",
-		"class": "class/primary:warrior",
-		"subclass": "class/subclass:stalwart",
-		"heritage": {
-			"ancestry": "heritage/ancestry:elf",
-			"community": "heritage/community:woodland"
-		},
-		"baseStats": {
-			/* ... */
-		},
-		"inventory": [
-			{
-				"reference": "inventory/armour:leather_armour",
-				"quantity": 1,
-				"equipped": true
-			}
-		]
-		// ...
-	}
-}
-```
+- Resolve the `extendsCore` URL (found in its Campaign Registry's `meta`) to fetch the appropriate Core Registry.
+- Perform a deep merge, overlaying the `homebrewContent` from the Campaign Registry onto the Core Registry data. Items with identical `category/type:id` in `homebrewContent` _must_ replace their Core counterparts.
+- Serve the resulting merged JSON structure via its `X.Y.x` URL, including a `meta` section indicating both the Campaign version and the `mergedCoreVersion`.
+  **Tool Responsibilities (Universal):**
+  Any tool consuming DHFS data _must_:
+- Fetch the single `registry` URL provided in the character sheet's `meta` section.
+- Perform validation and change detection as defined in Section 3.7.
+- Utilize the received (potentially merged) data to represent the character.
+  **Official Libraries:**
+  The official **DHFS Server Utilities** and **DHFS Client Utilities** packages provide tested, reference implementations for these responsibilities in Typescript/Javascript, simplifying adoption and ensuring adherence to the specification. However, any implementation in any language following these universal responsibilities can be considered DHFS-compliant.
 
-### 3.5. Lookup Mechanism
+### 3.7. Validation & Change Detection (Tool Responsibility)
 
-Tools must:
+Tools _must_ perform the URL/Version Match (Sanity Check) and Patch Update Detection. The **DHFS Client Utilities** package may provide helpers for these checks.
 
-1.  Parse `category/type:id` by splitting at the colon.
-2.  Load Core and Campaign (if present) registries.
-3.  Check Campaign first: `campaignJson[type][id]`.
-4.  If not found, check Core: `coreJson[type][id]`.
-5.  Handle errors if not found in either.
-
-### 3.6. Defining Modifiers (Hybrid Model)
+### 3.8. Defining Modifiers (Hybrid Model)
 
 We represent how items affect stats using a hybrid model within registry items:
 
 1.  **`modifiers` (Array of Objects):** For structured, quantifiable effects.
-    - `target` (string): The stat to modify (e.g., `abilities.strength`, `evasion`). See 3.6.1.
-    - `type` (string): The type of modification (`add`, `set`). See 3.6.2.
+    - `target` (string): The stat to modify (e.g., `abilities.strength`, `evasion`). See 3.8.1.
+    - `type` (string, literal): The type of modification (`add`, `set`). See 3.8.2.
     - `value` (number): The magnitude.
     - `notes` (string, optional): Explanation.
 2.  **`effects_text` (Array of Strings):** For narrative, conditional, or complex effects.
 
-**Example Item:**
+**This 'Hybrid Model' combines two approaches: structured data and narrative text.** The `modifiers` array provides machine-readable, quantifiable effects (like +1 Strength) that tools can easily process for calculations. The `effects_text` array captures descriptive, conditional, or complex rules that are often better suited for human interpretation. **This hybrid approach is crucial because Daggerheart is a narrative-focused game; many unique abilities and item effects cannot be fully expressed as simple numerical adjustments and require descriptive text to convey their full intent and flavour.**
 
-```json
-{
-	"id": "dragonscale_shield",
-	"type": "inventory/armour",
-	"name": "Dragonscale Shield",
-	"modifiers": [
-		{ "target": "armour", "type": "add", "value": 3 },
-		{ "target": "abilities.spirit", "type": "add", "value": 1 }
-	],
-	"effects_text": ["You gain resistance to fire damage."]
-}
-```
+#### 3.8.1. Standard Target Keys (Initial List)
 
-#### 3.6.1. Standard Target Keys (Initial List)
-
-These keys identify the specific character statistics that a modifier can affect. They use **dot notation (`.`)** to represent the structure of a character's stats (e.g., `abilities.strength` means the `strength` stat within the `abilities` group).
-
-**Note on Notation:** We deliberately use dot notation here to distinguish these _character stat identifiers_ from the `category/type:id` format used for _registry item references_. While `category/type:id` tells a tool to "look this up in the registry," a target key like `abilities.strength` tells a tool to "find this specific field on the character sheet itself." This distinction prevents parsing ambiguity and ensures tools correctly interpret whether to perform a lookup or apply a direct modification.
+These keys identify character statistics, using **dot notation (`.`)**.
 
 - `abilities.strength`, `abilities.finesse`, `abilities.spirit`, `abilities.instinct`, `abilities.presence`, `abilities.knowledge`
 - `evasion`
@@ -195,80 +207,54 @@ These keys identify the specific character statistics that a modifier can affect
 - `hp.max`
 - `damage.bonus`
 - `speed`
+  _(This list needs formal definition and maintenance)._
 
-_(This list needs formal definition and maintenance)._
-
-#### 3.6.2. Standard Modifier Types
+#### 3.8.2. Standard Modifier Types
 
 - `add`: Adds the `value`.
-- `set`: Sets the `value` (often applied before `add`).
+- `set`: Sets the `value`.
 
-#### 3.6.3. Processing Modifiers (Tool Responsibility)
+#### 3.8.3. Processing Modifiers (Tool Responsibility)
 
-Tools should gather all `modifiers` and `effects_text`. They need to implement their own logic to calculate final stats based on `modifiers` (following a consistent order of operations) and display `effects_text` for user reference. **This spec defines _what_ is stored, not _how_ to calculate.**
+Tools gather `modifiers` and `effects_text`. They implement their own logic to calculate final stats based on `modifiers` and display `effects_text`. **This spec defines _what_ is stored, not _how_ to calculate**.
 
-### 3.7. Data Types (Initial List)
+### 3.9. Data Types (Initial List)
 
 - `class/primary`, `class/subclass`, `class/domain`, `class/domain/card`
 - `heritage/ancestry`, `heritage/community`
 - `inventory/weapon`, `inventory/armour`, `inventory/item`
 - `feature`
+  _(This list needs formal definition and maintenance)._
 
-_(This list needs formal definition and maintenance)._
+### 3.10. Schema & Validation
 
-### **3.8 Schema & Validation**
-
-To ensure consistency, enable automated validation, and support code generation, DHFS makes the following commitments:
-
-- **Single Source of Truth:** The core data structures, types, and constraints of DHFS are defined using Zod schemas within the `DHForge` project (`/packages/forge-models`).
-- **Official JSON Schemas:** For each version of the DHFS specification, official **JSON Schema** files will be generated directly from the Zod definitions. These schemas serve as the framework-agnostic, machine-readable standard.
-- **Availability:** These official JSON Schemas will be published and made available at stable, versioned URLs (e.g., `https://schema.dhfs.dev`).
-- **Validation:** Any data claiming DHFS compatibility should successfully validate against these official JSON Schemas.
-- **Typescript Support:** Typescript type definitions will also be generated/inferred from the Zod schemas, providing first-class support for TS developers.
+- **Single Source of Truth:** Core data structures are defined using Zod schemas.
+- **Official JSON Schemas:** JSON Schemas will be generated.
+- **Availability:** JSON Schemas will be published at stable, versioned URLs.
+- **Validation:** DHFS-compatible data should validate. The provided **DHFS Client/Server Utilities** will leverage these schemas.
+- **Typescript Support:** Typescript types will be generated and included in the utility packages.
 
 ## 4. Use Cases & Implementation Examples
 
-This standard enables tools like:
-
-1.  **Visual Character Sheet Web Pages:** Load, resolve, calculate, and display character data.
-2.  **Livestream Overlays:** Pull key stats (HP, Name, Class) for real-time display.
-3.  **Virtual Tabletops (VTTs):** Import characters for online play.
-4.  **iPad Apps for In-Person Play:** Provide mobile character sheet access.
-5.  **MCP Servers / AI Tools:** Allow AI to understand character structure for narrative or GM assistance.
-
-### 4.1. Retrieving Registry Data
-
-Tools fetch registry data via direct HTTP GET requests to the URLs specified in `meta`.
-
-### 4.2. Resolving References & Modifiers (Tool Responsibility)
-
-Tools perform the fetching, lookup, and calculation based on the structures defined here.
+This standard enables tools like Visual Character Sheets, Livestream Overlays, VTTs, and AI Tools. The server-side merge significantly simplifies the import process for all these tools.
 
 ## 5. Recommendations & Warnings
 
-### 5.1. ID Naming Conventions
-
-- **Recommendation:** Homebrew creators should **prefix** their IDs (e.g., `mycampaign_dragon_shield`) to prevent collisions.
-- **Recommendation:** Adhere strictly to the allowed characters for `type` and `id` keys.
-
-### 5.2. Modifier Calculation Order
-
-- **Warning:** While this spec doesn't _mandate_ calculation logic, for interoperability of _results_, the community (or tool developers) should aim to converge on a standard order of operations (e.g., Base -> Set -> Add/Subtract).
-
-### 5.3. URL Encoding
-
-- **Warning:** Remember that references containing `/` (e.g., `inventory/weapon:longsword`) **must be URL-encoded** when used within URLs.
+- **ID Naming Conventions:** Homebrew creators should **prefix** their IDs to avoid unintended overrides.
+- **Campaign Hosting:** While providers _must_ implement the server-side merge logic, the **official DHFS Server Utilities package is designed to make this significantly easier**.
+- **Modifier Calculation Order:** A standard order is recommended.
+- **URL Encoding:** References **must be URL-encoded**.
 
 ## 6. Non-Goals
 
-- **Storing Character Sheets:** We define structure, not storage/hosting.
-- **Defining Game Mechanics/Resolution Logic:** We define data structure, not the _rules engine_ or _calculation implementation_.
-- **Being a Centralized Registry:** We define a _pattern_, not a single _service_.
-- **Replacing VTTs:** It's a data standard, not a platform.
+- Storing Character Sheets.
+- Defining Game Mechanics/Resolution Logic.
+- Being a Centralized Registry Service.
+- Replacing VTTs.
 
 ## 7. Future Considerations
 
-- **Registry Discovery:** An index file for popular/official registries.
-- **Versioning:** Robust versioning for registries and the API spec.
-- **Schema Validation:** Providing JSON Schemas.
+- **Registry Discovery:** An index file or service for popular registries.
 - **Modifier Calculation Order:** Formalizing a recommended sequence.
+- **Campaign-Specific Metadata:** Defining standard keys for `campaignInfo`.
+- **Authentication/Permissions:** How private campaigns might be handled.

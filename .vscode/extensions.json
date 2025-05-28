@@ -9,7 +9,6 @@
 		// Astro - Syntax Highlighting
 		"astro-build.astro-vscode",
 
-
 		// MDX - JSX in markdown
 		"unifiedjs.vscode-mdx"
 	],

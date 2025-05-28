@@ -1,5 +1,5 @@
 {
-	"name": "@forge/docs",
+	"name": "@forge/api",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
@@ -14,11 +14,14 @@
 	},
 	"dependencies": {
 		"@forge/models": "workspace:*",
-		"@astrojs/starlight": "^0.34.3",
-		"astro": "^5.6.1",
-		"sharp": "^0.34.2"
+		"@astrojs/sitemap": "^3.4.0",
+		"@tailwindcss/vite": "^4.1.8",
+		"astro": "^5.8.0",
+		"tailwindcss": "^4.1.8",
+		"zod": "^3.25.32"
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.16",
 		"typescript": "5.8.3"
 	}
 }

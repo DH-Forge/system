@@ -57,6 +57,7 @@ This repository uses a monorepo structure to manage different parts of the DHFS 
 - `/packages/forge-models`: This is the heart\! It contains the **Zod schemas** which serve as the single source of truth for defining all DHFS data structures. Typescript types and JSON Schemas are generated from here.
 - `/apps/docs`: Houses the source code for our [Documentation Website](https://docs.dhfs.dev).
 - `/apps/schema`: Contains the necessary files and infrastructure to publish and host the generated **JSON Schema files**. This makes the machine-readable schemas available at stable, versioned URLs like [schema.dhfs.dev/v1](https://schema.dhfs.dev/v1).
+- `/apps/registry`: A working demonstration of a hosted repository. Available at [repo.dhfs.dev](https://repo.dhfs.dev).
 - _(Other internal packages may exist but are primarily for development support)._
 
 ## Further Reading & Governance
