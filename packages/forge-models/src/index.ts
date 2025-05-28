@@ -7,3 +7,12 @@ export const versionMap = {
 
 export type AppVersion = keyof typeof versionMap;
 export const appVersions = Object.keys(versionMap) as AppVersion[];
+
+/**
+ * Type guard to check if a string is a valid AppVersion
+ * @param value - The string to check
+ * @returns True if the string is a valid AppVersion, false otherwise
+ */
+export function isAppVersion(value: string): value is AppVersion {
+	return appVersions.includes(value as AppVersion);
+}

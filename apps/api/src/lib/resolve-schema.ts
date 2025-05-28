@@ -1,6 +1,7 @@
+import { type AppVersion, isAppVersion } from "@forge/models";
 import type { APIContext, APIRoute } from "astro";
 import { z } from "zod/v4";
-import { type AppVersion, getVersionModels, isAppVersion } from "./versions";
+import { getVersionModels } from "./versions";
 
 // Infer the type from the return type of getVersionModels
 type VersionModels = ReturnType<typeof getVersionModels>;
