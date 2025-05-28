@@ -92,6 +92,10 @@ The source code for the official [Documentation Website](https://docs.dhfs.dev),
 `/apps/schema`
 Infrastructure for publishing and hosting the generated JSON Schema files, making them available at [schema.dhfs.dev](https://schema.dhfs.dev).
 
+#### ⚡️ registry
+`/apps/registry`
+A working demonstration of a hosted repository. Available at [repo.dhfs.dev](https://repo.dhfs.dev).
+
 ### GitHub
 `/.github/`
 Contains GitHub-specific files, including workflow definitions for CI/CD.
