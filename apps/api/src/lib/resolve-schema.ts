@@ -23,7 +23,7 @@ export const createSchemaRoute =
 	): APIRoute =>
 	async ({ params }: APIContext): Promise<Response> => {
 		const isDev = import.meta.env.DEV;
-		const serverHost = isDev ? "api.localhost" : "api.dhfs.dev";
+		const serverHost = isDev ? "api.localhost" : "api.dh-forge.com";
 
 		const version = params.version ?? "0.0.0";
 

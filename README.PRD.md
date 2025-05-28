@@ -65,7 +65,7 @@ DHFS uses a **Registry Model** with two main types:
 DHFS uses **Semantic Versioning (SemVer)**.
 
 - **Internal Versioning:** Every Registry file _must_ contain its full SemVer number (e.g., `1.2.9`) within its `meta`.
-- **URL Versioning (`X.Y.x` Format):** Registry URLs _must_ use a `Major.Minor.x` format (e.g., `https://schema.dhfs.dev/core/1.2.x.json`). This URL _always_ serves the _latest patch version_ within that minor release, allowing automatic non-breaking updates.
+- **URL Versioning (`X.Y.x` Format):** Registry URLs _must_ use a `Major.Minor.x` format (e.g., `https://schema.dh-forge.com/core/1.2.x.json`). This URL _always_ serves the _latest patch version_ within that minor release, allowing automatic non-breaking updates.
 - **Specification Versioning:** The DHFS specification itself follows SemVer.
 
 ## 3. API Specification
@@ -94,7 +94,7 @@ A character sheet declares its registry via a single `registry` URL and stores t
 A Core Registry file contains its version and compatibility information.
 
 ```json
-// Example: https://schema.dhfs.dev/core/1.2.x.json (serving 1.2.9)
+// Example: https://schema.dh-forge.com/core/1.2.x.json (serving 1.2.9)
 {
   "meta": {
     "name": "Daggerheart Core Rules",
@@ -120,7 +120,7 @@ This defines the Campaign _before_ the server merges it, introducing the `homebr
     "name": "Shadow Isles Campaign",
     "version": "1.0.3",
     "compatibleVersions": ["1.0.x"],
-    "extendsCore": "https://schema.dhfs.dev/core/1.2.x.json"
+    "extendsCore": "https://schema.dh-forge.com/core/1.2.x.json"
   },
   "campaignInfo": { /* Optional Campaign-specific metadata */ },
   "homebrewContent": { // ALL game data changes MUST be under this key

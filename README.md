@@ -1,8 +1,8 @@
 # DH Forge System (DHFS)
 
 [License](https://opensource.org/licenses/MIT)
-[Docs](https://docs.dhfs.dev)
-[JSON Schema](https://schema.dhfs.dev)
+[Docs](https://docs.dh-forge.com)
+[JSON Schema](https://schema.dh-forge.com)
 
 **DHFS is an open, unofficial system for defining, structuring, and sharing player character and game data for the Daggerheart™ TTRPG.**
 
@@ -42,11 +42,11 @@ Items within these registries (like `class/primary:warrior` or `inventory/item:h
 
 We're excited for you to explore and use DHFS\!
 
-- **For Developers & Implementers:** The best place to start is our **[Official Documentation Site](https://docs.dhfs.dev)**. It contains:
+- **For Developers & Implementers:** The best place to start is our **[Official Documentation Site](https://docs.dh-forge.com)**. It contains:
   - Detailed Guides & Tutorials.
   - The full Technical Specification.
   - Links to the published JSON Schemas.
-  - First-class [Typescript](https://docs.dhfs.dev/libraries/typescript) support (coming soon\!).
+  - First-class [Typescript](https://docs.dh-forge.com/libraries/typescript) support (coming soon\!).
 - **For Contributors:** We welcome community involvement\! Please read our [**CONTRIBUTING**](CONTRIBUTING) guide to learn how you can help.
 
 ## Project Structure (Monorepo)
@@ -55,14 +55,14 @@ This repository uses a monorepo structure to manage different parts of the DHFS 
 
 - `/`: Contains core project configuration and top-level documentation like this README, `LICENSE`, `GOVERNANCE.md`, and `CONTRIBUTING`.
 - `/packages/forge-models`: This is the heart\! It contains the **Zod schemas** which serve as the single source of truth for defining all DHFS data structures. Typescript types and JSON Schemas are generated from here.
-- `/apps/docs`: Houses the source code for our [Documentation Website](https://docs.dhfs.dev).
-- `/apps/schema`: Contains the necessary files and infrastructure to publish and host the generated **JSON Schema files**. This makes the machine-readable schemas available at stable, versioned URLs like [schema.dhfs.dev/v1](https://schema.dhfs.dev/v1).
-- `/apps/registry`: A working demonstration of a hosted repository. Available at [repo.dhfs.dev](https://repo.dhfs.dev).
+- `/apps/docs`: Houses the source code for our [Documentation Website](https://docs.dh-forge.com).
+- `/apps/schema`: Contains the necessary files and infrastructure to publish and host the generated **JSON Schema files**. This makes the machine-readable schemas available at stable, versioned URLs like [schema.dh-forge.com/v1](https://schema.dh-forge.com/v1).
+- `/apps/registry`: A working demonstration of a hosted repository. Available at [repo.dh-forge.com](https://repo.dh-forge.com).
 - _(Other internal packages may exist but are primarily for development support)._
 
 ## Further Reading & Governance
 
-- **[Specification](https://docs.dhfs.dev/specification):** For those who want the deep, formal technical details behind every decision and structure in DHFS.
+- **[Specification](https://docs.dh-forge.com/specification):** For those who want the deep, formal technical details behind every decision and structure in DHFS.
 - **[Governance](GOVERNANCE.md):** Learn about how the DHFS project is managed and how decisions are made.
 - **[Code of Conduct](CODE_OF_CONDUCT.md):** Our code of conduct for the DHFS community and contributors.
 - **[Contributing](CONTRIBUTING):** Find out how you can contribute to the standard, documentation, or tooling.
@@ -88,7 +88,7 @@ While the MIT license allows for forks and modifications of the DHFS specificati
 - **How it works (Future):** We plan to provide clear guidelines, potentially a test suite, and branding assets (like a logo) to help developers verify and showcase DHFS compatibility.
 - **Why it matters:** This allows the community to extend DHFS for specific needs (as permitted by the MIT license) while still providing a clear benchmark for core interoperability. Users can look for "DHFS Compatible" to ensure their chosen tools will work together seamlessly.
 
-_Further details on the DHFS Compatibility standard will be developed and shared in our [Official Documentation Site](https://docs.dhfs.dev) as the system matures._
+_Further details on the DHFS Compatibility standard will be developed and shared in our [Official Documentation Site](https://docs.dh-forge.com) as the system matures._
 
 ### Daggerheart™ License
 

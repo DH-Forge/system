@@ -40,7 +40,7 @@ It also applies when an individual is representing the DH Forge community in pub
 
 ## Reporting Violations
 
-If you witness or experience unacceptable behavior, or have any other concerns, please report it by contacting **Ollie at ollie@dhfs.dev**.
+If you witness or experience unacceptable behavior, or have any other concerns, please report it by contacting **Ollie at ollie@dh-forge.com**.
 
 All complaints will be reviewed and investigated promptly and fairly. We are committed to maintaining the confidentiality of the reporter where possible, though full anonymity cannot always be guaranteed, especially if direct action involving the reporter is necessary.
 
