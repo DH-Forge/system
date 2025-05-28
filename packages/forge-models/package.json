@@ -7,7 +7,9 @@
 	"types": "./dist/index.d.ts",
 	"sideEffects": false,
 	"license": "MIT",
-	"files": ["dist/**"],
+	"files": [
+		"dist/**"
+	],
 	"scripts": {
 		"build": "tsup src/index.ts --format esm,cjs --dts",
 		"dev": "tsup src/index.ts --format esm,cjs --watch --dts",
@@ -19,7 +21,7 @@
 		"typescript": "5.8.3"
 	},
 	"dependencies": {
-		"zod": "^3.25.30"
+		"zod": "^3.25.32"
 	},
 	"publishConfig": {
 		"access": "public"

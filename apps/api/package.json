@@ -16,7 +16,7 @@
 		"@tailwindcss/vite": "^4.1.8",
 		"astro": "^5.8.0",
 		"tailwindcss": "^4.1.8",
-		"zod": "^3.25.30"
+		"zod": "^3.25.32"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.16",
