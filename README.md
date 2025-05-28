@@ -2,7 +2,6 @@
 
 [License](https://opensource.org/licenses/MIT)
 [Docs](https://docs.dh-forge.com)
-[JSON Schema](https://api.dh-forge.com)
 
 **DHFS is an open, unofficial system for defining, structuring, and sharing player character and game data for the Daggerheart™ TTRPG.**
 
@@ -67,8 +66,7 @@ This repository uses a monorepo structure to manage different parts of the DHFS 
 - `/`: Contains core project configuration and top-level documentation like this README, `LICENSE`, `GOVERNANCE.md`, and `CONTRIBUTING`.
 - `/packages/forge-models`: This is the heart\! It contains the **Zod schemas** which serve as the single source of truth for defining all DHFS data structures. Typescript types and JSON Schemas are generated from here.
 - `/apps/docs`: Houses the source code for our [Documentation Website](https://docs.dh-forge.com).
-- `/apps/schema`: Contains the necessary files and infrastructure to publish and host the generated **JSON Schema files**. This makes the machine-readable schemas available at stable, versioned URLs like [api.dh-forge.com/v1.0.x/registry-core.json](https://api.dh-forge.com).
-- `/apps/registry`: A working demonstration of a hosted repository. Available at [registry.dh-forge.com](https://registry.dh-forge.com).
+- `/apps/registry`: A working demonstration of a hosted repository. Available at [Example Registry](https://registry.dh-forge.com).
 - _(Other internal packages may exist but are primarily for development support)._
 
 ## Further Reading & Governance

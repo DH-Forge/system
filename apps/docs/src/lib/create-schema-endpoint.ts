@@ -16,14 +16,14 @@ type VersionModels = ReturnType<typeof getVersionModels>;
  * @param getModel - A function that takes the version models and returns the specific model.
  * @returns An APIRoute function.
  */
-export const createSchemaRoute =
+export const createSchemaEndpoint =
 	(
 		getModel: (models: VersionModels) => z.ZodTypeAny,
 		filename = "schema.json",
 	): APIRoute =>
 	async ({ params }: APIContext): Promise<Response> => {
 		const isDev = import.meta.env.DEV;
-		const serverHost = isDev ? "api.localhost" : "api.dh-forge.com";
+		const serverHost = isDev ? "docs.localhost" : "dh-forge.com";
 
 		const version = params.version ?? "0.0.0";
 

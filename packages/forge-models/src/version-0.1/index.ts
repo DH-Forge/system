@@ -1,7 +1,7 @@
 import type { VersionModelMap } from "../lib/types";
+import { registryCampaignSchema } from "./campaign";
 import { characterSchema } from "./character";
-import { registryCampaignSchema } from "./registry-campaign";
-import { registryCoreSchema } from "./registry-core";
+import { registryCoreSchema } from "./core";
 
 export const schema = {
 	character: characterSchema,

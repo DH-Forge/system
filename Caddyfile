@@ -4,18 +4,6 @@
 }
 
 
-api.localhost {
-	encode gzip
-
-	# Vide node modules
-	handle /node_modules/* {
-		reverse_proxy localhost:4321
-	}
-
-	reverse_proxy localhost:4321
-}
-
-
 docs.localhost {
 	encode gzip
 

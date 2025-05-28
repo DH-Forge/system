@@ -1,7 +1,7 @@
 import { appVersions } from "@forge/models";
-import { createSchemaRoute } from "../../lib/resolve-schema";
+import { createSchemaEndpoint } from "../../../lib/create-schema-endpoint";
 
-export const GET = createSchemaRoute(
+export const GET = createSchemaEndpoint(
 	(models) => models.character,
 	"schema.character.json",
 );
