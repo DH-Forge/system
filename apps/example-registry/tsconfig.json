@@ -1,7 +1,7 @@
 {
 	"extends": "@forge/tsconfig/node.json",
-  "compilerOptions": {
-    "types": ["vite/client", "@cloudflare/workers-types"],
-    "jsxImportSource": "hono/jsx"
-  }
+	"compilerOptions": {
+		"types": ["vite/client", "@cloudflare/workers-types"],
+		"jsxImportSource": "hono/jsx"
+	}
 }
