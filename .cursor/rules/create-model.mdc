@@ -1,0 +1,123 @@
+---
+description:
+globs: packages/forge-models/src/**/*.ts,apps/docs/src/content/docs/models/**/*
+alwaysApply: false
+---
+# Rule: Create Model
+
+This rule outlines the process for defining new data models and ensuring their corresponding documentation is comprehensive and up-to-date. Adherence to this rule maintains clarity and consistency across the DH Forge System.
+
+## Core Principle
+
+Model definitions and their documentation are inextricably linked. **Whenever a model is created or modified, its documentation must be created or updated accordingly.**
+
+## Model Definition
+
+1.  **Location:** All core data models are defined as Zod schemas within the `/packages/forge-models/src/` directory.
+2.  - Models are stored within versioned folders (e.g., `/src/version-0.2`. `/src/version-1.0`)
+    - Organize models logically, potentially by category (e.g., `character/`, `item/`, `ability/`).
+    - Follow existing patterns or create new categorized subdirectories if appropriate.
+3.  **Technology:** Use @Zod schema definition and validation.
+4.  **Naming Conventions:**
+    - **Zod Schema Variable:** `camelCase` (e.g., `characterSchema`).
+    - **Exported Type:** `PascalCase` (e.g., `Character`), typically inferred from the Zod schema using `z.infer<typeof yourSchemaName>`.
+    - **File Names (for Zod schemas):** `kebab-case.ts` (e.g., `character.ts` or `item-schemas.ts`).
+
+## Documentation
+
+Each distinct model type _must_ have its own documentation page.
+
+1.  **Location:** `apps/docs/src/content/docs/models/`
+2.  **File Creation:**
+    - Create a new `.mdx` file for the model (e.g., `character.mdx` or `primary-class.mdx`).
+    - Use `kebab-case` for documentation filenames.
+3.  **Content Requirements:**
+    The `.mdx` file for each model must include:
+
+    - **Frontmatter:**
+      - `title`: A clear, descriptive title for the model (e.g., `Character Model`).
+      - `description`: A brief overview of what this model represents.
+    - **Main Content:**
+      - **Description Section:**
+        - A concise explanation of what the model represents and its purpose within the DH Forge System.
+        - Clarify any potential ambiguities.
+      - **Schema and Expected Values Section:**
+        - Detail all fields, their expected data types (e.g., string, number, boolean, array, nested object).
+        - Specify if fields are required or optional.
+        - Describe any constraints, enumerations (e.g., "must be one of 'VALUE_A', 'VALUE_B'"), or formatting rules.
+        - This section should accurately reflect the Zod schema. Including a relevant snippet of the Zod schema definition or a simplified representation is highly encouraged.
+      - **Examples Section:**
+        - Provide at least one, preferably multiple, clear JSON or TypeScript object examples illustrating valid instances of the model.
+        - Include examples that cover common use cases and demonstrate the use of optional fields.
+
+    **Example `.mdx` Structure:**
+
+    ````mdx
+    ---
+    title: Example Model Name
+    description: A brief overview of what this Example Model represents and its role in the system.
+    ---
+
+    ## Description
+
+    The `ExampleModel` is used to structure data related to [...]. Its primary purpose is to ensure consistency and provide a clear definition for [...].
+
+    ## Schema and Expected Values
+
+    The `ExampleModel` has the following structure:
+
+    | key                | type                | required | note                                                                                 |
+    |--------------------|---------------------|----------|--------------------------------------------------------------------------------------|
+    | id                 | string              | yes      | Unique identifier for the instance. Must follow UUID v4 format.                      |
+    | name               | string              | yes      | Human-readable name for the instance.                                                |
+    | status             | string              | yes      | Current status. Must be one of `ACTIVE`, `INACTIVE`, `PENDING`.                      |
+    | configuration      | object              | no       | Optional object containing further configuration details.                             |
+    | configuration.retries   | number         | no       | Number of retries, defaults to 3.                                                    |
+    | configuration.isEnabled | boolean        | yes      | Flag to enable or disable.                                                           |
+    | tags               | array of strings    | no       | List of associated tags.                                                             |
+
+    ## Examples
+
+    ### Basic Example
+
+    ```json
+    {
+      "id": "123e4567-e89b-12d3-a456-426614174000",
+      "name": "My First Example Instance",
+      "status": "ACTIVE"
+    }
+    ```
+    ````
+
+    ### Example with Optional Fields
+
+    ```json
+    {
+      "id": "987e6543-e21b-32d1-b432-872251234011",
+      "name": "Another Example Instance",
+      "status": "PENDING",
+      "configuration": {
+        "retries": 5,
+        "isEnabled": true
+      },
+      "tags": ["important", "needs-review"]
+    }
+    ```
+
+    ```
+
+    ```
+
+4.  **Referencing Other Models:**
+    - If the model references other models (e.g., using an ID that corresponds to another model, or the `category/type:id` convention if applicable), clearly explain these relationships.
+    - Where appropriate, link to the documentation pages for any referenced models.
+
+## Process Summary
+
+1.  **Define/Update Schema:** Create or modify the Zod schema in the relevant file within `/packages/forge-models/src/`.
+2.  **Create/Update Documentation:**
+    - Create a new `.mdx` file in `apps/docs/src/content/docs/models/` for a new model, or open the existing one for an update.
+    - Ensure the filename is `kebab-case`.
+3.  **Write Documentation Content:** Populate the `.mdx` file with the title, description, schema details, and examples as outlined above.
+4.  **Verify Accuracy:** Double-check that the documentation accurately reflects the current model schema.
+5.  **Commit Changes:** Commit both the schema changes (in `/packages/forge-models/`) and the documentation changes (in `apps/docs/src/content/docs/models/`) together in the same commit to ensure atomicity.
