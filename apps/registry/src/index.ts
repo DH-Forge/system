@@ -30,27 +30,18 @@ app.get("/:version/:fileName", (c) => {
 	const fileName = c.req.param("fileName");
 
 	if (!fileName.endsWith(".json")) {
-		c.status(400);
-		return c.json({
-			error: "Bad Request",
-			message: "File name must end with .json",
-		});
+		console.warn("File name must end with .json");
+		return c.notFound();
 	}
 
 	if (!isVersion(version)) {
-		c.status(404);
-		return c.json({
-			error: "Not Found",
-			message: `Version '${version}' not found`,
-		});
+		console.warn(`Version '${version}' not found`);
+		return c.notFound();
 	}
 
 	if (!isFilename(fileName)) {
-		c.status(404);
-		return c.json({
-			error: "Not Found",
-			message: `Endpoint '${fileName}' not found`,
-		});
+		console.warn(`Endpoint '${fileName}' not found`);
+		return c.notFound();
 	}
 
 	c.header("Server", "dhfs.localhost");
