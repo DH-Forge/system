@@ -10,6 +10,9 @@
 	"files": ["src/**"],
 	"exports": {
 		".": "./src/index.ts",
+		"./schema": "./src/schema.ts",
+		"./types": "./src/types.ts",
+		"./models/*": "./src/models/*",
 		"./version-0.1": "./src/version-0.1/index.ts",
 		"./version-0.1/*": "./src/version-0.1/*"
 	},
