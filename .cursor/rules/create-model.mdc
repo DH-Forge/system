@@ -1,6 +1,6 @@
 ---
 description:
-globs: packages/forge-models/src/**/*.ts,apps/docs/src/content/docs/models/**/*
+globs: packages/forge-schema/src/**/*.ts,apps/docs/src/content/docs/models/**/*
 alwaysApply: false
 ---
 # Rule: Create Model
@@ -13,7 +13,7 @@ Model definitions and their documentation are inextricably linked. **Whenever a 
 
 ## Model Definition
 
-1.  **Location:** All core data models are defined as Zod schemas within the `/packages/forge-models/src/` directory.
+1.  **Location:** All core data models are defined as Zod schemas within the `/packages/forge-schema/src/` directory.
 2.  - Models are stored within versioned folders (e.g., `/src/version-0.2`. `/src/version-1.0`)
     - Organize models logically, potentially by category (e.g., `character/`, `item/`, `ability/`).
     - Follow existing patterns or create new categorized subdirectories if appropriate.
@@ -114,10 +114,10 @@ Each distinct model type _must_ have its own documentation page.
 
 ## Process Summary
 
-1.  **Define/Update Schema:** Create or modify the Zod schema in the relevant file within `/packages/forge-models/src/`.
+1.  **Define/Update Schema:** Create or modify the Zod schema in the relevant file within `/packages/forge-schema/src/`.
 2.  **Create/Update Documentation:**
     - Create a new `.mdx` file in `apps/docs/src/content/docs/models/` for a new model, or open the existing one for an update.
     - Ensure the filename is `kebab-case`.
 3.  **Write Documentation Content:** Populate the `.mdx` file with the title, description, schema details, and examples as outlined above.
 4.  **Verify Accuracy:** Double-check that the documentation accurately reflects the current model schema.
-5.  **Commit Changes:** Commit both the schema changes (in `/packages/forge-models/`) and the documentation changes (in `apps/docs/src/content/docs/models/`) together in the same commit to ensure atomicity.
+5.  **Commit Changes:** Commit both the schema changes (in `/packages/forge-schema/`) and the documentation changes (in `apps/docs/src/content/docs/models/`) together in the same commit to ensure atomicity.

@@ -64,7 +64,7 @@ We're excited for you to explore and use DHFS\!
 This repository uses a monorepo structure to manage different parts of the DHFS project:
 
 - `/`: Contains core project configuration and top-level documentation like this README, `LICENSE`, `GOVERNANCE.md`, and `CONTRIBUTING`.
-- `/packages/forge-models`: This is the heart\! It contains the **Zod schemas** which serve as the single source of truth for defining all DHFS data structures. Typescript types and JSON Schemas are generated from here.
+- `/packages/forge-schema`: This is the heart\! It contains the **Zod schemas** which serve as the single source of truth for defining all DHFS data structures. Typescript types and JSON Schemas are generated from here.
 - `/apps/docs`: Houses the source code for our [Documentation Website](https://docs.dh-forge.com).
 - `/apps/registry`: A working demonstration of a hosted repository. Available at [Example Registry](https://registry.dh-forge.com).
 - _(Other internal packages may exist but are primarily for development support)._

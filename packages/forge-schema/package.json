@@ -1,5 +1,5 @@
 {
-	"name": "@forge/models",
+	"name": "@forge/schema",
 	"description": "DHFS Models for defining and validating data",
 	"version": "0.0.0",
 	"main": "./src/index.ts",

@@ -25,7 +25,7 @@ const getVersion = async (): Promise<string> => {
  */
 const useDirectory = async (version: string): Promise<string> => {
 	// Use path.resolve with process.cwd() to get the monorepo root
-	// Assumes the script is run from the 'packages/forge-models' directory
+	// Assumes the script is run from the 'packages/forge-schema' directory
 	const directory = path.resolve(
 		process.cwd(),
 		`../../apps/docs/src/schema/${version}`,

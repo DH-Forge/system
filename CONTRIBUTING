@@ -69,7 +69,7 @@ Contains core project configuration (`package.json`, `turbo.json`, `pnpm-workspa
 Houses the individual, publishable Node.js packages.
 
 #### 📦 Models
-`/packages/forge-models`
+`/packages/forge-schema`
 This is the core of DHFS. It contains the Zod schemas that define all DHFS data structures. TypeScript types and JSON Schemas are generated from these schemas.
 
 #### 📦 Helpers
@@ -122,10 +122,10 @@ Each application and package has its own development scripts. Refer to the `pack
     ```
     This will typically start a local development server at `localhost:4321`.
 
--   **For packages (e.g., `forge-models`, `forge-helpers`):**
+-   **For packages (e.g., `forge-schema`, `forge-helpers`):**
     These packages usually have a `dev` script for building in watch mode.
     ```bash
-    pnpm --filter @forge/models dev
+    pnpm --filter @forge/schema dev
     pnpm --filter @forge/helpers dev
     ```
 
@@ -146,7 +146,7 @@ pnpm build
 You can also build specific packages:
 
 ```bash
-pnpm --filter @forge/models build
+pnpm --filter @forge/schema build
 ```
 
 ## Submitting Changes
@@ -174,7 +174,7 @@ git checkout -b feat/your-awesome-feature
 
 ### Creating a Changeset
 
-If your changes affect any of the publishable packages in the `/packages` directory (e.g., you've changed code in `forge-models` or `forge-helpers`), you **must** include a changeset. This is crucial for versioning and changelog generation.
+If your changes affect any of the publishable packages in the `/packages` directory (e.g., you've changed code in `forge-schema` or `forge-helpers`), you **must** include a changeset. This is crucial for versioning and changelog generation.
 
 1.  **After committing your changes, run:**
     ```bash
@@ -190,7 +190,7 @@ If your changes affect any of the publishable packages in the `/packages` direct
     *Example changeset message:*
     ```
     ---
-    "@forge/models": minor
+    "@forge/schema": minor
     ---
     Add support for `newOptionalField` in the Character schema.
     ```
