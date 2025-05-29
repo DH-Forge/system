@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {},
-		"types": ["vite/client", "@cloudflare/workers-types"],
+		"types": ["vite/client"],
 		"jsxImportSource": "hono/jsx"
 	}
 }

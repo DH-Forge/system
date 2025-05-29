@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { handle } from "hono/vercel";
 import type { z } from "zod/v4";
 import { registryCampaign } from "./v1/campaign";
 import { registryCore } from "./v1/core";
@@ -74,4 +75,5 @@ app.get("/:version/:fileName", (c) => {
 	return c.json(model.data);
 });
 
-export default app;
+export const GET = handle(app);
+export const POST = handle(app);
