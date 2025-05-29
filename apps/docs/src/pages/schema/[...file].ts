@@ -1,6 +1,9 @@
+import {
+	getFilename,
+	getSchemaJson,
+} from "@forge/schema/versions/get-version.ts";
+import { listSchemaFiles } from "@forge/schema/versions/list-versions.ts";
 import type { APIRoute } from "astro";
-import { getFilename, getSchemaJson } from "src/schema/get-schema";
-import { listSchemaFiles } from "src/schema/list-schemas";
 
 export const GET: APIRoute = async ({ params, request }) => {
 	if (!params.file) {

@@ -1,9 +1,12 @@
 import path from "node:path";
-import {
-	characterSchema,
-	registryCampaignSchema,
-	registryCoreSchema,
-} from "../schema";
+import { z } from "zod/v4";
+import { campaign } from "../src/models/campaign";
+import { character } from "../src/models/character";
+import { registry } from "../src/models/registry";
+
+const characterSchema = z.toJSONSchema(character);
+const registryCampaignSchema = z.toJSONSchema(campaign);
+const registryCoreSchema = z.toJSONSchema(registry);
 
 /**
  * Returns the version value from the package.json
@@ -26,10 +29,7 @@ const getVersion = async (): Promise<string> => {
 const useDirectory = async (version: string): Promise<string> => {
 	// Use path.resolve with process.cwd() to get the monorepo root
 	// Assumes the script is run from the 'packages/forge-schema' directory
-	const directory = path.resolve(
-		process.cwd(),
-		`../../apps/docs/src/schema/${version}`,
-	);
+	const directory = path.resolve(process.cwd(), `./src/versions/${version}`);
 
 	/**
 	 * Ensures the schema directory exists.
@@ -64,7 +64,7 @@ const generateSchemas = async (): Promise<void> => {
 	await Promise.all(
 		schemas.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data, null, 2), "utf-8");
+			return writeFile(dest, JSON.stringify(data), "utf-8");
 		}),
 	);
 };

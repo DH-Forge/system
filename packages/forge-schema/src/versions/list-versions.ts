@@ -56,5 +56,5 @@ export function listSchemaFiles(): string[] {
 		.flatMap((directory) => getJsonFiles(directory))
 		.map((filePath) => getRelativeFilePath(schemaDirectory, filePath));
 
-	return jsonFiles;
+	return jsonFiles.sort((a, b) => b.localeCompare(a));
 }

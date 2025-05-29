@@ -12,12 +12,12 @@
 	],
 	"exports": {
 		".": "./src/index.ts",
-		"./schema": "./src/schema.ts",
 		"./types": "./src/types.ts",
+		"./versions/*": "./src/versions/*",
 		"./models/*": "./src/models/*"
 	},
 	"scripts": {
-		"generate-schema": "tsx ./src/scripts/generate-schema.ts",
+		"schema:gen": "tsx ./scripts/generate-json-schema.ts",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"check": "tsc --noEmit"
 	},

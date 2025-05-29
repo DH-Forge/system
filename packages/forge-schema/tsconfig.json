@@ -1,6 +1,6 @@
 {
 	"extends": "@forge/tsconfig/library.json",
-	"include": ["src"],
+	"include": ["src", "scripts"],
 	"exclude": ["dist", "build", "node_modules"],
 	"compilerOptions": {
 		"outDir": "dist"

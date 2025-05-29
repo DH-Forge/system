@@ -1,5 +1,5 @@
 ---
-import { getGroupedSchemaVersions } from "../schema/group-schemas";
+import { getGroupedSchemaVersions } from "@forge/schema/versions/group-versions.ts";
 ---
 
 <div>
@@ -21,9 +21,11 @@ import { getGroupedSchemaVersions } from "../schema/group-schemas";
 												{patch.schemas
 													.map((schema) => (
 													<li>
+														<a
+															href={`/schema/${schema.version}/${schema.model}.${schema.extension}`}
 
-														<a href={`/schema/${schema.version}/${schema.model}.${schema.extension}`}>
-															/schema/<span>{schema.version}</span>/<span>{schema.model}</span>.<span>{schema.extension}</span>
+														>
+															<b>{schema.model}</b><span style="opacity: 0.8;">.{schema.extension}</span>
 														</a>
 													</li>
 

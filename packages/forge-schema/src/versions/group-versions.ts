@@ -1,4 +1,4 @@
-import { listSchemaFiles } from "src/schema/list-schemas";
+import { listSchemaFiles } from "./list-versions.js";
 
 type SchemaData = {
 	version: string;
@@ -14,8 +14,9 @@ type SchemaData = {
  * @param schemaPath - The schema file path in the format "version/model/extension".
  * @returns An object containing version, majorVersion, minorVersion, patchVersion, model, and extension.
  */
-function formatSchemaPath(schemaPath: string): SchemaData {
-	const [version, model, extension] = schemaPath.split("/");
+function formatVersionPath(versionPath: string): SchemaData {
+	const [version, filename] = versionPath.split("/");
+	const [model, extension] = filename.split(".");
 
 	const [majorVersion, minorVersion, patchVersion] = version.split(".");
 
@@ -69,12 +70,10 @@ function groupByKey<K extends keyof SchemaData>(
  * @param schemas - The array of SchemaGroup objects to sort.
  * @returns The sorted array of SchemaGroup objects.
  */
-function sortGroup(schemas: SchemaGroup[]): SchemaGroup[] {
-	return schemas.sort((a, b) => {
-		const aVersion = a.version;
-		const bVersion = b.version;
-		return bVersion.localeCompare(aVersion);
-	});
+function sortGroup(a: SchemaGroup, b: SchemaGroup): number {
+	const aVersion = a.version;
+	const bVersion = b.version;
+	return bVersion.localeCompare(aVersion);
 }
 
 /**
@@ -82,27 +81,27 @@ function sortGroup(schemas: SchemaGroup[]): SchemaGroup[] {
  * @param schemas - The array of SchemaData objects to sort.
  * @returns The sorted array of SchemaData objects.
  */
-function sortData(schemas: SchemaData[]): SchemaData[] {
-	return schemas.sort((a, b) => {
-		const aVersion = a.model;
-		const bVersion = b.model;
-		return aVersion.localeCompare(bVersion);
-	});
+function sortData(a: SchemaData, b: SchemaData): number {
+	const aVersion = a.model;
+	const bVersion = b.model;
+	return aVersion.localeCompare(bVersion);
 }
 
 export function getGroupedSchemaVersions() {
-	const schemas = listSchemaFiles().map(formatSchemaPath);
+	const schemas = listSchemaFiles().map(formatVersionPath);
 
 	const majorVersions = groupByKey(schemas, "majorVersion").map((major) => {
 		const majorVersion = major.version;
-		const majorSchemas = sortGroup(groupByKey(major.schemas, "minorVersion"));
+		const majorSchemas = groupByKey(major.schemas, "minorVersion").sort(
+			sortGroup,
+		);
 
 		return {
 			version: majorVersion,
 			schemas: majorSchemas.map((minor) => {
 				const minorVersion = `${major.version}.${minor.version}.x`;
-				const minorSchemas = sortGroup(
-					groupByKey(minor.schemas, "patchVersion"),
+				const minorSchemas = groupByKey(minor.schemas, "patchVersion").sort(
+					sortGroup,
 				);
 
 				return {
@@ -110,7 +109,10 @@ export function getGroupedSchemaVersions() {
 					schemas: minorSchemas.map((patch) => {
 						const patchVersion = `${major.version}.${minor.version}.${patch.version}`;
 
-						return { version: patchVersion, schemas: sortData(patch.schemas) };
+						return {
+							version: patchVersion,
+							schemas: patch.schemas.sort(sortData),
+						};
 					}),
 				};
 			}),
