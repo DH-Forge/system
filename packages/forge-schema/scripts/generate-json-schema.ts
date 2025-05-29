@@ -1,8 +1,8 @@
 import path from "node:path";
 import { z } from "zod/v4";
-import { campaign } from "../src/models/campaign";
-import { character } from "../src/models/character";
-import { registry } from "../src/models/registry";
+import { campaign } from "../src/models/campaign/index.js";
+import { character } from "../src/models/character/index.js";
+import { registry } from "../src/models/registry/index.js";
 
 const characterSchema = z.toJSONSchema(character);
 const registryCampaignSchema = z.toJSONSchema(campaign);

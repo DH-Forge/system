@@ -1,11 +1,11 @@
 import { z } from "zod/v4";
-import { referenceVersion } from "../reference";
-import { registryAncestry } from "./registry-ancestry";
-import { registryItemArmor } from "./registry-armor";
-import { registryClass, registrySubclass } from "./registry-class";
-import { registryCommunity } from "./registry-community";
-import { registryItemSpecial } from "./registry-special";
-import { registryItemWeapon } from "./registry-weapon";
+import { referenceVersion } from "../reference.js";
+import { registryAncestry } from "./registry-ancestry.js";
+import { registryItemArmor } from "./registry-armor.js";
+import { registryClass, registrySubclass } from "./registry-class.js";
+import { registryCommunity } from "./registry-community.js";
+import { registryItemSpecial } from "./registry-special.js";
+import { registryItemWeapon } from "./registry-weapon.js";
 
 export const registryMeta = z.object({
 	_type: z.literal("registryMeta"),

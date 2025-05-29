@@ -2,7 +2,7 @@ import { z } from "zod/v4";
 import {
 	referenceHeritageAncestry,
 	referenceHeritageCommunity,
-} from "../reference";
+} from "../reference.js";
 
 export const characterSingleAncestry = z.object({
 	_type: z.literal("singleAncestry"),

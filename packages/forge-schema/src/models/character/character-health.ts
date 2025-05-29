@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { damageThreshold } from "../mechanic";
+import { damageThreshold } from "../mechanic/index.js";
 
 export const characterHealth = z.object({
 	_type: z.literal("characterHealth"),

@@ -1,19 +1,19 @@
 import { z } from "zod/v4";
-import { referenceRegistry } from "../reference";
-import { characterTraits } from "./character-abilities";
-import { characterArmor } from "./character-armor";
-import { characterEvasion } from "./character-evasion";
-import { characterExperience } from "./character-experience";
-import { characterGold } from "./character-gold";
-import { characterHealth } from "./character-health";
-import { characterHeritage } from "./character-heritage";
-import { characterHope } from "./character-hope";
-import { characterInventoryItem } from "./character-inventory";
-import { characterLevel } from "./character-level";
-import { characterName } from "./character-name";
-import { characterPronouns } from "./character-pronouns";
-import { characterRole } from "./character-role";
-import { characterStress } from "./character-stress";
+import { referenceRegistry } from "../reference.js";
+import { characterTraits } from "./character-abilities.js";
+import { characterArmor } from "./character-armor.js";
+import { characterEvasion } from "./character-evasion.js";
+import { characterExperience } from "./character-experience.js";
+import { characterGold } from "./character-gold.js";
+import { characterHealth } from "./character-health.js";
+import { characterHeritage } from "./character-heritage.js";
+import { characterHope } from "./character-hope.js";
+import { characterInventoryItem } from "./character-inventory.js";
+import { characterLevel } from "./character-level.js";
+import { characterName } from "./character-name.js";
+import { characterPronouns } from "./character-pronouns.js";
+import { characterRole } from "./character-role.js";
+import { characterStress } from "./character-stress.js";
 
 export const characterMeta = z.object({
 	_type: z.literal("characterMeta"),

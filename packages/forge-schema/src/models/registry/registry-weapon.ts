@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { damageType, diceType, range } from "../mechanic";
+import { damageType, diceType, range } from "../mechanic/index.js";
 
 export const registryItemWeapon = z.object({
 	_type: z.literal("itemWeapon"),

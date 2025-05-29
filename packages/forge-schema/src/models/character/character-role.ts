@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { referenceRoleClass, referenceRoleSubclass } from "../reference";
+import { referenceRoleClass, referenceRoleSubclass } from "../reference.js";
 
 export const characterRole = z.object({
 	_type: z.literal("characterRole"),

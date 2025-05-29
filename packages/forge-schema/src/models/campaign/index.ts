@@ -1,1 +1,1 @@
-export { campaign, type Campaign } from "./campaign";
+export { campaign, type Campaign } from "./campaign.js";

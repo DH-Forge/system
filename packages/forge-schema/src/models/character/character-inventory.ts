@@ -3,7 +3,7 @@ import {
 	referenceItemArmor,
 	referenceItemSpecial,
 	referenceItemWeapon,
-} from "../reference";
+} from "../reference.js";
 
 const baseItem = z.object({
 	notes: z.array(z.string()).optional(),

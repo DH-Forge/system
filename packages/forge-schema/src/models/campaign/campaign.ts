@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
-import { referenceRegistry } from "../reference";
-import { registry } from "../registry";
+import { referenceRegistry } from "../reference.js";
+import { registry } from "../registry/index.js";
 
 export const campaignMeta = z.object({
 	_type: z.literal("campaignMeta"),
