@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {},
-		"types": ["vite/client"],
-		"jsxImportSource": "hono/jsx"
+		"types": ["node"],
+		"jsxImportSource": "hono/jsx",
+    	"outDir": "./dist"
 	}
 }

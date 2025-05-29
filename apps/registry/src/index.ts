@@ -1,5 +1,5 @@
+import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { handle } from "hono/vercel";
 import type { z } from "zod/v4";
 import { registryCampaign } from "./v1/campaign";
 import { registryCore } from "./v1/core";
@@ -75,5 +75,27 @@ app.get("/:version/:fileName", (c) => {
 	return c.json(model.data);
 });
 
-export const GET = handle(app);
-export const POST = handle(app);
+const server = serve(
+	{
+		fetch: app.fetch,
+		port: 3000,
+	},
+	(info) => {
+		console.log(`Server is running on http://localhost:${info.port}`);
+	},
+);
+
+// graceful shutdown
+process.on("SIGINT", () => {
+	server.close();
+	process.exit(0);
+});
+process.on("SIGTERM", () => {
+	server.close((err) => {
+		if (err) {
+			console.error(err);
+			process.exit(1);
+		}
+		process.exit(0);
+	});
+});
