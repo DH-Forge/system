@@ -1,27 +1,39 @@
 ---
-import { sortedVersions } from "../lib/versions";
+import { getGroupedSchemaVersions } from "../schema/group-schemas";
 ---
 
 <div>
 {
-	sortedVersions.map(({majorVersion,versions}) => (
+	getGroupedSchemaVersions().map((major) => (
 		<section>
-			<h3>Version {majorVersion}</h3>
+			<h3>Version {major.version}</h3>
 			<ul>
-				{versions
-					.map((version) => (
+				{major.schemas
+					.map((minor) => (
 						<li>
-							<h4>{version}</h4>
+							<h4>{minor.version}</h4>
 							<ul>
-								<li>
-									<a href={`/schema/${version}/character.json`}>/{version}/character.json</a>
-								</li>
-								<li>
-									<a href={`/schema/${version}/core.json`}>/{version}/core.json</a>
-								</li>
-								<li>
-									<a href={`/${version}/campaign.json`}>/{version}/campaign.json</a>
-								</li>
+								{minor.schemas
+									.map((patch) => (
+										<li>
+											<h5>{patch.version}</h5>
+											<ul>
+												{patch.schemas
+													.map((schema) => (
+													<li>
+
+														<a href={`/schema/${schema.version}/${schema.model}.${schema.extension}`}>
+															/schema/<span>{schema.version}</span>/<span>{schema.model}</span>.<span>{schema.extension}</span>
+														</a>
+													</li>
+
+												))}
+											</ul>
+
+
+
+										</li>
+									))}
 							</ul>
 						</li>
 					))}

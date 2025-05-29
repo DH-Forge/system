@@ -1,5 +1,5 @@
-import { versionStringValidator } from "@forge/helpers/version";
 import { z } from "zod/v4";
+import { referenceVersion } from "../reference";
 import { registryAncestry } from "./registry-ancestry";
 import { registryItemArmor } from "./registry-armor";
 import { registryClass, registrySubclass } from "./registry-class";
@@ -9,8 +9,8 @@ import { registryItemWeapon } from "./registry-weapon";
 
 export const registryMeta = z.object({
 	_type: z.literal("registryMeta"),
-	version: versionStringValidator,
-	compatibleVersions: z.array(versionStringValidator),
+	version: referenceVersion,
+	minVersion: referenceVersion,
 });
 
 export type RegistryMeta = z.infer<typeof registryMeta>;
@@ -33,8 +33,8 @@ export const demoData: Registry = {
 	_type: "registry",
 	_meta: {
 		_type: "registryMeta",
-		version: "0.1.0",
-		compatibleVersions: ["0.1.x", "0.2.x"],
+		version: { major: 0, minor: 2, patch: 0 },
+		minVersion: { major: 0, minor: 0, patch: 1 },
 	},
 	"item/armor": {},
 	"item/weapon": {},

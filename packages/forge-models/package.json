@@ -7,25 +7,28 @@
 	"types": "./src/index.ts",
 	"sideEffects": false,
 	"license": "MIT",
-	"files": ["src/**"],
+	"files": [
+		"src/**"
+	],
 	"exports": {
 		".": "./src/index.ts",
 		"./schema": "./src/schema.ts",
 		"./types": "./src/types.ts",
-		"./models/*": "./src/models/*",
-		"./version-0.1": "./src/version-0.1/index.ts",
-		"./version-0.1/*": "./src/version-0.1/*"
+		"./models/*": "./src/models/*"
 	},
 	"scripts": {
+		"generate-schema": "tsx ./src/scripts/generate-schema.ts",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
-		"@forge/tsconfig": "workspace:*",
 		"@forge/helpers": "workspace:*",
+		"@forge/tsconfig": "workspace:*",
+		"tsx": "^4.19.4",
 		"typescript": "5.8.3"
 	},
 	"dependencies": {
+		"@types/node": "^20.17.52",
 		"zod": "^3.25.32"
 	},
 	"publishConfig": {

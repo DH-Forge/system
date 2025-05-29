@@ -76,10 +76,18 @@ const demoData: Character = {
 	},
 	heritage: {
 		_type: "characterHeritage",
-		community: "heritage/community:the-order-of-the-silver-dragon",
+		community: {
+			_type: "reference",
+			key: "heritage/community",
+			id: "the-order-of-the-silver-dragon",
+		},
 		ancestry: {
 			_type: "singleAncestry",
-			ancestry: "heritage/ancestry:human",
+			ancestry: {
+				_type: "reference",
+				key: "heritage/ancestry",
+				id: "human",
+			},
 		},
 	},
 
@@ -96,8 +104,16 @@ const demoData: Character = {
 	classes: [
 		{
 			_type: "characterRole",
-			class: "role/class:warrior",
-			subclass: "role/subclass:paladin",
+			class: {
+				_type: "reference",
+				key: "role/class",
+				id: "warrior",
+			},
+			subclass: {
+				_type: "reference",
+				key: "role/subclass",
+				id: "paladin",
+			},
 		},
 	],
 	evasion: 10,
