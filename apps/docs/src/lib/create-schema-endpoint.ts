@@ -1,4 +1,4 @@
-import { type AppVersion, isAppVersion } from "@forge/models";
+import { type SchemaVersion, isSchemaVersion } from "@forge/models";
 import type { APIContext, APIRoute } from "astro";
 import { z } from "zod/v4";
 import { getVersionModels } from "./versions";
@@ -27,13 +27,13 @@ export const createSchemaEndpoint =
 
 		const version = params.version ?? "0.0.0";
 
-		if (!isAppVersion(version)) {
+		if (!isSchemaVersion(version)) {
 			return new Response(`API Version "${version}" not found`, {
 				status: 404,
 			});
 		}
 
-		const model = getModel(getVersionModels(version as AppVersion));
+		const model = getModel(getVersionModels(version as SchemaVersion));
 		const schema = z.toJSONSchema(model);
 
 		return new Response(JSON.stringify(schema), {

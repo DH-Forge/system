@@ -7,7 +7,12 @@
 	"types": "./src/index.ts",
 	"sideEffects": false,
 	"license": "MIT",
-	"files": ["dist/**"],
+	"files": ["src/**"],
+	"exports": {
+		".": "./src/index.ts",
+		"./version": "./src/version/index.ts",
+		"./version/*": "./src/version/*"
+	},
 	"scripts": {
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"check": "tsc --noEmit"
@@ -16,7 +21,9 @@
 		"@forge/tsconfig": "workspace:*",
 		"typescript": "5.8.3"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"zod": "^3.25.32"
+	},
 	"publishConfig": {
 		"access": "public"
 	}

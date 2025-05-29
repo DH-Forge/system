@@ -1,13 +1,13 @@
-import { appVersions } from "@forge/models";
+import { schemaVersions } from "@forge/models";
 import { createSchemaEndpoint } from "../../../lib/create-schema-endpoint";
 
 export const GET = createSchemaEndpoint(
-	(models) => models.registryCampaign,
+	(models) => models.campaign,
 	"schema.registry-campaign.json",
 );
 
 export function getStaticPaths() {
-	return appVersions.map((version) => ({
+	return schemaVersions.map((version) => ({
 		params: { version },
 	}));
 }

@@ -1,10 +1,14 @@
-import { type AppVersion, appVersions, versionMap } from "@forge/models";
+import {
+	type SchemaVersion,
+	schemaModelVersions,
+	schemaVersions,
+} from "@forge/models";
 
-export function getVersionModels(version: AppVersion) {
-	return versionMap[version];
+export function getVersionModels(version: SchemaVersion) {
+	return schemaModelVersions[version];
 }
 
-function groupMajorVersions(versions: AppVersion[]) {
+function groupMajorVersions(versions: SchemaVersion[]) {
 	return versions.reduce(
 		(acc, version) => {
 			const majorVersion = version.split(".")[0];
@@ -14,11 +18,11 @@ function groupMajorVersions(versions: AppVersion[]) {
 			acc[majorVersion].push(version);
 			return acc;
 		},
-		{} as Record<string, AppVersion[]>,
+		{} as Record<string, SchemaVersion[]>,
 	);
 }
 
-const majorVersions = groupMajorVersions(appVersions);
+const majorVersions = groupMajorVersions(schemaVersions);
 const sortedMajorVersions = Object.keys(majorVersions).sort(
 	(a, b) => Number(b) - Number(a),
 );
