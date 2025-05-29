@@ -1,0 +1,32 @@
+---
+import { sortedVersions } from "../lib/versions";
+---
+
+<div>
+{
+	sortedVersions.map(({majorVersion,versions}) => (
+		<section>
+			<h3>Version {majorVersion}</h3>
+			<ul>
+				{versions
+					.map((version) => (
+						<li>
+							<h4>{version}</h4>
+							<ul>
+								<li>
+									<a href={`/schema/${version}/character.json`}>/{version}/character.json</a>
+								</li>
+								<li>
+									<a href={`/schema/${version}/core.json`}>/{version}/core.json</a>
+								</li>
+								<li>
+									<a href={`/${version}/campaign.json`}>/{version}/campaign.json</a>
+								</li>
+							</ul>
+						</li>
+					))}
+			</ul>
+		</section>
+	))
+}
+</div>

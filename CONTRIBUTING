@@ -88,10 +88,6 @@ Contains applications built using the DHFS packages.
 `/apps/docs`
 The source code for the official [Documentation Website](https://docs.dh-forge.com), built with Starlight (Astro).
 
-#### ⚡️ schema
-`/apps/schema`
-Infrastructure for publishing and hosting the generated JSON Schema files, making them available at [api.dh-forge.com](https://api.dh-forge.com).
-
 #### ⚡️ registry
 `/apps/registry`
 A working demonstration of a hosted repository. Available at [registry.dh-forge.com](https://registry.dh-forge.com).

@@ -1,9 +1,0 @@
-{
-	"extends": "@forge/tsconfig/node.json",
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {},
-		"types": ["vite/client", "@cloudflare/workers-types"],
-		"jsxImportSource": "hono/jsx"
-	}
-}

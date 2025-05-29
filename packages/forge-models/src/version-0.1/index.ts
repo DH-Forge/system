@@ -1,10 +1,10 @@
-import type { VersionModelMap } from "../lib/types";
+import type { SchemaModelMap } from "../lib/schema";
+import { campaignSchema } from "./campaign";
 import { characterSchema } from "./character";
-import { registryCampaignSchema } from "./registry-campaign";
-import { registryCoreSchema } from "./registry-core";
+import { coreSchema } from "./core";
 
 export const schema = {
 	character: characterSchema,
-	registryCore: registryCoreSchema,
-	registryCampaign: registryCampaignSchema,
-} satisfies VersionModelMap;
+	core: coreSchema,
+	campaign: campaignSchema,
+} satisfies SchemaModelMap;

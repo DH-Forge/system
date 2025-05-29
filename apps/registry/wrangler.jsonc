@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dhfs-registry",
+  "compatibility_date": "2025-05-29",
+  "main": "./src/index.ts"
+}
