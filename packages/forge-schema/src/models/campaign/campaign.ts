@@ -16,24 +16,3 @@ export const campaign = z.object({
 });
 
 export type Campaign = z.infer<typeof campaign>;
-
-export const demoData: Campaign = {
-	_type: "campaign",
-	_meta: {
-		_type: "campaignMeta",
-		extends: {
-			_type: "documentRegistry",
-			url: "https://forge.daggerheart.com/core-registry.json",
-			usedVersion: "0.1.0",
-		},
-	},
-	homebrew: {
-		"item/armor": {},
-		"item/weapon": {},
-		"item/special": {},
-		"role/class": {},
-		"role/subclass": {},
-		"heritage/ancestry": {},
-		"heritage/community": {},
-	},
-};
