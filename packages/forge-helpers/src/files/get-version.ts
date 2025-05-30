@@ -10,7 +10,9 @@ import { fileURLToPath } from "node:url";
  */
 export function useGetSchemaJson(monorepoRoot: URL) {
 	// Determine the absolute path to the 'schema' directory, assuming this file is within it.
-	const schemaDirectory = fileURLToPath(new URL(".", monorepoRoot));
+	const schemaDirectory = fileURLToPath(
+		new URL("./packages/forge-schema/src/versions", monorepoRoot),
+	);
 
 	return (relativeFilePath: string): string => {
 		// Construct the absolute path to the target JSON file.
