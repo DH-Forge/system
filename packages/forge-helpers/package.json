@@ -2,16 +2,21 @@
 	"name": "@forge/helpers",
 	"description": "DHFS Helpers for resolving and formatting data",
 	"version": "0.0.0",
+	"type": "module",
 	"main": "./src/index.ts",
 	"module": "./src/index.ts",
 	"types": "./src/index.ts",
 	"sideEffects": false,
 	"license": "MIT",
-	"files": ["src/**"],
+	"files": [
+		"src/**"
+	],
 	"exports": {
 		".": "./src/index.ts",
 		"./version": "./src/version/index.ts",
-		"./version/*": "./src/version/*"
+		"./version/*": "./src/version/*",
+		"./files": "./src/files/index.ts",
+		"./files/*": "./src/files/*"
 	},
 	"scripts": {
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
@@ -19,9 +24,12 @@
 	},
 	"devDependencies": {
 		"@forge/tsconfig": "workspace:*",
+		"@types/node": "^20.17.52",
 		"typescript": "5.8.3"
 	},
 	"dependencies": {
+		"just-group-by": "^2.2.0",
+		"just-sort-by": "^3.2.0",
 		"zod": "^3.25.32"
 	},
 	"publishConfig": {

@@ -138,5 +138,3 @@ const demoData: Character = {
 	},
 	inventory: [],
 };
-
-console.log(JSON.stringify(demoData, null, 2));

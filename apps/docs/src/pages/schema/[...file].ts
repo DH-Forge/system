@@ -1,9 +1,9 @@
-import {
-	getFilename,
-	getSchemaJson,
-} from "@forge/schema/versions/get-version.ts";
-import { listSchemaFiles } from "@forge/schema/versions/list-versions.ts";
+import { listSchemaFiles, useGetSchemaJson } from "@forge/helpers/files";
 import type { APIRoute } from "astro";
+import path from "node:path";
+
+const monorepoRoot = new URL("../../../../../", import.meta.url);
+const getSchemaJson = useGetSchemaJson(monorepoRoot);
 
 export const GET: APIRoute = async ({ params, request }) => {
 	if (!params.file) {
@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ params, request }) => {
 	}
 
 	const schema = getSchemaJson(params.file);
-	const filename = getFilename(params.file);
+	const filename = path.basename(params.file);
 
 	const isDev = import.meta.env.DEV;
 	const serverHost = isDev ? "docs.localhost" : "dh-forge.com";
@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ params, request }) => {
 };
 
 export function getStaticPaths() {
-	const paths = listSchemaFiles();
+	const paths = listSchemaFiles(monorepoRoot);
 
 	return paths.map((path) => ({
 		params: { file: path },

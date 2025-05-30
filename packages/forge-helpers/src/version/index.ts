@@ -1,8 +1,8 @@
-export { createVersionRecord, createVersionString } from "./create";
+export { createVersionRecord, createVersionString } from "./create.js";
 export {
 	isVersionString,
 	versionRecordValidator,
 	versionStringValidator,
 	type VersionRecord,
 	type VersionString,
-} from "./validate";
+} from "./validate.js";

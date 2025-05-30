@@ -1,4 +1,4 @@
-import type { VersionRecord, VersionString } from "./validate";
+import type { VersionRecord, VersionString } from "./validate.js";
 
 /**
  * Converts a VersionRecord to a VersionString

@@ -21,13 +21,13 @@
 		"check": "tsc --noEmit"
 	},
 	"devDependencies": {
+		"@types/node": "^20.17.52",
 		"@forge/helpers": "workspace:*",
 		"@forge/tsconfig": "workspace:*",
 		"tsx": "^4.19.4",
 		"typescript": "5.8.3"
 	},
 	"dependencies": {
-		"@types/node": "^20.17.52",
 		"zod": "^3.25.32"
 	},
 	"publishConfig": {
