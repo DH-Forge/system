@@ -1,10 +1,16 @@
 ---
-import { getGroupedSchemaVersions } from "@forge/schema/versions/group-versions.ts";
+import {
+	getGroupedSchemaVersions,
+	listSchemaFiles,
+} from "@forge/helpers/files";
+
+const monorepoRoot = new URL("../../../../", import.meta.url);
+const schemaFiles = listSchemaFiles(monorepoRoot);
 ---
 
 <div>
 {
-	getGroupedSchemaVersions().map((major) => (
+	getGroupedSchemaVersions(schemaFiles).map((major) => (
 		<section>
 			<h3>Version {major.version}</h3>
 			<ul>
