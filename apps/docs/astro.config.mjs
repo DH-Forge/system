@@ -20,18 +20,31 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: "Introduction",
-					autogenerate: { directory: "introduction" },
+					label: "Overview",
+					items: [
+						{
+							label: "Introduction",
+							slug: "introduction",
+						},
+						{
+							label: "Getting Started",
+							slug: "getting-started",
+						},
+						{
+							label: "JSON Schema",
+							slug: "schema",
+						},
+					],
 				},
 				{
 					label: "Specification",
 					autogenerate: { directory: "specification" },
-					badge: "New",
+					// badge: "New",
 				},
 				{
 					label: "Libraries",
 					autogenerate: { directory: "libraries" },
-					collapsed: true,
+					collapsed: false,
 				},
 				{
 					label: "Resources",
@@ -42,7 +55,7 @@ export default defineConfig({
 							link: "https://github.com/DH-Forge/system",
 						},
 					],
-					collapsed: true,
+					collapsed: false,
 				},
 			],
 		}),
