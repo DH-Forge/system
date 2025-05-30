@@ -13,6 +13,7 @@
 		"version-packages": "changeset version",
 		"prepare": "npx lint-staged",
 		"release": "turbo run build --filter=@forge/docs^... && changeset publish",
+		"schema:gen": "turbo run schema:gen",
 		"check": "turbo run check"
 	},
 	"lint-staged": {

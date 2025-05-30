@@ -19,6 +19,9 @@
 		},
 		"check": {
 			"cache": false
+		},
+		"schema:gen": {
+			"cache": false
 		}
 	}
 }

@@ -1,0 +1,36 @@
+{
+	"name": "@forge/schema",
+	"description": "DHFS Models for defining and validating data",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./src/index.ts",
+	"module": "./src/index.ts",
+	"types": "./src/index.ts",
+	"sideEffects": false,
+	"license": "MIT",
+	"files": ["src/**"],
+	"exports": {
+		".": "./src/index.ts",
+		"./types": "./src/types.ts",
+		"./versions/*": "./src/versions/*",
+		"./models/*": "./src/models/*"
+	},
+	"scripts": {
+		"schema:gen": "tsx ./scripts/generate-json-schema.ts",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+		"check": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@forge/helpers": "workspace:*",
+		"@forge/tsconfig": "workspace:*",
+		"tsx": "^4.19.4",
+		"typescript": "5.8.3"
+	},
+	"dependencies": {
+		"@types/node": "^20.17.52",
+		"zod": "^3.25.32"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
