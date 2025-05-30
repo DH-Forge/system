@@ -64,7 +64,7 @@ export const characterDocument = z
 		),
 	})
 	.register(jsonCollection, {
-		id: "Character",
+		id: "CharacterDocument",
 		description: "A character sheet",
 		examples: [
 			{
