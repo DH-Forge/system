@@ -12,7 +12,12 @@ z.globalRegistry.add(character, { id: "Character" });
 z.globalRegistry.add(campaign, { id: "Campaign" });
 z.globalRegistry.add(registry, { id: "Registry" });
 
-const combinedSchema = z.toJSONSchema(z.globalRegistry, { reused: "ref" });
+const combinedSchema = z.toJSONSchema(z.globalRegistry, {
+	target: "draft-2020-12",
+	unrepresentable: "throw",
+	cycles: "throw",
+	reused: "inline",
+});
 
 /**
  * Returns the version value from the package.json
@@ -71,7 +76,7 @@ const generateSchemas = async (): Promise<void> => {
 	await Promise.all(
 		schemas.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data), "utf-8");
+			return writeFile(dest, JSON.stringify(data, null, 2), "utf-8");
 		}),
 	);
 };

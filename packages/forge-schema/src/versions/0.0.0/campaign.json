@@ -1,1 +1,377 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"_type":{"const":"campaign"},"_meta":{"type":"object","properties":{"_type":{"const":"campaignMeta"},"extends":{"type":"object","properties":{"_type":{"const":"documentRegistry"},"url":{"type":"string","format":"uri"},"usedVersion":{"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$"}},"required":["_type","url","usedVersion"],"additionalProperties":false}},"required":["_type","extends"],"additionalProperties":false},"homebrew":{"type":"object","properties":{"item/armor":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"itemArmor"},"name":{"type":"string"},"baseThresholds":{"type":"object","properties":{"_type":{"const":"damageThreshold"},"minor":{"type":"integer","minimum":0,"maximum":9007199254740991},"major":{"type":"integer","minimum":0,"maximum":9007199254740991},"severe":{"type":"integer","minimum":0,"maximum":9007199254740991}},"required":["_type","minor","major","severe"],"additionalProperties":false},"baseScore":{"type":"integer","minimum":0,"maximum":9007199254740991},"features":{"type":"array","items":{"type":"string"}}},"required":["_type","name","baseThresholds","baseScore"],"additionalProperties":false}},"item/special":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"itemSpecial"},"name":{"type":"string"}},"required":["_type","name"],"additionalProperties":false}},"item/weapon":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"itemWeapon"},"name":{"type":"string"},"trait":{"type":"string"},"range":{"anyOf":[{"const":"Melee"},{"const":"Very Close"},{"const":"Close"},{"const":"Far"},{"const":"Very Far"}]},"damageDice":{"anyOf":[{"const":"d4"},{"const":"d6"},{"const":"d8"},{"const":"d10"},{"const":"d12"},{"const":"d20"}]},"damageType":{"anyOf":[{"const":"Physical"},{"const":"Magical"}]},"features":{"type":"array","items":{"type":"string"}},"burden":{"anyOf":[{"const":"One-Handed"},{"const":"Two-Handed"}]}},"required":["_type","name","range","damageDice","damageType","burden"],"additionalProperties":false}},"role/class":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"registryClass"},"name":{"type":"string"},"subclasses":{"type":"array","items":{"$ref":"#/$defs/__schema0"}}},"required":["_type","name","subclasses"],"additionalProperties":false}},"role/subclass":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"$ref":"#/$defs/__schema0"}},"heritage/ancestry":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"ancestry"},"name":{"type":"string"},"description":{"type":"string"},"traits":{"type":"array","items":{"type":"string"}},"features":{"type":"object","properties":{"_type":{"const":"ancestryFeatures"},"primary":{"type":"string"},"secondary":{"type":"string"}},"required":["_type","primary","secondary"],"additionalProperties":false}},"required":["_type","name","traits","features"],"additionalProperties":false}},"heritage/community":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"_type":{"const":"community"},"name":{"type":"string"},"description":{"type":"string"},"feature":{"type":"string"}},"required":["_type","name","feature"],"additionalProperties":false}}},"additionalProperties":false}},"required":["_type","_meta","homebrew"],"additionalProperties":false,"$defs":{"__schema0":{"type":"object","properties":{"_type":{"const":"registrySubclass"},"name":{"type":"string"}},"required":["_type","name"],"additionalProperties":false}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "_type": {
+      "const": "campaign"
+    },
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "campaignMeta"
+        },
+        "extends": {
+          "type": "object",
+          "properties": {
+            "_type": {
+              "const": "documentRegistry"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "usedVersion": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$"
+            }
+          },
+          "required": [
+            "_type",
+            "url",
+            "usedVersion"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "_type",
+        "extends"
+      ],
+      "additionalProperties": false
+    },
+    "homebrew": {
+      "type": "object",
+      "properties": {
+        "item/armor": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "itemArmor"
+              },
+              "name": {
+                "type": "string"
+              },
+              "baseThresholds": {
+                "type": "object",
+                "properties": {
+                  "_type": {
+                    "const": "damageThreshold"
+                  },
+                  "minor": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "major": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "severe": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "_type",
+                  "minor",
+                  "major",
+                  "severe"
+                ],
+                "additionalProperties": false
+              },
+              "baseScore": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "_type",
+              "name",
+              "baseThresholds",
+              "baseScore"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "item/special": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "itemSpecial"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "_type",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "item/weapon": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "itemWeapon"
+              },
+              "name": {
+                "type": "string"
+              },
+              "trait": {
+                "type": "string"
+              },
+              "range": {
+                "anyOf": [
+                  {
+                    "const": "Melee"
+                  },
+                  {
+                    "const": "Very Close"
+                  },
+                  {
+                    "const": "Close"
+                  },
+                  {
+                    "const": "Far"
+                  },
+                  {
+                    "const": "Very Far"
+                  }
+                ]
+              },
+              "damageDice": {
+                "anyOf": [
+                  {
+                    "const": "d4"
+                  },
+                  {
+                    "const": "d6"
+                  },
+                  {
+                    "const": "d8"
+                  },
+                  {
+                    "const": "d10"
+                  },
+                  {
+                    "const": "d12"
+                  },
+                  {
+                    "const": "d20"
+                  }
+                ]
+              },
+              "damageType": {
+                "anyOf": [
+                  {
+                    "const": "Physical"
+                  },
+                  {
+                    "const": "Magical"
+                  }
+                ]
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "burden": {
+                "anyOf": [
+                  {
+                    "const": "One-Handed"
+                  },
+                  {
+                    "const": "Two-Handed"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "_type",
+              "name",
+              "range",
+              "damageDice",
+              "damageType",
+              "burden"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "role/class": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "registryClass"
+              },
+              "name": {
+                "type": "string"
+              },
+              "subclasses": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/__schema0"
+                }
+              }
+            },
+            "required": [
+              "_type",
+              "name",
+              "subclasses"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "role/subclass": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        "heritage/ancestry": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "ancestry"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "traits": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "features": {
+                "type": "object",
+                "properties": {
+                  "_type": {
+                    "const": "ancestryFeatures"
+                  },
+                  "primary": {
+                    "type": "string"
+                  },
+                  "secondary": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type",
+                  "primary",
+                  "secondary"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "_type",
+              "name",
+              "traits",
+              "features"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "heritage/community": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "_type": {
+                "const": "community"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "feature": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "_type",
+              "name",
+              "feature"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "_type",
+    "_meta",
+    "homebrew"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "registrySubclass"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "name"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
