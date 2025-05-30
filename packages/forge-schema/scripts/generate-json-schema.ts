@@ -52,7 +52,7 @@ const generateSchemas = async (): Promise<void> => {
 
 	// Compose schema data and filenames
 	const schemas = [
-		{ data: characterSchema, filename: "schema.json" },
+		{ data: characterSchema, filename: "character.json" },
 		{ data: registryCampaignSchema, filename: "campaign.json" },
 		{ data: registryCoreSchema, filename: "core.json" },
 	];
