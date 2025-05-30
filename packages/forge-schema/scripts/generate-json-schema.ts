@@ -4,9 +4,15 @@ import { campaign } from "../src/models/campaign/index.js";
 import { character } from "../src/models/character/index.js";
 import { registry } from "../src/models/registry/index.js";
 
-const characterSchema = z.toJSONSchema(character);
-const registryCampaignSchema = z.toJSONSchema(campaign);
-const registryCoreSchema = z.toJSONSchema(registry);
+const characterSchema = z.toJSONSchema(character, { reused: "ref" });
+const registryCampaignSchema = z.toJSONSchema(campaign, { reused: "ref" });
+const registryCoreSchema = z.toJSONSchema(registry, { reused: "ref" });
+
+z.globalRegistry.add(character, { id: "Character" });
+z.globalRegistry.add(campaign, { id: "Campaign" });
+z.globalRegistry.add(registry, { id: "Registry" });
+
+const combinedSchema = z.toJSONSchema(z.globalRegistry, { reused: "ref" });
 
 /**
  * Returns the version value from the package.json
@@ -55,6 +61,7 @@ const generateSchemas = async (): Promise<void> => {
 		{ data: characterSchema, filename: "character.json" },
 		{ data: registryCampaignSchema, filename: "campaign.json" },
 		{ data: registryCoreSchema, filename: "core.json" },
+		{ data: combinedSchema, filename: "schema.json" },
 	];
 
 	// Dynamically import fs/promises for ESM compatibility

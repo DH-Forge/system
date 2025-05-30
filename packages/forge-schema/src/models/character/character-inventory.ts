@@ -1,9 +1,5 @@
 import { z } from "zod/v4";
-import {
-	referenceItemArmor,
-	referenceItemSpecial,
-	referenceItemWeapon,
-} from "../reference.js";
+import { referenceValue } from "../reference.js";
 
 const baseItem = z.object({
 	notes: z.array(z.string()).optional(),
@@ -11,13 +7,13 @@ const baseItem = z.object({
 
 export const characterInventoryItemWeapon = baseItem.extend({
 	_type: z.literal("characterInventoryItemWeapon"),
-	item: referenceItemWeapon,
+	item: referenceValue,
 	equipped: z.boolean().default(false),
 });
 
 export const characterInventoryItemArmor = baseItem.extend({
 	_type: z.literal("characterInventoryItemArmor"),
-	item: referenceItemArmor,
+	item: referenceValue,
 	equipped: z
 		.union([z.literal("Primary"), z.literal("Secondary"), z.literal(false)])
 		.default(false),
@@ -25,7 +21,7 @@ export const characterInventoryItemArmor = baseItem.extend({
 
 export const characterInventoryItemSpecial = baseItem.extend({
 	_type: z.literal("characterInventoryItemSpecial"),
-	item: referenceItemSpecial,
+	item: referenceValue,
 });
 
 export const characterInventoryItemGeneral = baseItem.extend({
