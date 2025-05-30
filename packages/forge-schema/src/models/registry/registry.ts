@@ -33,8 +33,8 @@ export const demoData: Registry = {
 	_type: "registry",
 	_meta: {
 		_type: "registryMeta",
-		version: { major: 0, minor: 2, patch: 0 },
-		minVersion: { major: 0, minor: 0, patch: 1 },
+		version: "0.2.0",
+		minVersion: "0.0.1",
 	},
 	"item/armor": {},
 	"item/weapon": {},

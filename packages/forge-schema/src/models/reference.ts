@@ -1,16 +1,14 @@
 import { z } from "zod/v4";
 
-export const referenceVersion = z.object({
-	major: z.number().int().min(0),
-	minor: z.number().int().min(0),
-	patch: z.number().int().min(0),
-});
+export const referenceVersion: z.ZodString = z
+	.string()
+	.regex(/^\d+\.\d+\.\d+$/);
 export type ReferenceVersion = z.infer<typeof referenceVersion>;
 
 export const referenceRegistry = z.object({
 	_type: z.literal("documentRegistry"),
 	url: z.url(),
-	version: referenceVersion,
+	usedVersion: referenceVersion,
 });
 
 export type ReferenceRegistry = z.infer<typeof referenceRegistry>;

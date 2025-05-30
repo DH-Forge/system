@@ -24,11 +24,7 @@ export const demoData: Campaign = {
 		extends: {
 			_type: "documentRegistry",
 			url: "https://forge.daggerheart.com/core-registry.json",
-			version: {
-				major: 0,
-				minor: 1,
-				patch: 0,
-			},
+			usedVersion: "0.1.0",
 		},
 	},
 	homebrew: {
