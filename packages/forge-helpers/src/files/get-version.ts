@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 /**
  * Retrieves the JSON content of a schema file.
- * @param relativeFilePath - The relative path to the JSON schema file (e.g., "0.0.0/core.json").
+ * @param relativeFilePath - The relative path to the JSON schema file (e.g., "0.0.0/ruleset.json").
  * @returns The parsed JSON content of the file.
  * @throws Will throw an error if the file cannot be read or parsed.
  */

@@ -16,6 +16,8 @@ export {
 	roleSubclass,
 	roleSubclassReference,
 } from "./artifact/index.js";
+export { campaign } from "./campaign.js";
+export { character } from "./character.js";
 export {
 	characterAncestry,
 	characterRole,
@@ -32,7 +34,5 @@ export {
 	trait,
 	traitName,
 } from "./common/index.js";
-export { characterDocument } from "./doc-character.js";
-export { campaignRuleset } from "./ruleset-campaign.js";
-export { coreRuleset } from "./ruleset-core.js";
-export { SchemaMetadata, schemaVersion } from "./schema.js";
+export { ruleset } from "./ruleset.js";
+export { schemaMetadata, schemaVersion } from "./schema.js";

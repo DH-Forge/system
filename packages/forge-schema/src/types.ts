@@ -2,13 +2,12 @@ import type { z } from "zod/v4";
 import type {
 	ancestry,
 	ancestryReference,
-	campaignRuleset,
+	campaign,
+	character,
 	characterAncestry,
-	characterDocument,
 	characterRole,
 	community,
 	communityReference,
-	coreRuleset,
 	damageThresholds,
 	damageType,
 	diceType,
@@ -31,7 +30,8 @@ import type {
 	roleClassReference,
 	roleSubclass,
 	roleSubclassReference,
-	SchemaMetadata,
+	ruleset,
+	schemaMetadata,
 	schemaVersion,
 	trait,
 	traitName,
@@ -67,8 +67,8 @@ export type Pronouns = z.infer<typeof pronouns>;
 export type Range = z.infer<typeof range>;
 export type Trait = z.infer<typeof trait>;
 export type TraitName = z.infer<typeof traitName>;
-export type CharacterDocument = z.infer<typeof characterDocument>;
-export type CampaignRuleset = z.infer<typeof campaignRuleset>;
-export type CoreRuleset = z.infer<typeof coreRuleset>;
-export type SchemaMeta = z.infer<typeof SchemaMetadata>;
+export type Character = z.infer<typeof character>;
+export type Campaign = z.infer<typeof campaign>;
+export type Ruleset = z.infer<typeof ruleset>;
+export type SchemaMeta = z.infer<typeof schemaMetadata>;
 export type SchemaVersion = z.infer<typeof schemaVersion>;

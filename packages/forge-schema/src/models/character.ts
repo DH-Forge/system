@@ -13,12 +13,12 @@ import { gold } from "./common/gold.js";
 import { pronouns } from "./common/pronouns.js";
 import { dynamicResource } from "./common/resource.js";
 import { trait, traitName } from "./common/trait.js";
-import { SchemaMetadata } from "./schema.js";
+import { schemaMetadata } from "./schema.js";
 
-export const characterDocument = z
+export const character = z
 	.object({
-		_type: z.literal("characterDocument"),
-		_meta: SchemaMetadata,
+		_type: z.literal("character"),
+		_meta: schemaMetadata,
 
 		// Identity
 		name: z.string(),
@@ -31,7 +31,17 @@ export const characterDocument = z
 		experiences: z.array(experience),
 
 		// Stats
-		level: z.number().int().min(1).max(10),
+		level: z
+			.number()
+			.int()
+			.min(1)
+			.max(10)
+			.meta({
+				id: "Level",
+				title: "Level",
+				description: "The level of the character",
+				examples: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+			}),
 		evasion: z.number().int().min(0).max(100),
 		armorSlots: dynamicResource,
 		hitPoints: dynamicResource,
@@ -63,12 +73,12 @@ export const characterDocument = z
 		),
 	})
 	.meta({
-		id: "CharacterDocument",
-		title: "Character Document",
+		id: "Character",
+		title: "Character Sheet",
 		description: "A character sheet",
 		examples: [
 			{
-				_type: "characterDocument",
+				_type: "character",
 				_meta: {
 					rulesetUrl: "https://dh-forge.com/schema.json",
 					rulesetVersion: "1.0.0",

@@ -3,25 +3,44 @@ import { z } from "zod/v4";
 // import { jsonCollection } from "../src/json-collection.js";
 import { characterDocument } from "../src/models/doc-character.js";
 import { campaignRuleset } from "../src/models/ruleset-campaign.js";
-import { coreRuleset } from "../src/models/ruleset-core.js";
+import { ruleset } from "../src/models/ruleset-core.js";
 
-const characterDocumentSchema = z.toJSONSchema(characterDocument, {
-	reused: "ref",
-});
-const campaignRulesetSchema = z.toJSONSchema(campaignRuleset, {
-	reused: "ref",
-});
-const coreRulesetSchema = z.toJSONSchema(coreRuleset, { reused: "ref" });
-
-const defaultSchema = z.toJSONSchema(z.globalRegistry, {
-	target: "draft-2020-12",
-	unrepresentable: "throw",
-	cycles: "throw",
-	reused: "ref",
-	override(ctx) {
-		ctx.jsonSchema.$id = ctx.jsonSchema.id;
+// Compose schema data and filenames
+const schemas = [
+	{
+		filename: "document-character.json",
+		data: z.toJSONSchema(characterDocument, {
+			unrepresentable: "throw",
+			cycles: "throw",
+			reused: "ref",
+			override(ctx) {
+				ctx.jsonSchema.$id = ctx.jsonSchema.id;
+			},
+		}),
 	},
-});
+	{
+		filename: "campaign.json",
+		data: z.toJSONSchema(campaignRuleset, {
+			unrepresentable: "throw",
+			cycles: "throw",
+			reused: "ref",
+			override(ctx) {
+				ctx.jsonSchema.$id = ctx.jsonSchema.id;
+			},
+		}),
+	},
+	{
+		filename: "ruleset.json",
+		data: z.toJSONSchema(ruleset, {
+			unrepresentable: "throw",
+			cycles: "throw",
+			reused: "ref",
+			override(ctx) {
+				ctx.jsonSchema.$id = ctx.jsonSchema.id;
+			},
+		}),
+	},
+];
 
 /**
  * Returns the version value from the package.json
@@ -64,14 +83,6 @@ const generateSchemas = async (): Promise<void> => {
 	const version = await getVersion();
 
 	const directory = await useDirectory(version);
-
-	// Compose schema data and filenames
-	const schemas = [
-		{ data: characterDocumentSchema, filename: "document-character.json" },
-		{ data: campaignRulesetSchema, filename: "ruleset-campaign.json" },
-		{ data: coreRulesetSchema, filename: "ruleset-core.json" },
-		{ data: defaultSchema, filename: "schema.json" },
-	];
 
 	// Dynamically import fs/promises for ESM compatibility
 	const { writeFile } = await import("node:fs/promises");
