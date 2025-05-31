@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { communityReference } from "../artifact/community.js";
 import { characterAncestry } from "./character-ancestry.js";
 
@@ -9,8 +8,9 @@ export const heritage = z
 		community: communityReference,
 		ancestry: characterAncestry,
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Heritage",
+		title: "Character Heritage",
 		description: "A character's heritage",
 		examples: [
 			{

@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 
 export const community = z
@@ -12,8 +11,9 @@ export const community = z
 			description: z.string(),
 		}),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Community",
+		title: "Community",
 		description: "A community that shaped a characters backstory",
 		examples: [
 			{
@@ -30,11 +30,9 @@ export const community = z
 		],
 	});
 
-export const communityReference = createReference(
-	"heritage/community",
-).register(jsonCollection, {
-	id: "CommunityReference",
-	description: "A reference to a community",
+export const communityReference = createReference("heritage/community").meta({
+	id: "ReferenceCommunity",
+	title: "Reference to a Community",
 	examples: [
 		{
 			_type: "reference",

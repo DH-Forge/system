@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 import { damageType } from "../common/damage-type.js";
 import { diceType } from "../common/dice-type.js";
@@ -17,8 +16,9 @@ export const inventoryWeapon = z
 		features: z.array(z.string()).nullable(),
 		burden: z.union([z.literal("One-Handed"), z.literal("Two-Handed")]),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Weapon",
+		title: "Weapon",
 		description: "A weapon that can be equipped by a character",
 		examples: [
 			{
@@ -34,17 +34,14 @@ export const inventoryWeapon = z
 		],
 	});
 
-export const inventoryWeaponReference = createReference("item/weapon").register(
-	jsonCollection,
-	{
-		id: "ItemWeaponReference",
-		description: "A reference to a weapon",
-		examples: [
-			{
-				_type: "reference",
-				_key: "item/weapon",
-				value: "warhammer",
-			},
-		],
-	},
-);
+export const inventoryWeaponReference = createReference("item/weapon").meta({
+	id: "ReferenceWeapon",
+	title: "Reference to a Weapon",
+	examples: [
+		{
+			_type: "reference",
+			_key: "item/weapon",
+			value: "warhammer",
+		},
+	],
+});

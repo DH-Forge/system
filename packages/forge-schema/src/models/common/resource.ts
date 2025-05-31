@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const dynamicResource = z
 	.object({
@@ -7,8 +6,9 @@ export const dynamicResource = z
 		max: z.number().int().min(0),
 		current: z.number().int().min(0),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "DynamicResource",
+		title: "Dynamic Resource",
 		description: "A dynamic resource used by a character",
 		examples: [
 			{ _type: "dynamicResource", max: 10, current: 0 },

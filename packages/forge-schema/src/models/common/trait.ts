@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const traitName = z
 	.union([
@@ -10,8 +9,9 @@ export const traitName = z
 		z.literal("Presence"),
 		z.literal("Knowledge"),
 	])
-	.register(jsonCollection, {
+	.meta({
 		id: "TraitName",
+		title: "Trait Name",
 		description: "The name of a character trait",
 		examples: [
 			"Agility",
@@ -29,8 +29,9 @@ export const trait = z
 		value: z.number().int().default(0),
 		locked: z.boolean().default(false),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Trait",
+		title: "Trait",
 		description: "The details of a character trait",
 		examples: [
 			{ _type: "trait", value: 2, locked: true },

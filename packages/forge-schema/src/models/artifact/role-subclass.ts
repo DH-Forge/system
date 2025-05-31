@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 import { feature } from "../common/feature.js";
 import { traitName } from "../common/trait.js";
@@ -15,8 +14,9 @@ export const roleSubclass = z
 		specializationFeatures: z.array(feature),
 		masteryFeatures: z.array(feature),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Subclass",
+		title: "Subclass",
 		description: "A subclass of a class",
 		examples: [
 			{
@@ -64,17 +64,14 @@ export const roleSubclass = z
 		],
 	});
 
-export const roleSubclassReference = createReference("role/subclass").register(
-	jsonCollection,
-	{
-		id: "RoleSubclassReference",
-		description: "A reference to a subclass",
-		examples: [
-			{
-				_type: "reference",
-				_key: "role/subclass",
-				value: "troubadour",
-			},
-		],
-	},
-);
+export const roleSubclassReference = createReference("role/subclass").meta({
+	id: "ReferenceSubclass",
+	title: "Reference to a Subclass",
+	examples: [
+		{
+			_type: "reference",
+			_key: "role/subclass",
+			value: "troubadour",
+		},
+	],
+});

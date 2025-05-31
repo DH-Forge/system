@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 import { domainReference } from "./domain.js";
 import { inventoryArmor } from "./inventory-armor.js";
@@ -31,8 +30,9 @@ export const roleClass = z
 
 		subclasses: z.array(roleSubclassReference),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Class",
+		title: "Class",
 		description: "A class of a character",
 		examples: [
 			{
@@ -70,17 +70,14 @@ export const roleClass = z
 		],
 	});
 
-export const roleClassReference = createReference("role/class").register(
-	jsonCollection,
-	{
-		id: "RoleClassReference",
-		description: "A reference to a class",
-		examples: [
-			{
-				_type: "reference",
-				_key: "role/class",
-				value: "barbarian",
-			},
-		],
-	},
-);
+export const roleClassReference = createReference("role/class").meta({
+	id: "ReferenceClass",
+	title: "Reference to a Class",
+	examples: [
+		{
+			_type: "reference",
+			_key: "role/class",
+			value: "barbarian",
+		},
+	],
+});

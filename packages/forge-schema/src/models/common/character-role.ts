@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { roleClassReference } from "../artifact/role-class.js";
 import { roleSubclassReference } from "../artifact/role-subclass.js";
 
@@ -9,8 +8,9 @@ export const characterRole = z
 		class: roleClassReference,
 		subclass: roleSubclassReference,
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "CharacterRole",
+		title: "Character Role",
 		description: "Ruleset references to the class and subclass of a character",
 		examples: [
 			{

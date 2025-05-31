@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { inventoryArmorReference } from "../artifact/inventory-armor.js";
 import {
 	inventoryThing,
@@ -14,8 +13,9 @@ export const inventoryItem = z
 		inventoryThingReference,
 		inventoryThing,
 	])
-	.register(jsonCollection, {
+	.meta({
 		id: "InventoryItem",
+		title: "Inventory Item",
 		description: "An item in a character's inventory",
 		examples: [
 			{

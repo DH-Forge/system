@@ -1,21 +1,26 @@
 import path from "node:path";
 import { z } from "zod/v4";
-import { jsonCollection } from "../src/json-collection.js";
+// import { jsonCollection } from "../src/json-collection.js";
 import { characterDocument } from "../src/models/doc-character.js";
 import { campaignRuleset } from "../src/models/ruleset-campaign.js";
 import { coreRuleset } from "../src/models/ruleset-core.js";
 
-const characterSchema = z.toJSONSchema(characterDocument, { reused: "ref" });
-const registryCampaignSchema = z.toJSONSchema(campaignRuleset, {
+const characterDocumentSchema = z.toJSONSchema(characterDocument, {
 	reused: "ref",
 });
-const registryCoreSchema = z.toJSONSchema(coreRuleset, { reused: "ref" });
+const campaignRulesetSchema = z.toJSONSchema(campaignRuleset, {
+	reused: "ref",
+});
+const coreRulesetSchema = z.toJSONSchema(coreRuleset, { reused: "ref" });
 
-const testingSchema = z.toJSONSchema(jsonCollection, {
+const defaultSchema = z.toJSONSchema(z.globalRegistry, {
 	target: "draft-2020-12",
 	unrepresentable: "throw",
 	cycles: "throw",
 	reused: "ref",
+	override(ctx) {
+		ctx.jsonSchema.$id = ctx.jsonSchema.id;
+	},
 });
 
 /**
@@ -62,10 +67,10 @@ const generateSchemas = async (): Promise<void> => {
 
 	// Compose schema data and filenames
 	const schemas = [
-		{ data: characterSchema, filename: "character.json" },
-		{ data: registryCampaignSchema, filename: "campaign.json" },
-		{ data: registryCoreSchema, filename: "core.json" },
-		{ data: testingSchema, filename: "schema.json" },
+		{ data: characterDocumentSchema, filename: "document-character.json" },
+		{ data: campaignRulesetSchema, filename: "ruleset-campaign.json" },
+		{ data: coreRulesetSchema, filename: "ruleset-core.json" },
+		{ data: defaultSchema, filename: "schema.json" },
 	];
 
 	// Dynamically import fs/promises for ESM compatibility
@@ -75,7 +80,7 @@ const generateSchemas = async (): Promise<void> => {
 	await Promise.all(
 		schemas.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data, null, 3), "utf-8");
+			return writeFile(dest, JSON.stringify(data), "utf-8");
 		}),
 	);
 };

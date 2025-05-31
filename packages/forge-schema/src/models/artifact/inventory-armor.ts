@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 import { damageThresholds } from "../common/damage-threshold.js";
 
@@ -12,8 +11,9 @@ export const inventoryArmor = z
 		baseScore: z.number().int().min(0),
 		features: z.array(z.string()).nullable(),
 	})
-	.register(jsonCollection, {
-		id: "ItemArmor",
+	.meta({
+		id: "Armor",
+		title: "Armor",
 		description: "A set of armor that can be equipped by a character",
 		examples: [
 			{
@@ -31,17 +31,14 @@ export const inventoryArmor = z
 		],
 	});
 
-export const inventoryArmorReference = createReference("item/armor").register(
-	jsonCollection,
-	{
-		id: "ItemArmorReference",
-		description: "A reference to an armor",
-		examples: [
-			{
-				_type: "reference",
-				_key: "item/armor",
-				value: "full-plate-armor",
-			},
-		],
-	},
-);
+export const inventoryArmorReference = createReference("item/armor").meta({
+	id: "ReferenceArmor",
+	title: "Reference to a piece of Armor",
+	examples: [
+		{
+			_type: "reference",
+			_key: "item/armor",
+			value: "full-plate-armor",
+		},
+	],
+});

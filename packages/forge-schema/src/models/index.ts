@@ -35,4 +35,4 @@ export {
 export { characterDocument } from "./doc-character.js";
 export { campaignRuleset } from "./ruleset-campaign.js";
 export { coreRuleset } from "./ruleset-core.js";
-export { schemaMeta, schemaVersion } from "./schema.js";
+export { SchemaMetadata, schemaVersion } from "./schema.js";

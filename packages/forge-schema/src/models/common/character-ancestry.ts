@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { ancestryReference } from "../artifact/ancestry.js";
 
 export const characterAncestry = z
@@ -14,8 +13,9 @@ export const characterAncestry = z
 			secondary: ancestryReference,
 		}),
 	])
-	.register(jsonCollection, {
+	.meta({
 		id: "CharacterAncestry",
+		title: "Character Ancestry",
 		description: "A character's ancestry",
 		examples: [
 			{

@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const feature = z
 	.object({
@@ -9,8 +8,9 @@ export const feature = z
 		notes: z.array(z.string()).nullable().default(null),
 		modifiers: z.null().default(null),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Feature",
+		title: "Feature",
 		description: "A feature for a character to use",
 		examples: [
 			{

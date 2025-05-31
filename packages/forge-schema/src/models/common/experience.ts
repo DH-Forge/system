@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const experience = z
 	.object({
@@ -7,8 +6,9 @@ export const experience = z
 		name: z.string(),
 		description: z.string().nullable().default(null),
 	})
-	.register(jsonCollection, {
-		id: "CharacterExperience",
+	.meta({
+		id: "Experience",
+		title: "Character Experience",
 		description: "Experience represents a character specialization.",
 		examples: [
 			{

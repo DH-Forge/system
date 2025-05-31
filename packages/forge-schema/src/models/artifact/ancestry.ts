@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 
 export const ancestry = z
@@ -10,8 +9,8 @@ export const ancestry = z
 		primaryFeature: z.object({ name: z.string(), description: z.string() }),
 		secondaryFeature: z.object({ name: z.string(), description: z.string() }),
 	})
-	.register(jsonCollection, {
-		id: "Ancestry",
+	.meta({
+		title: "Ancestry",
 		description: "The ancestry of a character",
 		examples: [
 			{
@@ -32,17 +31,14 @@ export const ancestry = z
 		],
 	});
 
-export const ancestryReference = createReference("heritage/ancestry").register(
-	jsonCollection,
-	{
-		id: "AncestryReference",
-		description: "A reference to an ancestry",
-		examples: [
-			{
-				_type: "reference",
-				_key: "heritage/ancestry",
-				value: "ribbet",
-			},
-		],
-	},
-);
+export const ancestryReference = createReference("heritage/ancestry").meta({
+	id: "ReferenceAncestry",
+	title: "Reference to an Ancestry",
+	examples: [
+		{
+			_type: "reference",
+			_key: "heritage/ancestry",
+			value: "ribbet",
+		},
+	],
+});
