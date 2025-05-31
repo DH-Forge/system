@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 import { createReference } from "../../utility/create-reference.js";
 
 export const domain = z
@@ -8,8 +7,9 @@ export const domain = z
 		name: z.string(),
 		description: z.string().nullable(),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Domain",
+		title: "Domain",
 		description: "A domain of a character class",
 		examples: [
 			{
@@ -21,17 +21,14 @@ export const domain = z
 		],
 	});
 
-export const domainReference = createReference("role/domain").register(
-	jsonCollection,
-	{
-		id: "DomainReference",
-		description: "A reference to a domain",
-		examples: [
-			{
-				_type: "reference",
-				_key: "role/domain",
-				value: "arcana",
-			},
-		],
-	},
-);
+export const domainReference = createReference("role/domain").meta({
+	id: "ReferenceDomain",
+	title: "Reference to a Domain",
+	examples: [
+		{
+			_type: "reference",
+			_key: "role/domain",
+			value: "arcana",
+		},
+	],
+});

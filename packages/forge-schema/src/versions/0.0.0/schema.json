@@ -2,6 +2,16 @@
    "schemas": {
       "DamageThresholds": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "DamageThresholds",
+         "title": "Damage Thresholds",
+         "description": "The damage thresholds of a character",
+         "examples": [
+            {
+               "_type": "damageThresholds",
+               "major": 5,
+               "severe": 8
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -24,10 +34,30 @@
             "major",
             "severe"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "DamageThresholds"
       },
-      "ItemArmor": {
+      "Armor": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Armor",
+         "title": "Armor",
+         "description": "A set of armor that can be equipped by a character",
+         "examples": [
+            {
+               "_type": "inventoryArmor",
+               "name": "Full Plate Armor",
+               "description": null,
+               "baseThresholds": {
+                  "_type": "damageThresholds",
+                  "major": 8,
+                  "severe": 17
+               },
+               "baseScore": 4,
+               "features": [
+                  "Very Heavy: -2 to Evasion"
+               ]
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -77,10 +107,20 @@
             "baseScore",
             "features"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Armor"
       },
-      "ItemArmorReference": {
+      "ReferenceArmor": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceArmor",
+         "title": "Reference to a piece of Armor",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "item/armor",
+               "value": "full-plate-armor"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -98,10 +138,21 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceArmor"
       },
       "Thing": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Thing",
+         "title": "Thing",
+         "description": "A thing that can be added to a character's inventory",
+         "examples": [
+            {
+               "_type": "inventoryThing",
+               "name": "Suspicious looking potion",
+               "description": "The label is written in a language you don't recognize."
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -127,17 +178,27 @@
             "name",
             "description"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Thing"
       },
-      "ItemSpecialReference": {
+      "ReferenceThing": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceThing",
+         "title": "Reference to a Thing",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "item/thing",
+               "value": "suspicious-looking-potion"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
                "const": "reference"
             },
             "_key": {
-               "const": "item/special"
+               "const": "item/thing"
             },
             "value": {
                "type": "string"
@@ -148,10 +209,18 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceThing"
       },
       "DamageType": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "DamageType",
+         "title": "Damage Type",
+         "description": "The type of damage a weapon or ability deals",
+         "examples": [
+            "Physical",
+            "Magical"
+         ],
          "anyOf": [
             {
                "const": "Physical"
@@ -159,10 +228,22 @@
             {
                "const": "Magical"
             }
-         ]
+         ],
+         "$id": "DamageType"
       },
       "DiceType": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "DiceType",
+         "title": "Dice Type",
+         "description": "The type of dice to roll",
+         "examples": [
+            "d4",
+            "d6",
+            "d8",
+            "d10",
+            "d12",
+            "d20"
+         ],
          "anyOf": [
             {
                "const": "d4"
@@ -182,10 +263,21 @@
             {
                "const": "d20"
             }
-         ]
+         ],
+         "$id": "DiceType"
       },
       "Range": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Range",
+         "title": "Range",
+         "description": "The range of a weapon or ability",
+         "examples": [
+            "Melee",
+            "Very Close",
+            "Close",
+            "Far",
+            "Very Far"
+         ],
          "anyOf": [
             {
                "const": "Melee"
@@ -202,10 +294,22 @@
             {
                "const": "Very Far"
             }
-         ]
+         ],
+         "$id": "Range"
       },
       "TraitName": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "TraitName",
+         "title": "Trait Name",
+         "description": "The name of a character trait",
+         "examples": [
+            "Agility",
+            "Strength",
+            "Finesse",
+            "Instinct",
+            "Presence",
+            "Knowledge"
+         ],
          "anyOf": [
             {
                "const": "Agility"
@@ -225,10 +329,26 @@
             {
                "const": "Knowledge"
             }
-         ]
+         ],
+         "$id": "TraitName"
       },
       "Trait": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Trait",
+         "title": "Trait",
+         "description": "The details of a character trait",
+         "examples": [
+            {
+               "_type": "trait",
+               "value": 2,
+               "locked": true
+            },
+            {
+               "_type": "trait",
+               "value": -1,
+               "locked": false
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -251,10 +371,28 @@
             "value",
             "locked"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Trait"
       },
       "Weapon": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Weapon",
+         "title": "Weapon",
+         "description": "A weapon that can be equipped by a character",
+         "examples": [
+            {
+               "_type": "inventoryWeapon",
+               "name": "Warhammer",
+               "trait": "Strength",
+               "range": "Melee",
+               "damageDice": "d8",
+               "damageType": "Physical",
+               "features": [
+                  "Versatile"
+               ],
+               "burden": "One-Handed"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -310,10 +448,20 @@
             "features",
             "burden"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Weapon"
       },
-      "ItemWeaponReference": {
+      "ReferenceWeapon": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceWeapon",
+         "title": "Reference to a Weapon",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "item/weapon",
+               "value": "warhammer"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -331,10 +479,25 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceWeapon"
       },
       "Community": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Community",
+         "title": "Community",
+         "description": "A community that shaped a characters backstory",
+         "examples": [
+            {
+               "_type": "community",
+               "name": "Highborn",
+               "description": "Being part of a highborn community means you're accustomed to a life of elegance, opulence, and prestige within the upper echelons of society.",
+               "feature": {
+                  "name": "Privilege",
+                  "description": "You have advantage on rolls to consort with nobles, negotiate prices, or leverage your reputation to get what you want."
+               }
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -368,10 +531,20 @@
             "name",
             "feature"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Community"
       },
-      "CommunityReference": {
+      "ReferenceCommunity": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceCommunity",
+         "title": "Reference to a Community",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "heritage/community",
+               "value": "highborn"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -389,64 +562,20 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceCommunity"
       },
-      "Ancestry": {
+      "ReferenceAncestry": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
-         "type": "object",
-         "properties": {
-            "_type": {
-               "const": "ancestry"
-            },
-            "name": {
-               "type": "string"
-            },
-            "description": {
-               "type": "string"
-            },
-            "primaryFeature": {
-               "type": "object",
-               "properties": {
-                  "name": {
-                     "type": "string"
-                  },
-                  "description": {
-                     "type": "string"
-                  }
-               },
-               "required": [
-                  "name",
-                  "description"
-               ],
-               "additionalProperties": false
-            },
-            "secondaryFeature": {
-               "type": "object",
-               "properties": {
-                  "name": {
-                     "type": "string"
-                  },
-                  "description": {
-                     "type": "string"
-                  }
-               },
-               "required": [
-                  "name",
-                  "description"
-               ],
-               "additionalProperties": false
+         "id": "ReferenceAncestry",
+         "title": "Reference to an Ancestry",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "heritage/ancestry",
+               "value": "ribbet"
             }
-         },
-         "required": [
-            "_type",
-            "name",
-            "primaryFeature",
-            "secondaryFeature"
          ],
-         "additionalProperties": false
-      },
-      "AncestryReference": {
-         "$schema": "https://json-schema.org/draft/2020-12/schema",
          "type": "object",
          "properties": {
             "_type": {
@@ -464,10 +593,37 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceAncestry"
       },
       "CharacterAncestry": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "CharacterAncestry",
+         "title": "Character Ancestry",
+         "description": "A character's ancestry",
+         "examples": [
+            {
+               "_type": "singleAncestry",
+               "ancestry": {
+                  "_type": "reference",
+                  "_key": "heritage/ancestry",
+                  "value": "dwarf"
+               }
+            },
+            {
+               "_type": "dualAncestry",
+               "primary": {
+                  "_type": "reference",
+                  "_key": "heritage/ancestry",
+                  "value": "elf"
+               },
+               "secondary": {
+                  "_type": "reference",
+                  "_key": "heritage/ancestry",
+                  "value": "faun"
+               }
+            }
+         ],
          "anyOf": [
             {
                "type": "object",
@@ -477,7 +633,7 @@
                      "const": "singleAncestry"
                   },
                   "ancestry": {
-                     "$ref": "AncestryReference"
+                     "$ref": "ReferenceAncestry"
                   }
                },
                "required": [
@@ -494,10 +650,10 @@
                      "const": "dualAncestry"
                   },
                   "primary": {
-                     "$ref": "AncestryReference"
+                     "$ref": "ReferenceAncestry"
                   },
                   "secondary": {
-                     "$ref": "AncestryReference"
+                     "$ref": "ReferenceAncestry"
                   }
                },
                "required": [
@@ -507,10 +663,53 @@
                ],
                "additionalProperties": false
             }
-         ]
+         ],
+         "$id": "CharacterAncestry"
       },
       "Heritage": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Heritage",
+         "title": "Character Heritage",
+         "description": "A character's heritage",
+         "examples": [
+            {
+               "_type": "heritage",
+               "community": {
+                  "_type": "reference",
+                  "_key": "heritage/community",
+                  "value": "seaborne"
+               },
+               "ancestry": {
+                  "_type": "singleAncestry",
+                  "ancestry": {
+                     "_type": "reference",
+                     "_key": "heritage/ancestry",
+                     "value": "dwarf"
+                  }
+               }
+            },
+            {
+               "_type": "heritage",
+               "community": {
+                  "_type": "reference",
+                  "_key": "heritage/community",
+                  "value": "highborn"
+               },
+               "ancestry": {
+                  "_type": "dualAncestry",
+                  "primary": {
+                     "_type": "reference",
+                     "_key": "heritage/ancestry",
+                     "value": "elf"
+                  },
+                  "secondary": {
+                     "_type": "reference",
+                     "_key": "heritage/ancestry",
+                     "value": "faun"
+                  }
+               }
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -518,7 +717,7 @@
                "const": "heritage"
             },
             "community": {
-               "$ref": "CommunityReference"
+               "$ref": "ReferenceCommunity"
             },
             "ancestry": {
                "$ref": "CharacterAncestry"
@@ -529,10 +728,21 @@
             "community",
             "ancestry"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Heritage"
       },
       "Domain": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Domain",
+         "title": "Domain",
+         "description": "A domain of a character class",
+         "examples": [
+            {
+               "_type": "domain",
+               "name": "Arcana",
+               "description": "Arcana is the domain of innate and instinctual magic. Those who choose this path tap into the raw, enigmatic forces of the realms to manipulate both their own energy and the elements. Arcana offers wielders a volatile power, but it is incredibly potent when correctly channeled. The Arcana domain can be accessed by the Druid and Sorcerer classes."
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -557,10 +767,20 @@
             "name",
             "description"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Domain"
       },
-      "DomainReference": {
+      "ReferenceDomain": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceDomain",
+         "title": "Reference to a Domain",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "role/domain",
+               "value": "arcana"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -578,10 +798,27 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceDomain"
       },
       "Feature": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Feature",
+         "title": "Feature",
+         "description": "A feature for a character to use",
+         "examples": [
+            {
+               "_type": "feature",
+               "name": "Gifted Performer",
+               "description": "You can play three different types of songs, once each per long rest; describe how you perform for others to gain the listed benefit:",
+               "notes": [
+                  "Relaxing Song: You and all allies within Close range clear a Hit Point.",
+                  "Epic Song: Make a target within Close range temporarily Vulnerable.",
+                  "Heartbreaking Song: You and all allies within Close range gain a Hope."
+               ],
+               "modifiers": null
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -619,10 +856,53 @@
             "notes",
             "modifiers"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Feature"
       },
       "Subclass": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Subclass",
+         "title": "Subclass",
+         "description": "A subclass of a class",
+         "examples": [
+            {
+               "_type": "subclass",
+               "name": "Troubadour",
+               "description": "Play the Troubadour if you want to play music to bolster your allies.",
+               "spellTrait": "Presence",
+               "foundationFeatures": [
+                  {
+                     "_type": "feature",
+                     "name": "Gifted Performer",
+                     "description": "You can play three different types of songs, once each per long rest; describe how you perform for others to gain the listed benefit:",
+                     "notes": [
+                        "Relaxing Song: You and all allies within Close range clear a Hit Point.",
+                        "Epic Song: Make a target within Close range temporarily Vulnerable.",
+                        "Heartbreaking Song: You and all allies within Close range gain a Hope."
+                     ],
+                     "modifiers": null
+                  }
+               ],
+               "specializationFeatures": [
+                  {
+                     "_type": "feature",
+                     "name": "Maestro",
+                     "description": "Your rallying songs steel the courage of those who listen. When you give a Rally Die to an ally, they can gain a Hope or clear a Stress.",
+                     "notes": null,
+                     "modifiers": null
+                  }
+               ],
+               "masteryFeatures": [
+                  {
+                     "_type": "feature",
+                     "name": "Virtuoso",
+                     "description": "You are among the greatest of your craft and your skill is boundless. You can perform each of your “Gifted Performer” feature’s songs twice per long rest.",
+                     "notes": null,
+                     "modifiers": null
+                  }
+               ]
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -673,10 +953,20 @@
             "specializationFeatures",
             "masteryFeatures"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Subclass"
       },
-      "RoleSubclassReference": {
+      "ReferenceSubclass": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceSubclass",
+         "title": "Reference to a Subclass",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "role/subclass",
+               "value": "troubadour"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -694,10 +984,45 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceSubclass"
       },
       "Class": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Class",
+         "title": "Class",
+         "description": "A class of a character",
+         "examples": [
+            {
+               "_type": "class",
+               "name": "Barbarian",
+               "domain": {
+                  "_type": "reference",
+                  "_key": "role/domain",
+                  "value": "arcana"
+               },
+               "initialEvasion": 10,
+               "initialHitPoints": 5,
+               "initialInventory": [
+                  {
+                     "_type": "inventoryThing",
+                     "name": "A romance novel or a letter never opened",
+                     "description": null
+                  }
+               ],
+               "features": [
+                  {
+                     "name": "Rally",
+                     "description": "Once per session, describe how you rally the party and give yourself and each of your allies a Rally Die. At level 1, your Rally Die is a d6. A PC can spend their Rally Die to roll it, adding the result to their action roll, reaction roll, damage roll, or to clear a number of Stress equal to the result. At the end of each session, clear all unspent Rally Dice. At level 5, your Rally Die increases to a d8."
+                  }
+               ],
+               "hopeFeature": {
+                  "name": "Make a Scene",
+                  "description": "Spend 3 Hope to temporarily Distract a target within Close range, giving them a -2 penalty to their Difficulty."
+               },
+               "subclasses": []
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -707,7 +1032,7 @@
                "type": "string"
             },
             "domain": {
-               "$ref": "DomainReference"
+               "$ref": "ReferenceDomain"
             },
             "initialEvasion": {
                "type": "integer",
@@ -730,7 +1055,7 @@
                         "$ref": "Weapon"
                      },
                      {
-                        "$ref": "ItemArmor"
+                        "$ref": "Armor"
                      }
                   ]
                }
@@ -773,7 +1098,7 @@
             "subclasses": {
                "type": "array",
                "items": {
-                  "$ref": "RoleSubclassReference"
+                  "$ref": "ReferenceSubclass"
                }
             }
          },
@@ -788,10 +1113,20 @@
             "hopeFeature",
             "subclasses"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Class"
       },
-      "RoleClassReference": {
+      "ReferenceClass": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "ReferenceClass",
+         "title": "Reference to a Class",
+         "examples": [
+            {
+               "_type": "reference",
+               "_key": "role/class",
+               "value": "barbarian"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -809,10 +1144,42 @@
             "_key",
             "value"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "ReferenceClass"
       },
       "CharacterRole": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "CharacterRole",
+         "title": "Character Role",
+         "description": "Ruleset references to the class and subclass of a character",
+         "examples": [
+            {
+               "_type": "characterRole",
+               "class": {
+                  "_type": "reference",
+                  "_key": "role/class",
+                  "value": "bard"
+               },
+               "subclass": {
+                  "_type": "reference",
+                  "_key": "role/subclass",
+                  "value": "troubadour"
+               }
+            },
+            {
+               "_type": "characterRole",
+               "class": {
+                  "_type": "reference",
+                  "_key": "role/class",
+                  "value": "guardian"
+               },
+               "subclass": {
+                  "_type": "reference",
+                  "_key": "role/subclass",
+                  "value": "stalwart"
+               }
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -820,10 +1187,10 @@
                "const": "characterRole"
             },
             "class": {
-               "$ref": "RoleClassReference"
+               "$ref": "ReferenceClass"
             },
             "subclass": {
-               "$ref": "RoleSubclassReference"
+               "$ref": "ReferenceSubclass"
             }
          },
          "required": [
@@ -831,10 +1198,26 @@
             "class",
             "subclass"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "CharacterRole"
       },
-      "CharacterExperience": {
+      "Experience": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Experience",
+         "title": "Character Experience",
+         "description": "Experience represents a character specialization.",
+         "examples": [
+            {
+               "_type": "experience",
+               "name": "Catch Me If You Can",
+               "description": null
+            },
+            {
+               "_type": "experience",
+               "name": "Sticky Fingers",
+               "description": "Background as a con artist"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -861,10 +1244,34 @@
             "name",
             "description"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Experience"
       },
       "Gold": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Gold",
+         "title": "Gold",
+         "description": "The amount of gold held by a character",
+         "examples": [
+            {
+               "_type": "gold",
+               "handfuls": 2,
+               "bags": 0,
+               "chests": 0
+            },
+            {
+               "_type": "gold",
+               "handfuls": 3,
+               "bags": 1,
+               "chests": 0
+            },
+            {
+               "_type": "gold",
+               "handfuls": 1,
+               "bags": 3,
+               "chests": 1
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -895,10 +1302,37 @@
             "bags",
             "chests"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Gold"
       },
       "Pronouns": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "Pronouns",
+         "title": "Pronouns",
+         "description": "The pronouns of a character",
+         "examples": [
+            {
+               "_type": "pronouns",
+               "subject": "she",
+               "object": "her",
+               "possessive": "hers",
+               "reflexive": "herself"
+            },
+            {
+               "_type": "pronouns",
+               "subject": "he",
+               "object": "him",
+               "possessive": "his",
+               "reflexive": "himself"
+            },
+            {
+               "_type": "pronouns",
+               "subject": "they",
+               "object": "them",
+               "possessive": "theirs",
+               "reflexive": "themselves"
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -924,10 +1358,26 @@
             "possessive",
             "reflexive"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "Pronouns"
       },
       "DynamicResource": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "DynamicResource",
+         "title": "Dynamic Resource",
+         "description": "A dynamic resource used by a character",
+         "examples": [
+            {
+               "_type": "dynamicResource",
+               "max": 10,
+               "current": 0
+            },
+            {
+               "_type": "dynamicResource",
+               "max": 5,
+               "current": 3
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -949,15 +1399,36 @@
             "max",
             "current"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "DynamicResource"
       },
       "SchemaVersion": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "SchemaVersion",
+         "title": "Schema Version",
+         "description": "A version number",
+         "examples": [
+            "1.0.0",
+            "2.10.0",
+            "3.0.19"
+         ],
          "type": "string",
-         "pattern": "^\\d+\\.\\d+\\.\\d+$"
+         "pattern": "^\\d+\\.\\d+\\.\\d+$",
+         "$id": "SchemaVersion"
       },
-      "SchemaMeta": {
+      "SchemaMetadata": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "SchemaMetadata",
+         "title": "Schema Metadata",
+         "description": "Metadata about a schema",
+         "examples": [
+            {
+               "rulesetUrl": "https://dh-forge.com/schema.json",
+               "rulesetVersion": "1.0.0",
+               "dateCreated": "2025-05-30T12:00:00.000Z",
+               "dateUpdated": "2025-05-30T12:00:00.000Z"
+            }
+         ],
          "type": "object",
          "properties": {
             "rulesetUrl": {
@@ -979,90 +1450,206 @@
             "dateCreated",
             "dateUpdated"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "SchemaMetadata"
       },
-      "CharacterEquippedArmor": {
+      "CharacterDocument": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
-         "type": "object",
-         "properties": {
-            "primary": {
-               "anyOf": [
-                  {
-                     "$ref": "ItemArmorReference"
+         "id": "CharacterDocument",
+         "title": "Character Document",
+         "description": "A character sheet",
+         "examples": [
+            {
+               "_type": "characterDocument",
+               "_meta": {
+                  "rulesetUrl": "https://dh-forge.com/schema.json",
+                  "rulesetVersion": "1.0.0",
+                  "dateCreated": "2025-05-30T12:00:00.000Z",
+                  "dateUpdated": "2025-05-30T12:00:00.000Z"
+               },
+               "name": "Elara Meadowlight",
+               "nameAlternate": "Ela",
+               "pronouns": {
+                  "_type": "pronouns",
+                  "subject": "she",
+                  "object": "her",
+                  "possessive": "hers",
+                  "reflexive": "herself"
+               },
+               "heritage": {
+                  "_type": "heritage",
+                  "community": {
+                     "_type": "reference",
+                     "_key": "heritage/community",
+                     "value": "seaborne"
                   },
-                  {
-                     "type": "null"
+                  "ancestry": {
+                     "_type": "dualAncestry",
+                     "primary": {
+                        "_type": "reference",
+                        "_key": "heritage/ancestry",
+                        "value": "elf"
+                     },
+                     "secondary": {
+                        "_type": "reference",
+                        "_key": "heritage/ancestry",
+                        "value": "faun"
+                     }
                   }
-               ]
-            },
-            "notes": {
-               "anyOf": [
+               },
+               "roles": [
                   {
-                     "type": "string"
+                     "_type": "characterRole",
+                     "class": {
+                        "_type": "reference",
+                        "_key": "role/class",
+                        "value": "bard"
+                     },
+                     "subclass": {
+                        "_type": "reference",
+                        "_key": "role/subclass",
+                        "value": "troubadour"
+                     }
                   },
                   {
-                     "type": "null"
+                     "_type": "characterRole",
+                     "class": {
+                        "_type": "reference",
+                        "_key": "role/class",
+                        "value": "sorcerer"
+                     },
+                     "subclass": {
+                        "_type": "reference",
+                        "_key": "role/subclass",
+                        "value": "pyromancer"
+                     }
+                  }
+               ],
+               "experiences": [
+                  {
+                     "_type": "experience",
+                     "name": "Loremaster of the Ancient Texts",
+                     "description": "Years spent deciphering forgotten scrolls."
+                  },
+                  {
+                     "_type": "experience",
+                     "name": "Survivor of the Whispering Woods",
+                     "description": null
+                  }
+               ],
+               "level": 5,
+               "evasion": 14,
+               "armorSlots": {
+                  "_type": "dynamicResource",
+                  "max": 5,
+                  "current": 3
+               },
+               "hitPoints": {
+                  "_type": "dynamicResource",
+                  "max": 8,
+                  "current": 7
+               },
+               "damageThresholds": {
+                  "_type": "damageThresholds",
+                  "major": 10,
+                  "severe": 15
+               },
+               "hope": {
+                  "_type": "dynamicResource",
+                  "max": 8,
+                  "current": 4
+               },
+               "stress": {
+                  "_type": "dynamicResource",
+                  "max": 5,
+                  "current": 1
+               },
+               "traits": {
+                  "Agility": {
+                     "_type": "trait",
+                     "value": 2,
+                     "locked": false
+                  },
+                  "Strength": {
+                     "_type": "trait",
+                     "value": 0,
+                     "locked": false
+                  },
+                  "Finesse": {
+                     "_type": "trait",
+                     "value": 3,
+                     "locked": true
+                  },
+                  "Instinct": {
+                     "_type": "trait",
+                     "value": 1,
+                     "locked": false
+                  },
+                  "Presence": {
+                     "_type": "trait",
+                     "value": 4,
+                     "locked": false
+                  },
+                  "Knowledge": {
+                     "_type": "trait",
+                     "value": 1,
+                     "locked": true
+                  }
+               },
+               "gold": {
+                  "_type": "gold",
+                  "handfuls": 15,
+                  "bags": 2,
+                  "chests": 0
+               },
+               "equippedArmor": {
+                  "primary": {
+                     "_type": "reference",
+                     "_key": "item/armor",
+                     "value": "enchanted_leather"
+                  },
+                  "notes": "Glows faintly in moonlight"
+               },
+               "equippedWeapon": {
+                  "primary": {
+                     "_type": "reference",
+                     "_key": "item/weapon",
+                     "value": "singing_shortbow"
+                  },
+                  "secondary": null,
+                  "notes": null
+               },
+               "inventory": [
+                  {
+                     "_type": "reference",
+                     "_key": "item/weapon",
+                     "value": "silvered_dagger"
+                  },
+                  {
+                     "_type": "reference",
+                     "_key": "item/thing",
+                     "value": "healing_potion_greater"
+                  },
+                  {
+                     "_type": "inventoryThing",
+                     "name": "Bundle of Strange Herbs",
+                     "description": "Found near the Shadowfen, smells of sulfur and roses."
+                  },
+                  {
+                     "_type": "inventoryThing",
+                     "name": "Tarnished Silver Locket",
+                     "description": "Opens, but is empty inside."
                   }
                ]
             }
-         },
-         "required": [
-            "primary",
-            "notes"
          ],
-         "additionalProperties": false
-      },
-      "CharacterEquippedWeapon": {
-         "$schema": "https://json-schema.org/draft/2020-12/schema",
-         "type": "object",
-         "properties": {
-            "primary": {
-               "anyOf": [
-                  {
-                     "$ref": "ItemWeaponReference"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ]
-            },
-            "secondary": {
-               "anyOf": [
-                  {
-                     "$ref": "ItemWeaponReference"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ]
-            },
-            "notes": {
-               "anyOf": [
-                  {
-                     "type": "string"
-                  },
-                  {
-                     "type": "null"
-                  }
-               ]
-            }
-         },
-         "required": [
-            "primary",
-            "secondary",
-            "notes"
-         ],
-         "additionalProperties": false
-      },
-      "Character": {
-         "$schema": "https://json-schema.org/draft/2020-12/schema",
          "type": "object",
          "properties": {
             "_type": {
                "const": "characterDocument"
             },
             "_meta": {
-               "$ref": "SchemaMeta"
+               "$ref": "SchemaMetadata"
             },
             "name": {
                "type": "string"
@@ -1092,7 +1679,7 @@
             "experiences": {
                "type": "array",
                "items": {
-                  "$ref": "CharacterExperience"
+                  "$ref": "Experience"
                }
             },
             "level": {
@@ -1133,23 +1720,88 @@
                "$ref": "Gold"
             },
             "equippedArmor": {
-               "$ref": "CharacterEquippedArmor"
+               "type": "object",
+               "properties": {
+                  "primary": {
+                     "anyOf": [
+                        {
+                           "$ref": "ReferenceArmor"
+                        },
+                        {
+                           "type": "null"
+                        }
+                     ]
+                  },
+                  "notes": {
+                     "anyOf": [
+                        {
+                           "type": "string"
+                        },
+                        {
+                           "type": "null"
+                        }
+                     ]
+                  }
+               },
+               "required": [
+                  "primary",
+                  "notes"
+               ],
+               "additionalProperties": false
             },
             "equippedWeapon": {
-               "$ref": "CharacterEquippedWeapon"
+               "type": "object",
+               "properties": {
+                  "primary": {
+                     "anyOf": [
+                        {
+                           "$ref": "ReferenceWeapon"
+                        },
+                        {
+                           "type": "null"
+                        }
+                     ]
+                  },
+                  "secondary": {
+                     "anyOf": [
+                        {
+                           "$ref": "ReferenceWeapon"
+                        },
+                        {
+                           "type": "null"
+                        }
+                     ]
+                  },
+                  "notes": {
+                     "anyOf": [
+                        {
+                           "type": "string"
+                        },
+                        {
+                           "type": "null"
+                        }
+                     ]
+                  }
+               },
+               "required": [
+                  "primary",
+                  "secondary",
+                  "notes"
+               ],
+               "additionalProperties": false
             },
             "inventory": {
                "type": "array",
                "items": {
                   "anyOf": [
                      {
-                        "$ref": "ItemArmorReference"
+                        "$ref": "ReferenceArmor"
                      },
                      {
-                        "$ref": "ItemWeaponReference"
+                        "$ref": "ReferenceWeapon"
                      },
                      {
-                        "$ref": "ItemSpecialReference"
+                        "$ref": "ReferenceThing"
                      },
                      {
                         "$ref": "Thing"
@@ -1180,10 +1832,33 @@
             "equippedWeapon",
             "inventory"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "CharacterDocument"
       },
       "CoreRuleset": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "CoreRuleset",
+         "title": "Core Ruleset",
+         "description": "A ruleset of all the things that can be used in the game",
+         "examples": [
+            {
+               "_type": "coreRuleset",
+               "_meta": {
+                  "rulesetUrl": "https://dh-forge.com/schema.json",
+                  "rulesetVersion": "0.2.0",
+                  "minVersion": "0.0.1",
+                  "dateCreated": "2025-05-30T12:00:00.000Z",
+                  "dateUpdated": "2025-05-30T12:00:00.000Z"
+               },
+               "item/armor": {},
+               "item/weapon": {},
+               "item/thing": {},
+               "role/class": {},
+               "role/subclass": {},
+               "heritage/ancestry": {},
+               "heritage/community": {}
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
@@ -1220,7 +1895,7 @@
             "item/armor": {
                "$ref": "__shared#/$defs/schema3"
             },
-            "item/special": {
+            "item/thing": {
                "$ref": "__shared#/$defs/schema4"
             },
             "item/weapon": {
@@ -1243,24 +1918,48 @@
             "_type",
             "_meta",
             "item/armor",
-            "item/special",
+            "item/thing",
             "item/weapon",
             "role/class",
             "role/subclass",
             "heritage/ancestry",
             "heritage/community"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "CoreRuleset"
       },
       "CampaignRuleset": {
          "$schema": "https://json-schema.org/draft/2020-12/schema",
+         "id": "CampaignRuleset",
+         "title": "Campaign Ruleset",
+         "description": "A campaign extension of a core ruleset",
+         "examples": [
+            {
+               "_type": "campaignRuleset",
+               "_meta": {
+                  "rulesetUrl": "https://dh-forge.com/schema.json",
+                  "rulesetVersion": "0.1.0",
+                  "dateCreated": "2025-05-30T12:00:00.000Z",
+                  "dateUpdated": "2025-05-30T12:00:00.000Z"
+               },
+               "homebrew": {
+                  "item/armor": {},
+                  "item/weapon": {},
+                  "item/thing": {},
+                  "role/class": {},
+                  "role/subclass": {},
+                  "heritage/ancestry": {},
+                  "heritage/community": {}
+               }
+            }
+         ],
          "type": "object",
          "properties": {
             "_type": {
                "const": "campaignRuleset"
             },
             "_meta": {
-               "$ref": "SchemaMeta"
+               "$ref": "SchemaMetadata"
             },
             "homebrew": {
                "type": "object",
@@ -1268,7 +1967,7 @@
                   "item/armor": {
                      "$ref": "__shared#/$defs/schema3"
                   },
-                  "item/special": {
+                  "item/thing": {
                      "$ref": "__shared#/$defs/schema4"
                   },
                   "item/weapon": {
@@ -1295,7 +1994,8 @@
             "_meta",
             "homebrew"
          ],
-         "additionalProperties": false
+         "additionalProperties": false,
+         "$id": "CampaignRuleset"
       },
       "__shared": {
          "$defs": {
@@ -1319,7 +2019,7 @@
                   "type": "string"
                },
                "additionalProperties": {
-                  "$ref": "ItemArmor"
+                  "$ref": "Armor"
                }
             },
             "schema4": {
@@ -1364,7 +2064,74 @@
                   "type": "string"
                },
                "additionalProperties": {
-                  "$ref": "Ancestry"
+                  "title": "Ancestry",
+                  "description": "The ancestry of a character",
+                  "examples": [
+                     {
+                        "_type": "ancestry",
+                        "name": "Ribbet",
+                        "description": "Ribbets resemble anthropomorphic frogs with protruding eyes, and webbed hands and feet.",
+                        "primaryFeature": {
+                           "name": "Amphibious",
+                           "description": "You can breathe and move naturally under water."
+                        },
+                        "secondaryFeature": {
+                           "name": "Long Tounge",
+                           "description": "You can use your long tounge to grab onto things within close range. Mark a stress to use your tounge as a finesse close weapon that deals d12 physical damage using your proficiency."
+                        }
+                     }
+                  ],
+                  "type": "object",
+                  "properties": {
+                     "_type": {
+                        "const": "ancestry"
+                     },
+                     "name": {
+                        "type": "string"
+                     },
+                     "description": {
+                        "type": "string"
+                     },
+                     "primaryFeature": {
+                        "type": "object",
+                        "properties": {
+                           "name": {
+                              "type": "string"
+                           },
+                           "description": {
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "name",
+                           "description"
+                        ],
+                        "additionalProperties": false
+                     },
+                     "secondaryFeature": {
+                        "type": "object",
+                        "properties": {
+                           "name": {
+                              "type": "string"
+                           },
+                           "description": {
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "name",
+                           "description"
+                        ],
+                        "additionalProperties": false
+                     }
+                  },
+                  "required": [
+                     "_type",
+                     "name",
+                     "primaryFeature",
+                     "secondaryFeature"
+                  ],
+                  "additionalProperties": false
                }
             },
             "schema9": {

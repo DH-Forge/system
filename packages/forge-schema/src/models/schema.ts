@@ -1,24 +1,25 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../json-collection.js";
 
 export const schemaVersion = z
 	.string()
 	.regex(/^\d+\.\d+\.\d+$/)
-	.register(jsonCollection, {
+	.meta({
 		id: "SchemaVersion",
+		title: "Schema Version",
 		description: "A version number",
 		examples: ["1.0.0", "2.10.0", "3.0.19"],
 	});
 
-export const schemaMeta = z
+export const SchemaMetadata = z
 	.object({
 		rulesetUrl: z.url(),
 		rulesetVersion: schemaVersion,
 		dateCreated: z.iso.datetime(),
 		dateUpdated: z.iso.datetime(),
 	})
-	.register(jsonCollection, {
-		id: "SchemaMeta",
+	.meta({
+		id: "SchemaMetadata",
+		title: "Schema Metadata",
 		description: "Metadata about a schema",
 		examples: [
 			{

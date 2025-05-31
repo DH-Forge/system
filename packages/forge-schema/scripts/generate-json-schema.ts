@@ -1,6 +1,6 @@
 import path from "node:path";
 import { z } from "zod/v4";
-import { jsonCollection } from "../src/json-collection.js";
+// import { jsonCollection } from "../src/json-collection.js";
 import { characterDocument } from "../src/models/doc-character.js";
 import { campaignRuleset } from "../src/models/ruleset-campaign.js";
 import { coreRuleset } from "../src/models/ruleset-core.js";
@@ -11,11 +11,14 @@ const registryCampaignSchema = z.toJSONSchema(campaignRuleset, {
 });
 const registryCoreSchema = z.toJSONSchema(coreRuleset, { reused: "ref" });
 
-const testingSchema = z.toJSONSchema(jsonCollection, {
+const testingSchema = z.toJSONSchema(z.globalRegistry, {
 	target: "draft-2020-12",
 	unrepresentable: "throw",
 	cycles: "throw",
 	reused: "ref",
+	override(ctx) {
+		ctx.jsonSchema.$id = ctx.jsonSchema.id;
+	},
 });
 
 /**

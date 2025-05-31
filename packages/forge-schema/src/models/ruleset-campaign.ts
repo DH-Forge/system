@@ -1,17 +1,17 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../json-collection.js";
 import { coreRuleset } from "./ruleset-core.js";
-import { schemaMeta } from "./schema.js";
+import { SchemaMetadata } from "./schema.js";
 
 export const campaignRuleset = z
 	.object({
 		_type: z.literal("campaignRuleset"),
-		_meta: schemaMeta,
+		_meta: SchemaMetadata,
 
 		homebrew: coreRuleset.omit({ _type: true, _meta: true }).partial(),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "CampaignRuleset",
+		title: "Campaign Ruleset",
 		description: "A campaign extension of a core ruleset",
 		examples: [
 			{
@@ -25,7 +25,7 @@ export const campaignRuleset = z
 				homebrew: {
 					"item/armor": {},
 					"item/weapon": {},
-					"item/special": {},
+					"item/thing": {},
 					"role/class": {},
 					"role/subclass": {},
 					"heritage/ancestry": {},

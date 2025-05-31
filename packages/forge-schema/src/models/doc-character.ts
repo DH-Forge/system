@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../json-collection.js";
 import { inventoryArmorReference } from "./artifact/inventory-armor.js";
 import {
 	inventoryThing,
@@ -14,12 +13,12 @@ import { gold } from "./common/gold.js";
 import { pronouns } from "./common/pronouns.js";
 import { dynamicResource } from "./common/resource.js";
 import { trait, traitName } from "./common/trait.js";
-import { schemaMeta } from "./schema.js";
+import { SchemaMetadata } from "./schema.js";
 
 export const characterDocument = z
 	.object({
 		_type: z.literal("characterDocument"),
-		_meta: schemaMeta,
+		_meta: SchemaMetadata,
 
 		// Identity
 		name: z.string(),
@@ -63,8 +62,9 @@ export const characterDocument = z
 			]),
 		),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "CharacterDocument",
+		title: "Character Document",
 		description: "A character sheet",
 		examples: [
 			{
@@ -190,7 +190,7 @@ export const characterDocument = z
 					},
 					{
 						_type: "reference",
-						_key: "item/special",
+						_key: "item/thing",
 						value: "healing_potion_greater",
 					},
 					{

@@ -31,7 +31,7 @@ import type {
 	roleClassReference,
 	roleSubclass,
 	roleSubclassReference,
-	schemaMeta,
+	SchemaMetadata,
 	schemaVersion,
 	trait,
 	traitName,
@@ -70,5 +70,5 @@ export type TraitName = z.infer<typeof traitName>;
 export type CharacterDocument = z.infer<typeof characterDocument>;
 export type CampaignRuleset = z.infer<typeof campaignRuleset>;
 export type CoreRuleset = z.infer<typeof coreRuleset>;
-export type SchemaMeta = z.infer<typeof schemaMeta>;
+export type SchemaMeta = z.infer<typeof SchemaMetadata>;
 export type SchemaVersion = z.infer<typeof schemaVersion>;

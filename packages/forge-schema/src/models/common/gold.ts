@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const gold = z
 	.object({
@@ -8,8 +7,9 @@ export const gold = z
 		bags: z.number().int().default(0),
 		chests: z.number().int().default(0),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Gold",
+		title: "Gold",
 		description: "The amount of gold held by a character",
 		examples: [
 			{ _type: "gold", handfuls: 2, bags: 0, chests: 0 },

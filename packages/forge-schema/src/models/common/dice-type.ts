@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const diceType = z
 	.union([
@@ -10,8 +9,9 @@ export const diceType = z
 		z.literal("d12"),
 		z.literal("d20"),
 	])
-	.register(jsonCollection, {
+	.meta({
 		id: "DiceType",
+		title: "Dice Type",
 		description: "The type of dice to roll",
 		examples: ["d4", "d6", "d8", "d10", "d12", "d20"],
 	});

@@ -1,5 +1,4 @@
 import { z } from "zod/v4";
-import { jsonCollection } from "../../json-collection.js";
 
 export const pronouns = z
 	.object({
@@ -9,8 +8,9 @@ export const pronouns = z
 		possessive: z.string(),
 		reflexive: z.string(),
 	})
-	.register(jsonCollection, {
+	.meta({
 		id: "Pronouns",
+		title: "Pronouns",
 		description: "The pronouns of a character",
 		examples: [
 			{
