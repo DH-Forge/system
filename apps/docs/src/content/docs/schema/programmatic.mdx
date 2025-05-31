@@ -1,0 +1,125 @@
+---
+title: Validating Your Data
+description: The DHFS Schema is a JSON Schema that defines the structure of the DHFS data.
+---
+
+import { Code, Steps} from '@astrojs/starlight/components';
+import VersionList from "../../../components/version-list.astro";
+import { createCharacterSchema } from '../../../components/json-schema-example';
+
+
+Editor assistance is great for when you're *writing* JSON, but usually you're going to need to handle JSON data programmatically? That's where programmatic validation comes in.
+
+#### How it works:
+
+Imagine you have a rest endpoint that returns a Daggerheart™ character as a JSON object. You also have the DHFS `character.json` schema. How can your program check if your character data actually follows all the rules set out in the schema?
+
+That's the job of a JSON Schema validator library. You pick one for your favorite programming language, feed it:
+
+1.  The DHFS schema (the rules).
+2.  Your JSON data (e.g., the data you want to check).
+
+The library then compares your data against the schema and tells you if it's valid. If not, it will usually provide a list of errors explaining what went wrong (e.g., "property 'level' is missing" or "property 'gold' should be a number but it was a string").
+
+This is incredibly useful for:
+
+ - Validating data submitted by users.
+ - Checking data coming from external APIs or files.
+ - Ensuring data is correct before saving it to a database or sending it to another system.
+
+#### Example with `ajv` and Javascript
+
+For developers working in JavaScript (Node.js or the browser), [ajv](https://ajv.js.org/) is a very popular and powerful JSON Schema validator. Here’s a simple example of how you might use it.
+
+<Steps>
+
+1.  **Install `ajv`** (if you're in a Node.js project):
+
+    ```bash
+    npm install ajv
+    ```
+
+2.  **Basic Validation Example:**
+
+    ```javascript
+     // Import Ajv
+    import Ajv from "ajv";
+
+    // Define the URL for the DHFS character schema
+    const DHFS_CHARACTER_SCHEMA_URL = "https://www.dh-forge.com/schema/0.0.0/character.json";
+
+    // Main logic in an async function to use 'await'
+    async function validateCharacterData() {
+      console.log(`Fetching schema from ${DHFS_CHARACTER_SCHEMA_URL}...`);
+      let characterSchema;
+      let validate;
+
+      try {
+        // --- Step 1: Fetch and Parse the Schema ---
+        // Fetches the schema and parses it from JSON text into a JavaScript object.
+        characterSchema = await fetch(DHFS_CHARACTER_SCHEMA_URL).then(res => res.json());
+        console.log("Schema fetched and parsed.");
+
+        // --- Step 2: Initialize Ajv and Compile the Schema ---
+        const ajv = new Ajv(); // Create an instance of the Ajv validator
+        validate = ajv.compile(characterSchema); // Prepares the schema for efficient validation
+        console.log("Schema compiled.");
+
+      } catch (error) {
+        console.error("Failed to load or compile schema:", error.message);
+        // Can't proceed if schema loading/compilation fails
+        return;
+      }
+
+      // --- Step 3: Prepare Your Data ---
+      // This data should be valid according to the 0.0.0/character.json schema.
+      // (Actual fields depend on the specific 0.0.0 schema definition)
+      const goodCharacterData = {
+        name: "Hero Name", // Assuming 'name' is a required string
+        // Add other fields as required by the 0.0.0 schema, e.g.:
+        // concept: "A brave warrior",
+        // ancestryId: "human_01"
+      };
+
+      // This data has intentional errors (e.g., wrong type for 'name')
+      const badCharacterData = {
+        name: 123, // 'name' should be a string
+        // Other required fields might also be missing here
+      };
+
+      // --- Step 4: Validate Your Data ---
+      console.log("\nValidating goodCharacterData...");
+      if (validate(goodCharacterData)) {
+        console.log("✅ Data is valid!");
+      } else {
+        // 'validate.errors' contains details about what's wrong
+        console.log("❌ Data is invalid. Errors:", validate.errors);
+      }
+
+      console.log("\nValidating badCharacterData...");
+      if (validate(badCharacterData)) {
+        console.log("✅ Data is valid? (This is unexpected)");
+      } else {
+        console.log("❌ Data is invalid. Errors:", validate.errors);
+      }
+    }
+
+    // Run the validation
+    validateCharacterData();
+    ```
+</Steps>
+
+#### Key Things to Note in This Example:
+
+ - **Simplified Fetch:** The schema is fetched and parsed in a single line.
+ - **Core Logic:** The example focuses on fetching, compiling the schema with `ajv`, and then validating data.
+ - **Sample Data:** `goodCharacterData` and `badCharacterData` are illustrative. For the example to work correctly against the *actual* `0.0.0/character.json`, you'd need to ensure `goodCharacterData` provides all required fields with correct types as defined in that specific schema version.
+ - **Error Info:** If validation fails, `validate.errors` is where `ajv` reports the issues.
+
+#### Important Notes for Real-World Use:
+
+ - **Schema Details:** The exact structure of `0.0.0/character.json` will determine what makes data "good" or "bad." Check the schema itself\!
+ - **Error Handling & Caching:** Production code would need more robust error handling and likely schema caching.
+ - **Consult Docs:** `ajv` and other validation libraries have many more features. Their official documentation is the best resource for advanced use.
+
+The key takeaway is that JSON Schemas, combined with a validator library, give you a robust way to ensure data quality in any application, regardless of the programming language.

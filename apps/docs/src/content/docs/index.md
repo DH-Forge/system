@@ -2,81 +2,36 @@
 title: DH-Forge System
 description: DHFS is an open-source system for defining, structuring, and sharing character and game data for the Daggerheart™ TTRPG. It aims to create a common language for digital tools, allowing seamless interoperability.
 ---
+DHFS (Daggerheart™ Forge System) is your open-source toolkit for wrangling character and game data for the Daggerheart™ TTRPG.
 
-DHFS is an open-source system for defining, structuring, and sharing character and game data for the Daggerheart™ TTRPG. It aims to create a common language for digital tools, allowing seamless interoperability.
+Think of it as a common language that helps all sorts of digital tools - character builders, virtual tabletops, and more - speak to each other seamlessly. No more awkward translations or lost-in-translation moments for your heroes!
 
-## Values
+## Our Mission
 
-The Daggerheart™ TTRPG community thrives on creativity, both in gameplay and in
-the tools we build to support it. However, a common challenge is "data silos" –
-character sheets locked in one app, VTTs needing manual data entry, and homebrew
-content being difficult to share digitally.
+TTRPG communities are bursting with creativity, not just in the thrilling tales we tell, but also in the tools we build to bring those stories to life. We've all been there, though: your favorite character sheet app doesn't talk to your VTT, or sharing your homebrew creations digitally feels like a side quest in itself. These "data islands" can slow down the fun.
 
-**DHFS aims to solve these problems for the Daggerheart™ community by
-providing:**
+**DHFS is here to bridge those islands and empower the Daggerheart™ community by offering:**
 
-- **Interoperability:** A shared understanding of data structure, so you can
-  move your character from your favorite builder to your virtual tabletop with
-  ease.
-- **Homebrew Support:** A robust system for integrating homebrew classes, items,
-  and more alongside core game rules.
-- **Openness:** A free and permissive (MIT licensed) standard that anyone can
-  implement in their personal or commercial projects.
-- **Flexibility:** A system designed to handle the core game data while allowing
-  for extensions.
+ - **Teamwork Makes the Dream Work (Interoperability):** A shared way of understanding game data. This means you can (eventually!) move your character from a character builder app straight into your virtual tabletop session, smooth as silk.
+ - **Your Game, Your Rules (Homebrew Support):** A solid but flexible system designed to welcome your unique homebrew classes, legendary items, and terrifying monsters right alongside the core game elements.
+ - **Open Doors for Everyone (Openness):** A completely free and permissive (that's MIT licensed, for the curious) standard. Anyone can use it, build with it, and share their creations, whether it's a passion project or a commercial one.
+ - **Built to Bend, Not Break (Flexibility):** A system that expertly handles all the core game data you'd expect, but is also designed to let you add your own extensions and features.
 
-### What It Enables
+### What Adventures Can This Unlock?
 
-By adopting DHFS, developers can build a richer, more connected ecosystem of
-tools, including:
+When our tools speak the same language using DHFS, developers like you can craft a richer, more connected universe of Daggerheart™ experiences, like:
 
-- **Visual Character Sheets:** Web or mobile apps that can display any DHFS-compliant character.
+ - **Living Character Sheets:** Web or mobile apps that can beautifully display any character built with DHFS.
+ - **Streamer-Friendly Overlays:** Automatically flash player stats on screen during your live games.
+ - **Virtual Tabletops (VTTs):** Effortlessly import and export characters, beasties, and game elements.
+ - **Digital Companions for Live Play:** Slick tablet apps for quick rule lookups and tracking initiative at the table.
+ - **AI Story Weavers & Game Masters:** Feed structured data to AI tools to help generate new adventures or even assist the GM.
+ - **And a Whole Realm More...:** Seriously, with a common way to handle data, the possibilities are extensive\!
 
-- **Livestream Overlays:** Automatically pull player stats for streaming.
 
-- **Virtual Tabletops:** Easy import/export of characters and game elements.
+## Ready to Forge?
 
-- **Digital Tools for In-Person Play:** Tablet apps for quick reference and tracking.
-
-- **AI & Narrative Tools:** Provide structured data for AI GMs or story generators.
-
-- **And much more...:** The possibilities are endless with a shared data standard!
-
-## What's inside?
-
-### Universal Compatibility with JSON Schemas
-
-To be truly interoperable, a system should support all developers regardless of their tech stack. [JSON Schemas](https://json-schema.org/) are a system for defining and distributing data structures. JSON, and JSON Schemas are widely supported and so make a great foundation for a shared data system.
-
- - Node: [ajv](https://github.com/ajv-validator/ajv)
- - Python: [jsonschema](https://github.com/python-jsonschema/jsonschema)
- - PHP: [json-schema](https://github.com/justinrainbow/json-schema)
- - Java: [json-schema-validator](https://github.com/networknt/json-schema-validator)
- - .NET: [Newtonsoft.Json.Schema](https://github.com/JamesNK/Newtonsoft.Json.Schema)
- - Go: [gojsonschema](https://github.com/invopop/gojsonschema)
- - Ruby: [json-schema](https://github.com/ruby-json-schema/json-schema)
- - Rust: [jsonschema](https://github.com/Stranger6667/jsonschema)
-
-A shared data system makes it easier for developers to build powerful
-tools for the Daggerheart™ community, ensuring efforts lead to maximum
-interoperability and benefit. It is in this spirit that DHForge provides DHFS –
-to offer a common foundation for a vibrant and interconnected ecosystem of
-player-focused applications.
-
-### Homebrew Friendly
-
-It's the rules and structure that make systems like these beneficial. DHFS has been designed to strike a balance to ensure support for custom content made by game-masters can be easily supported.
-
-This system supports core [Daggerheart™](https://www.daggerheart.com/) game elements and is designed with the flexibility to robustly incorporate **homebrew content**, fostering rich, interoperable experiences for character builders, virtual tabletops (VTTs), streaming overlays, and other community-created applications.
-
-### First-class Typescript + Javascript Support
-
-To complement these schemas, DHFS also offers first-class [Typescript](https://www.typescriptlang.org/) packages to simplify the integration and use of this structured data in your projects.
-
-## Get Started
-
-We invite you to **explore the DHFS data models** or dive into **getting started
-with the JSON Schemas**!
+We invite you to **explore the DHFS data models** or dive into **getting started with the JSON Schemas**!
 
 :::caution[Disclaimer]
 This project is an **unofficial** fan creation and is _not_ affiliated with, or endorsed by, Darrington Press LLC. It uses names and concepts related to [Daggerheart™]("https://www.daggerheart.com/") under fair use principles in line with their [community gaming license](https://darringtonpress.com/license/).

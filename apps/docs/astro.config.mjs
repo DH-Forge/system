@@ -31,42 +31,31 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: "Overview",
-					items: [
-						{
-							label: "Introduction",
-							slug: "index",
-						},
-						{
-							label: "Getting Started",
-							slug: "getting-started",
-						},
-						{
-							label: "JSON Schema",
-							slug: "schema",
-						},
-					],
+					label: "Introduction",
+					slug: "index",
+					// badge: "New",
 				},
 				{
-					label: "Specification",
-					autogenerate: { directory: "specification" },
-					// badge: "New",
+					label: "Overview",
+					autogenerate: { directory: "overview" },
+				},
+				{
+					label: "JSON Schema",
+					autogenerate: { directory: "schema" },
+				},
+				{
+					label: "Schema Reference",
+					autogenerate: { directory: "reference" },
+					collapsed: true,
+					badge: {
+						variant: "tip",
+						text: "Alpha",
+					},
 				},
 				{
 					label: "Libraries",
 					autogenerate: { directory: "libraries" },
-					collapsed: false,
-				},
-				{
-					label: "Resources",
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{
-							label: "GitHub Repository",
-							link: "https://github.com/DH-Forge/system",
-						},
-					],
-					collapsed: false,
+					collapsed: true,
 				},
 			],
 			plugins: [

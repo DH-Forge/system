@@ -1,0 +1,73 @@
+---
+title: Getting Started with DHFS Schemas
+description: The DHFS Schema is a JSON Schema that defines the structure of the DHFS data.
+sidebar:
+  label: "Getting Started"
+---
+
+import { Code, Steps} from '@astrojs/starlight/components';
+import VersionList from "../../../components/version-list.astro";
+import { createCharacterSchema } from '../../../components/json-schema-example';
+
+
+Welcome, adventurer, to the world of JSON Schemas! This page is your quick start guide to understanding and using the raw DHFS Schemas that define Daggerheart™ game data. Whether you're building a character manager, a VTT integration, or just curious, you're in the right place.
+
+We'll explore two main ways you can get a feel for these schemas:
+
+1.  **Live in Your Editor:** See how schemas provide autocompletion and validation as you type.
+2.  **Programmatic Validation:** Understand how your code can use schemas to check if data is structured correctly.
+
+Let's dive in!
+
+### Schemas in Your Editor with Instant Feedback!
+
+One of the neatest immediate benefits of JSON Schemas is how they can power up your code editor, giving you helpful hints and checks as you work with your Daggerheart™ JSON data.
+
+Most modern JSON files can include a special line at the top: `"$schema": "URL_to_your_schema.json"`. This little line tells your editor (and other tools) where to find the "rulebook" (the JSON Schema) for this particular JSON file.
+
+#### Autocomplete Demo:
+
+1.  Open your favorite code editor that has good JSON Schema support. We recommend [Cursor](https://www.cursor.com/), or [Visual Studio Code](https://code.visualstudio.com/).
+2.  Create a new file, let's call it `my_character.json`.
+3.  Paste the following into your new file:
+
+<Code
+	code={createCharacterSchema({name: "John Doe", level: 1})}
+	lang="json"
+	title="my_character.json"
+	mark={["$schema"]}
+/>
+
+:::note
+The `$schema` URL includes a version number, like `1.0.0`. You'll ideally replace this with the current version you intend to use from the [Available Schemas](#available-schema-versions) list below.
+:::
+
+**What You Should See (Fingers Crossed!):**
+
+ - **Autocompletion:** Try typing a new property. As you type, your editor might suggest valid property names defined in the `character.json` schema (e.g., if you start typing `"level":` it should recognize if it's a valid field, and the type of value).
+ - **Descriptions:** Hover over a property name like `"name"` or `"ancestry"`. The editor might show you a description of what that field is for, straight from the schema.
+ - **Validation:** Try changing `"level": 1` to `"level": "boss"`. Your editor should flag this as an error because the schema expects `level` to be a number, not a string. Or, try deleting a required field – you might get a warning.
+
+#### Why This is Cool:
+
+This immediate feedback loop is super helpful! It helps you:
+
+ - Write valid Daggerheart™ data from the start.
+ - Discover what properties are available and what they mean.
+ - Catch typos and structural errors quickly, without needing to run any code.
+
+:::caution[Heads-Up:]
+While most popular editors support this, your editor might require specific plugins or configuration to get it working smoothly with remote URLs.
+
+If it doesn't work out of the box, a quick search for "[Your Editor Name] JSON Schema support" might guide you.
+:::
+
+## What's Next?
+
+Hopefully, this gives you a good starting point! We encourage you to:
+
+ - Try the `$schema` trick in your editor with one of the character schemas.
+ - Browse the list of [available schemas](/json-schema/versions) to see what data structures are defined.
+ - If you're building something, think about how [schema validation](/json-schema/programmatic) could help your project.
+
+Happy forging!
