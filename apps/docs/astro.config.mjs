@@ -1,6 +1,7 @@
 // @ts-check
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
+import starlightLlmsTxt from "starlight-llms-txt";
 
 // https://astro.build/config
 export default defineConfig({
@@ -57,6 +58,26 @@ export default defineConfig({
 					],
 					collapsed: false,
 				},
+			],
+			plugins: [
+				starlightLlmsTxt({
+					// Docs: https://delucis.github.io/starlight-llms-txt/configuration/
+					projectName: "DH-Forge",
+					description:
+						"DH Forge System (DHFS) is an open-source, community-built JSON standard with TypeScript utilities for describing every piece of Daggerheart™ character and campaign data. It exists to give character builders, VTTs, livestream overlays and other tools a common language, wiping out “data silos” so players and creators can move official rules and homebrew content anywhere with zero re-entry.",
+					optionalLinks: [
+						{
+							label: "GitHub",
+							url: "https://github.com/DH-Forge/system",
+							description: "The GitHub repository for the DH-Forge project.",
+						},
+						{
+							label: "Daggerheart™",
+							url: "https://www.daggerheart.com",
+							description: "The official website for the Daggerheart™ game.",
+						},
+					],
+				}),
 			],
 		}),
 	],
