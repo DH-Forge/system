@@ -8,9 +8,7 @@
 	"types": "./src/index.ts",
 	"sideEffects": false,
 	"license": "MIT",
-	"files": [
-		"src/**"
-	],
+	"files": ["src/**"],
 	"exports": {
 		".": "./src/index.ts",
 		"./version": "./src/version/index.ts",
