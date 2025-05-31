@@ -6,14 +6,17 @@ import { inventoryThing } from "./artifact/inventory-thing.js";
 import { inventoryWeapon } from "./artifact/inventory-weapon.js";
 import { roleClass } from "./artifact/role-class.js";
 import { roleSubclass } from "./artifact/role-subclass.js";
-import { SchemaMetadata, schemaVersion } from "./schema.js";
+import { rulesetUrl, schemaMetadata, schemaVersion } from "./schema.js";
 
-export const coreRuleset = z
+export const ruleset = z
 	.object({
-		_type: z.literal("coreRuleset"),
-		_meta: SchemaMetadata.extend({
+		$schema: z.url().optional().catch(undefined),
+		_type: z.literal("ruleset"),
+		_meta: schemaMetadata.extend({
+			rulesetUrl: rulesetUrl,
 			minVersion: schemaVersion,
 		}),
+
 		"item/armor": z.record(z.string(), inventoryArmor),
 		"item/thing": z.record(z.string(), inventoryThing),
 		"item/weapon": z.record(z.string(), inventoryWeapon),
@@ -23,12 +26,12 @@ export const coreRuleset = z
 		"heritage/community": z.record(z.string(), community),
 	})
 	.meta({
-		id: "CoreRuleset",
-		title: "Core Ruleset",
+		id: "Ruleset",
+		title: "Ruleset",
 		description: "A ruleset of all the things that can be used in the game",
 		examples: [
 			{
-				_type: "coreRuleset",
+				_type: "ruleset",
 				_meta: {
 					rulesetUrl: "https://dh-forge.com/schema.json",
 					rulesetVersion: "0.2.0",

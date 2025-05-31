@@ -7,12 +7,11 @@ export const schemaVersion = z
 		id: "SchemaVersion",
 		title: "Schema Version",
 		description: "A version number",
-		examples: ["1.0.0", "2.10.0", "3.0.19"],
+		examples: ["0.0.0"],
 	});
 
-export const SchemaMetadata = z
+export const schemaMetadata = z
 	.object({
-		rulesetUrl: z.url(),
 		rulesetVersion: schemaVersion,
 		dateCreated: z.iso.datetime(),
 		dateUpdated: z.iso.datetime(),
@@ -21,12 +20,24 @@ export const SchemaMetadata = z
 		id: "SchemaMetadata",
 		title: "Schema Metadata",
 		description: "Metadata about a schema",
-		examples: [
-			{
-				rulesetUrl: "https://dh-forge.com/schema.json",
-				rulesetVersion: "1.0.0",
-				dateCreated: "2025-05-30T12:00:00.000Z",
-				dateUpdated: "2025-05-30T12:00:00.000Z",
-			},
-		],
 	});
+
+export const rulesetUrl = z.url().meta({
+	id: "RulesetUrl",
+	title: "Ruleset URL",
+	description: "The URL of the ruleset",
+	examples: [
+		"https://docs.dh-forge.com/schema/0.0.0/ruleset.json",
+		"https://docs.dh-forge.com/schema/1.0.0/ruleset.json",
+	],
+});
+
+export const campaignUrl = z.url().meta({
+	id: "CampaignUrl",
+	title: "Campaign URL",
+	description: "The URL of the campaign",
+	examples: [
+		"https://docs.dh-forge.com/schema/0.0.0/campaign.json",
+		"https://docs.dh-forge.com/schema/1.0.0/campaign.json",
+	],
+});

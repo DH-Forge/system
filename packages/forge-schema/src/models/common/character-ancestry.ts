@@ -17,27 +17,4 @@ export const characterAncestry = z
 		id: "CharacterAncestry",
 		title: "Character Ancestry",
 		description: "A character's ancestry",
-		examples: [
-			{
-				_type: "singleAncestry",
-				ancestry: {
-					_type: "reference",
-					_key: "heritage/ancestry",
-					value: "dwarf",
-				},
-			},
-			{
-				_type: "dualAncestry",
-				primary: {
-					_type: "reference",
-					_key: "heritage/ancestry",
-					value: "elf",
-				},
-				secondary: {
-					_type: "reference",
-					_key: "heritage/ancestry",
-					value: "faun",
-				},
-			},
-		],
 	});

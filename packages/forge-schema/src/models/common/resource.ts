@@ -10,8 +10,4 @@ export const dynamicResource = z
 		id: "DynamicResource",
 		title: "Dynamic Resource",
 		description: "A dynamic resource used by a character",
-		examples: [
-			{ _type: "dynamicResource", max: 10, current: 0 },
-			{ _type: "dynamicResource", max: 5, current: 3 },
-		],
 	});

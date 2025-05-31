@@ -1,21 +1,24 @@
 import { z } from "zod/v4";
-import { coreRuleset } from "./ruleset-core.js";
-import { SchemaMetadata } from "./schema.js";
+import { ruleset } from "./ruleset.js";
+import { rulesetUrl, schemaMetadata } from "./schema.js";
 
-export const campaignRuleset = z
+export const campaign = z
 	.object({
-		_type: z.literal("campaignRuleset"),
-		_meta: SchemaMetadata,
+		$schema: z.url().optional().catch(undefined),
+		_type: z.literal("campaign"),
+		_meta: schemaMetadata.extend({
+			rulesetUrl: rulesetUrl,
+		}),
 
-		homebrew: coreRuleset.omit({ _type: true, _meta: true }).partial(),
+		homebrew: ruleset.omit({ _type: true, _meta: true }).partial(),
 	})
 	.meta({
-		id: "CampaignRuleset",
-		title: "Campaign Ruleset",
-		description: "A campaign extension of a core ruleset",
+		id: "Campaign",
+		title: "Campaign",
+		description: "A campaign configuration and homebrew ruleset",
 		examples: [
 			{
-				_type: "campaignRuleset",
+				_type: "campaign",
 				_meta: {
 					rulesetUrl: "https://dh-forge.com/schema.json",
 					rulesetVersion: "0.1.0",

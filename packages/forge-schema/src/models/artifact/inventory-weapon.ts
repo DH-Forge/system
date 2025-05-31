@@ -20,28 +20,9 @@ export const inventoryWeapon = z
 		id: "Weapon",
 		title: "Weapon",
 		description: "A weapon that can be equipped by a character",
-		examples: [
-			{
-				_type: "inventoryWeapon",
-				name: "Warhammer",
-				trait: "Strength",
-				range: "Melee",
-				damageDice: "d8",
-				damageType: "Physical",
-				features: ["Versatile"],
-				burden: "One-Handed",
-			},
-		],
 	});
 
 export const inventoryWeaponReference = createReference("item/weapon").meta({
 	id: "ReferenceWeapon",
 	title: "Reference to a Weapon",
-	examples: [
-		{
-			_type: "reference",
-			_key: "item/weapon",
-			value: "warhammer",
-		},
-	],
 });
