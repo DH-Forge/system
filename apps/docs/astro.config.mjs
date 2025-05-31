@@ -3,15 +3,25 @@ import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
 import starlightLlmsTxt from "starlight-llms-txt";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://astro.build/config
 export default defineConfig({
-	site: "https://docs.dh-forge.com",
+	site: "https://dh-forge.com",
+
 	server: {
 		port: 4322,
 	},
+
 	integrations: [
 		starlight({
 			title: "DHFS Docs",
+			logo: {
+				light: "./src/assets/logo-light-mode.svg",
+				dark: "./src/assets/logo-dark-mode.svg",
+				// src: "./src/assets/logo-icon.svg",
+				replacesTitle: true,
+			},
 			social: [
 				{
 					icon: "github",
@@ -79,6 +89,15 @@ export default defineConfig({
 					],
 				}),
 			],
+			editLink: {
+				baseUrl:
+					"https://github.com/DH-Forge/system/edit/main/apps/docs/src/content/docs",
+			},
+			customCss: ["./src/styles/global.css"],
 		}),
 	],
+
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });
