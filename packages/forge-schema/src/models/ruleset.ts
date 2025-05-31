@@ -6,14 +6,17 @@ import { inventoryThing } from "./artifact/inventory-thing.js";
 import { inventoryWeapon } from "./artifact/inventory-weapon.js";
 import { roleClass } from "./artifact/role-class.js";
 import { roleSubclass } from "./artifact/role-subclass.js";
-import { schemaMetadata, schemaVersion } from "./schema.js";
+import { rulesetUrl, schemaMetadata, schemaVersion } from "./schema.js";
 
 export const ruleset = z
 	.object({
+		$schema: z.url().optional().catch(undefined),
 		_type: z.literal("ruleset"),
 		_meta: schemaMetadata.extend({
+			rulesetUrl: rulesetUrl,
 			minVersion: schemaVersion,
 		}),
+
 		"item/armor": z.record(z.string(), inventoryArmor),
 		"item/thing": z.record(z.string(), inventoryThing),
 		"item/weapon": z.record(z.string(), inventoryWeapon),

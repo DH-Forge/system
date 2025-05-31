@@ -1,11 +1,14 @@
 import { z } from "zod/v4";
 import { ruleset } from "./ruleset.js";
-import { schemaMetadata } from "./schema.js";
+import { rulesetUrl, schemaMetadata } from "./schema.js";
 
 export const campaign = z
 	.object({
+		$schema: z.url().optional().catch(undefined),
 		_type: z.literal("campaign"),
-		_meta: schemaMetadata,
+		_meta: schemaMetadata.extend({
+			rulesetUrl: rulesetUrl,
+		}),
 
 		homebrew: ruleset.omit({ _type: true, _meta: true }).partial(),
 	})

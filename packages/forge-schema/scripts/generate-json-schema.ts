@@ -90,7 +90,7 @@ const generateSchemas = async (): Promise<void> => {
 	await Promise.all(
 		schemas.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data, null, 2), "utf-8");
+			return writeFile(dest, JSON.stringify(data), "utf-8");
 		}),
 	);
 };

@@ -13,12 +13,15 @@ import { gold } from "./common/gold.js";
 import { pronouns } from "./common/pronouns.js";
 import { dynamicResource } from "./common/resource.js";
 import { trait, traitName } from "./common/trait.js";
-import { schemaMetadata } from "./schema.js";
+import { campaignUrl, schemaMetadata } from "./schema.js";
 
 export const character = z
 	.object({
+		$schema: z.url().optional().catch(undefined),
 		_type: z.literal("character"),
-		_meta: schemaMetadata,
+		_meta: schemaMetadata.extend({
+			campaignUrl: campaignUrl,
+		}),
 
 		// Identity
 		name: z.string(),
@@ -80,7 +83,7 @@ export const character = z
 			{
 				_type: "character",
 				_meta: {
-					rulesetUrl: "https://dh-forge.com/schema.json",
+					campaignUrl: "https://dh-forge.com/schema.json",
 					rulesetVersion: "1.0.0",
 					dateCreated: "2025-05-30T12:00:00.000Z",
 					dateUpdated: "2025-05-30T12:00:00.000Z",
