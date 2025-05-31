@@ -12,33 +12,9 @@ export const ancestry = z
 	.meta({
 		title: "Ancestry",
 		description: "The ancestry of a character",
-		examples: [
-			{
-				_type: "ancestry",
-				name: "Ribbet",
-				description:
-					"Ribbets resemble anthropomorphic frogs with protruding eyes, and webbed hands and feet.",
-				primaryFeature: {
-					name: "Amphibious",
-					description: "You can breathe and move naturally under water.",
-				},
-				secondaryFeature: {
-					name: "Long Tounge",
-					description:
-						"You can use your long tounge to grab onto things within close range. Mark a stress to use your tounge as a finesse close weapon that deals d12 physical damage using your proficiency.",
-				},
-			},
-		],
 	});
 
 export const ancestryReference = createReference("heritage/ancestry").meta({
 	id: "ReferenceAncestry",
 	title: "Reference to an Ancestry",
-	examples: [
-		{
-			_type: "reference",
-			_key: "heritage/ancestry",
-			value: "ribbet",
-		},
-	],
 });

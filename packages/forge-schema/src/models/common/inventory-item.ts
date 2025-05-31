@@ -17,17 +17,4 @@ export const inventoryItem = z
 		id: "InventoryItem",
 		title: "Inventory Item",
 		description: "An item in a character's inventory",
-		examples: [
-			{
-				_type: "reference",
-				_key: "item/weapon",
-				value: "warhammer",
-			},
-			{
-				_type: "inventoryThing",
-				name: "Unknown Potion",
-				description:
-					"Blue liquid in a glass vial with a green cap, smells like mint.",
-			},
-		],
 	});

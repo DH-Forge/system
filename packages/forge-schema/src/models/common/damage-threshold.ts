@@ -10,5 +10,4 @@ export const damageThresholds = z
 		id: "DamageThresholds",
 		title: "Damage Thresholds",
 		description: "The damage thresholds of a character",
-		examples: [{ _type: "damageThresholds", major: 5, severe: 8 }],
 	});

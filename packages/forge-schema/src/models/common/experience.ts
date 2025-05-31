@@ -10,16 +10,4 @@ export const experience = z
 		id: "Experience",
 		title: "Character Experience",
 		description: "Experience represents a character specialization.",
-		examples: [
-			{
-				_type: "experience",
-				name: "Catch Me If You Can",
-				description: null,
-			},
-			{
-				_type: "experience",
-				name: "Sticky Fingers",
-				description: "Background as a con artist",
-			},
-		],
 	});

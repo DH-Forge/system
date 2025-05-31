@@ -1,15 +1,14 @@
 import path from "node:path";
 import { z } from "zod/v4";
-// import { jsonCollection } from "../src/json-collection.js";
-import { characterDocument } from "../src/models/doc-character.js";
-import { campaignRuleset } from "../src/models/ruleset-campaign.js";
-import { ruleset } from "../src/models/ruleset-core.js";
+import { campaign } from "../src/models/campaign.js";
+import { character } from "../src/models/character.js";
+import { ruleset } from "../src/models/ruleset.js";
 
 // Compose schema data and filenames
 const schemas = [
 	{
-		filename: "document-character.json",
-		data: z.toJSONSchema(characterDocument, {
+		filename: "character.json",
+		data: z.toJSONSchema(character, {
 			unrepresentable: "throw",
 			cycles: "throw",
 			reused: "ref",
@@ -20,7 +19,7 @@ const schemas = [
 	},
 	{
 		filename: "campaign.json",
-		data: z.toJSONSchema(campaignRuleset, {
+		data: z.toJSONSchema(campaign, {
 			unrepresentable: "throw",
 			cycles: "throw",
 			reused: "ref",
@@ -91,7 +90,7 @@ const generateSchemas = async (): Promise<void> => {
 	await Promise.all(
 		schemas.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data), "utf-8");
+			return writeFile(dest, JSON.stringify(data, null, 2), "utf-8");
 		}),
 	);
 };
