@@ -2,7 +2,7 @@
 title: DHF Data Specification
 sidebar:
   label: "Data Spec"
-  order: 1
+  order: 0
   badge:
     variant: "tip"
     text: "Alpha"

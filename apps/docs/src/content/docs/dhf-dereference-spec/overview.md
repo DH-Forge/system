@@ -2,7 +2,7 @@
 title: DHF Dereference Specification
 sidebar:
   label: "Dereference Spec"
-  order: 2
+  order: 0
   badge:
     variant: "tip"
     text: "Alpha"

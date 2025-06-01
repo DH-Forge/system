@@ -10,6 +10,7 @@ export const ancestry = z
 		secondaryFeature: z.object({ name: z.string(), description: z.string() }),
 	})
 	.meta({
+		id: "Ancestry",
 		title: "Ancestry",
 		description: "The ancestry of a character",
 	});

@@ -2,7 +2,7 @@
 title: DHF Typescript API Reference
 sidebar:
   label: "Typescript API"
-  order: 3
+  order: 0
   badge:
     variant: "note"
     text: "WIP"

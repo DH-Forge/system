@@ -18,9 +18,15 @@ type Metadata = {
 	title: string;
 	description: string;
 	sidebar?: { order?: number; label?: string };
+	banner?: string;
 };
 
-function createFrontmatter({ description, title, sidebar }: Metadata): string {
+function createFrontmatter({
+	description,
+	title,
+	sidebar,
+	banner,
+}: Metadata): string {
 	const attribute = (key: string, value: string | number, indent = 0) => {
 		const spaces = " ".repeat(indent);
 		const prefix = [spaces, key.trim(), ":"].join("");
@@ -41,6 +47,10 @@ function createFrontmatter({ description, title, sidebar }: Metadata): string {
 			lines.push(attribute("order", sidebar.order, 1));
 		}
 	}
+	if (banner) {
+		lines.push(attribute("banner", ""));
+		lines.push(attribute("content", banner, 1));
+	}
 
 	return ["---", ...lines, "---\n"].join("\n");
 }
@@ -58,17 +68,17 @@ function createSection({ model }: Section): string {
 		throw new Error("Schema must have a title");
 	}
 
-	if (!schema.$id) {
+	if (!schema.id) {
 		console.error("\n⛔️", JSON.stringify(schema, null, 2), "\n\n");
-		throw new Error("Schema must have a $id");
+		throw new Error("Schema must have a id");
 	}
 
-	const lines = [block.heading(title, 2)];
+	const lines = [block.heading(title, 2), `ID: \`${schema.id}\``];
 
 	if (description) lines.push(description);
 	if (jsonSchema) lines.push(block.code(JSON.stringify(jsonSchema, null, 2)));
 
-	return lines.join("\n");
+	return lines.join("\n\n");
 }
 
 type Page = {
@@ -85,24 +95,28 @@ function createPage({ meta, sections }: Page): string {
 
 const pages = [
 	{
-		filename: "campaign.md",
-		data: createPage({
-			meta: {
-				title: "Campaign",
-				description: "A campaign is a collection of characters and rulesets.",
-			},
-			sections: [{ model: campaign }],
-		}),
-	},
-	{
 		filename: "character.md",
 		data: createPage({
 			meta: {
 				title: "Character",
 				description:
 					"A character is a player or non-player character in a campaign.",
+				sidebar: { order: 1 },
+				banner: "This document is a work in progress.",
 			},
 			sections: [{ model: character }],
+		}),
+	},
+	{
+		filename: "campaign.md",
+		data: createPage({
+			meta: {
+				title: "Campaign",
+				description: "A campaign is a collection of characters and rulesets.",
+				sidebar: { order: 2 },
+				banner: "This document is a work in progress.",
+			},
+			sections: [{ model: campaign }],
 		}),
 	},
 	{
@@ -111,6 +125,8 @@ const pages = [
 			meta: {
 				title: "Ruleset",
 				description: "A ruleset is a collection of rules for a campaign.",
+				sidebar: { order: 3 },
+				banner: "This document is a work in progress.",
 			},
 			sections: [{ model: ruleset }],
 		}),
@@ -121,6 +137,8 @@ const pages = [
 			meta: {
 				title: "Artifacts",
 				description: "Artifacts are items that can be used in a campaign.",
+				sidebar: { order: 4 },
+				banner: "This document is a work in progress.",
 			},
 			sections: Object.values(artifactSchemas).map((model) => ({ model })),
 		}),
@@ -131,6 +149,8 @@ const pages = [
 			meta: {
 				title: "Common",
 				description: "Common schemas are used in multiple models.",
+				sidebar: { order: 5 },
+				banner: "This document is a work in progress.",
 			},
 			sections: Object.values(commonSchemas).map((model) => ({ model })),
 		}),
@@ -146,7 +166,7 @@ const useDirectory = async (): Promise<string> => {
 	// Assumes the script is run from the 'packages/forge-schema' directory
 	const directory = path.resolve(
 		process.cwd(),
-		"../../apps/docs/src/content/docs/dhf-data-spec",
+		"../../apps/docs/src/content/docs/dhf-data-spec/models",
 	);
 
 	/**
@@ -173,7 +193,7 @@ export const generateDocs = async (): Promise<void> => {
 	await Promise.all(
 		pages.map(async ({ data, filename }) => {
 			const dest = path.join(directory, filename);
-			return writeFile(dest, JSON.stringify(data), "utf-8");
+			return writeFile(dest, data, "utf-8");
 		}),
 	);
 };
