@@ -20,18 +20,18 @@ This specification focuses on **defining the structure, relationships, and refer
 
 To address these problems effectively, the DH Forge System comprises three core components:
 
-1.  **The DHFS Standard (JSON Schema):** This is the heart of the project – the universal, open system for defining character and campaign data tructures. It will be published as a machine-readable JSON Schema, derived from Zod definitions, acting as the common language.
-2.  **DHFS Server Utilities (TS/JS Package):** An official, server-compatible Typescript/Javascript package. Its primary purpose is to **simplify osting** DHFS registries. It will provide utilities for:
+1.  **The DH-F Standard (JSON Schema):** This is the heart of the project – the universal, open system for defining character and campaign data structures. It will be published as a machine-readable JSON Schema, derived from Zod definitions, acting as the common language.
+2.  **DH-F Server Utilities (TS/JS Package):** An official, server-compatible Typescript/Javascript package. Its primary purpose is to **simplify hosting** DH-F registries. It will provide utilities for:
     - Resolving Core Registry dependencies.
     - Implementing the **mandated server-side merge** logic for Campaign Registries.
-    - Serving registry data according to the DHFS standard.
+    - Serving registry data according to the DH-F standard.
     - This directly addresses the increased complexity for Campaign Registry providers.
-3.  **DHFS Client Utilities (TS/JS Package):** An official, browser- and server-compatible Typescript/Javascript package designed for **tool evelopers**. It will offer:
-    - Utilities for fetching and consuming DHFS data.
+3.  **DH-F Client Utilities (TS/JS Package):** An official, browser- and server-compatible Typescript/Javascript package designed for **tool developers**. It will offer:
+    - Utilities for fetching and consuming DH-F data.
     - Type-safe interfaces based on the standard.
     - Potential helpers for validation and change detection logic.
 
-**While official support focuses on TS/JS, the DHFS standard is designed to be platform-agnostic, and community contributions for other languages (e.g., Python, Rust, PHP) are encouraged and welcome.**
+**While official support focuses on TS/JS, the DH-F standard is designed to be platform-agnostic, and community contributions for other languages (e.g., Python, Rust, PHP) are encouraged and welcome.**
 
 ### 1.4. Goals & Objectives
 
@@ -39,7 +39,7 @@ To address these problems effectively, the DH Forge System comprises three core 
 - **Ensure Interoperability:** Enable different tools to _understand_ the same character data.
 - **Support Homebrew:** Provide a robust mechanism and **tooling** for incorporating custom game content.
 - **Focus on Web & JSON:** Prioritize a format suitable for modern web applications and APIs.
-- **Simplify Data Consumption:** Provide client libraries to ease the integration of DHFS data into tools.
+- **Simplify Data Consumption:** Provide client libraries to ease the integration of DH-F data into tools.
 - **Simplify Data Hosting:** Provide server libraries to manage the complexities of serving merged Campaign Registries.
 - **Handle Game Mechanics:** Define a standard way to _represent_ game element modifiers.
 - **Clarification:** This specification defines _how data is structured, referenced, and served_. The provided libraries will offer reference implementations, but the specification remains the core standard.
@@ -52,21 +52,21 @@ At its core, Daggerheart involves players creating **Characters**. Each characte
 
 ### 2.2. The Registry Model (Server-Merged)
 
-DHFS uses a **Registry Model** with two main types:
+DH-F uses a **Registry Model** with two main types:
 
 - **Core Registry:** Provides the foundational game rules, classes, items, and other elements as defined by Daggerheart's official content (likely based on the SRD). It represents the baseline game experience.
 - **Campaign Registry:** Allows Game Masters and creators to introduce _modifications_ and _additions_ for their specific games—new items, altered abilities, unique classes, or entirely custom content. It defines what makes a specific campaign unique.
   **Why Merge?** A character exists within a specific campaign's context; they need access to both the base rules _and_ any changes or additions that apply only to that game. A merge is necessary to create a single, consistent view of the _effective ruleset_ for that character in that campaign.
   **Key Decision: Server-Side Merge**
-  DHFS **mandates a server-side merge model** to simplify tool development. The _server_ hosting a Campaign Registry is responsible for fetching its declared Core Registry dependency and serving a pre-merged dataset. **This specification defines _how_ this merge should behave (e.g., Campaign overrides Core), while the official DHFS Server Utilities package provides a reference TS/JS implementation. Community-provided solutions in other languages are expected to follow the same merge principles.**
+  DH-F **mandates a server-side merge model** to simplify tool development. The _server_ hosting a Campaign Registry is responsible for fetching its declared Core Registry dependency and serving a pre-merged dataset. **This specification defines _how_ this merge should behave (e.g., Campaign overrides Core), while the official DH-F Server Utilities package provides a reference TS/JS implementation. Community-provided solutions in other languages are expected to follow the same merge principles.**
 
 ### 2.3. Versioning Philosophy
 
-DHFS uses **Semantic Versioning (SemVer)**.
+DH-F uses **Semantic Versioning (SemVer)**.
 
 - **Internal Versioning:** Every Registry file _must_ contain its full SemVer number (e.g., `1.2.9`) within its `meta`.
 - **URL Versioning (`X.Y.x` Format):** Registry URLs _must_ use a `Major.Minor.x` format (e.g., `https://dh-forge.com/schema/1.2.x/core.json`). This URL _always_ serves the _latest patch version_ within that minor release, allowing automatic non-breaking updates.
-- **Specification Versioning:** The DHFS specification itself follows SemVer.
+- **Specification Versioning:** The DH-F specification itself follows SemVer.
 
 ## 3. API Specification
 
@@ -141,7 +141,7 @@ This is what a tool receives when it fetches a Campaign Registry URL. The `homeb
 ```json
 {
   "meta": {
-    "name": "Shadow Isles Campaign (DHFS Merged)",
+    "name": "Shadow Isles Campaign (DH-F Merged)",
     "version": "1.0.3", // Campaign Version
     "compatibleVersions": ["1.0.x"],
     "mergedCoreVersion": "1.0.2" // States the Core version used
@@ -165,7 +165,7 @@ We use a single string format for references: `category/type:id`.
 
 ### 3.6. Lookup Mechanism & Server Responsibility
 
-The DHFS standard defines a clear separation of responsibilities between the server (Registry Provider) and the client (Tool) to ensure consistent data delivery and consumption, regardless of the underlying technology.
+The DH-F standard defines a clear separation of responsibilities between the server (Registry Provider) and the client (Tool) to ensure consistent data delivery and consumption, regardless of the underlying technology.
 **Server Responsibilities (Universal):**
 Any server hosting a Campaign Registry _must_:
 
@@ -173,16 +173,16 @@ Any server hosting a Campaign Registry _must_:
 - Perform a deep merge, overlaying the `homebrewContent` from the Campaign Registry onto the Core Registry data. Items with identical `category/type:id` in `homebrewContent` _must_ replace their Core counterparts.
 - Serve the resulting merged JSON structure via its `X.Y.x` URL, including a `meta` section indicating both the Campaign version and the `mergedCoreVersion`.
   **Tool Responsibilities (Universal):**
-  Any tool consuming DHFS data _must_:
+  Any tool consuming DH-F data _must_:
 - Fetch the single `registry` URL provided in the character sheet's `meta` section.
 - Perform validation and change detection as defined in Section 3.7.
 - Utilize the received (potentially merged) data to represent the character.
   **Official Libraries:**
-  The official **DHFS Server Utilities** and **DHFS Client Utilities** packages provide tested, reference implementations for these responsibilities in Typescript/Javascript, simplifying adoption and ensuring adherence to the specification. However, any implementation in any language following these universal responsibilities can be considered DHFS-compliant.
+  The official **DH-F Server Utilities** and **DH-F Client Utilities** packages provide tested, reference implementations for these responsibilities in Typescript/Javascript, simplifying adoption and ensuring adherence to the specification. However, any implementation in any language following these universal responsibilities can be considered DH-F-compliant.
 
 ### 3.7. Validation & Change Detection (Tool Responsibility)
 
-Tools _must_ perform the URL/Version Match (Sanity Check) and Patch Update Detection. The **DHFS Client Utilities** package may provide helpers for these checks.
+Tools _must_ perform the URL/Version Match (Sanity Check) and Patch Update Detection. The **DH-F Client Utilities** package may provide helpers for these checks.
 
 ### 3.8. Defining Modifiers (Hybrid Model)
 
@@ -231,7 +231,7 @@ Tools gather `modifiers` and `effects_text`. They implement their own logic to c
 - **Single Source of Truth:** Core data structures are defined using Zod schemas.
 - **Official JSON Schemas:** JSON Schemas will be generated.
 - **Availability:** JSON Schemas will be published at stable, versioned URLs.
-- **Validation:** DHFS-compatible data should validate. The provided **DHFS Client/Server Utilities** will leverage these schemas.
+- **Validation:** DH-F-compatible data should validate. The provided **DH-F Client/Server Utilities** will leverage these schemas.
 - **Typescript Support:** Typescript types will be generated and included in the utility packages.
 
 ## 4. Use Cases & Implementation Examples
@@ -241,7 +241,7 @@ This standard enables tools like Visual Character Sheets, Livestream Overlays, V
 ## 5. Recommendations & Warnings
 
 - **ID Naming Conventions:** Homebrew creators should **prefix** their IDs to avoid unintended overrides.
-- **Campaign Hosting:** While providers _must_ implement the server-side merge logic, the **official DHFS Server Utilities package is designed to make this significantly easier**.
+- **Campaign Hosting:** While providers _must_ implement the server-side merge logic, the **official DH-F Server Utilities package is designed to make this significantly easier**.
 - **Modifier Calculation Order:** A standard order is recommended.
 - **URL Encoding:** References **must be URL-encoded**.
 
