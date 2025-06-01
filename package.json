@@ -17,7 +17,7 @@
 		"check": "turbo run check"
 	},
 	"lint-staged": {
-		"*.{json,css,html,ts,tsx,js,jsx}": "biome format --write"
+		"*.{json,css,html,ts,tsx,js,jsx}": "biome check --write --organize-imports-enabled=false --no-errors-on-unmatched"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",

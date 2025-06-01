@@ -1,0 +1,19 @@
+---
+import { Code } from "@astrojs/starlight/components";
+
+const versionUrl = "https://www.dh-forge.com/schema/0.0.0/character.json";
+
+const minimalExample = {
+	$schema: versionUrl,
+	name: "John Doe",
+	level: 1,
+	class: "Sorcerer",
+};
+---
+
+<Code
+	code={JSON.stringify(minimalExample,null,2,)}
+	lang="json"
+	title="minimal-example.json"
+	mark={["$schema"]}
+/>

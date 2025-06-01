@@ -1,0 +1,192 @@
+---
+title: Getting Started with DH-F Schemas
+description: Learn to integrate DH-F JSON Schemas into your Daggerheart™ development workflow. This guide explains how to use schemas for editor autocompletion and programmatic data validation, with practical examples.
+sidebar:
+  label: "Getting Started"
+---
+
+import { Code, Steps} from '@astrojs/starlight/components';
+import VersionList from "../../../components/version-list.astro";
+import { createCharacterSchema } from '../../../components/json-schema-example';
+
+
+Welcome, adventurer, to the world of JSON Schemas! This page is your quick start guide to understanding and using the raw DH-F Schemas that define Daggerheart™ game data. Whether you're building a character manager, a VTT integration, or just curious, you're in the right place.
+
+We'll explore two main ways you can get a feel for these schemas:
+
+1.  **[Autocomplete in Your Editor](#in-your-editor):** See how schemas provide autocompletion and validation as you type.
+2.  **[Programmatic Validation](#programmatic-validation):** Understand how your code can use schemas to check if data is structured correctly.
+
+Let's dive in!
+
+## In your editor:
+
+One of the neatest immediate benefits of JSON Schemas is how they can power up your code editor, giving you helpful hints and checks as you work with your Daggerheart™ JSON data.
+
+Most modern JSON files can include a special line at the top: `"$schema": "URL_to_your_schema.json"`. This little line tells your editor (and other tools) where to find the "rulebook" (the JSON Schema) for this particular JSON file.
+
+### Autocomplete Demo:
+
+1.  Open your favorite code editor that has good JSON Schema support. We recommend [Cursor](https://www.cursor.com/), or [Visual Studio Code](https://code.visualstudio.com/).
+2.  Create a new file, let's call it `my_character.json`.
+3.  Paste the following into your new file:
+
+<Code
+	code={createCharacterSchema({name: "John Doe", level: 1})}
+	lang="json"
+	title="my_character.json"
+	mark={["$schema"]}
+/>
+
+:::note
+The `$schema` URL includes a version number, like `1.0.0`. You'll ideally replace this with the current version you intend to use from the [Available Schemas](#available-schema-versions) list below.
+:::
+
+**What You Should See (Fingers Crossed!):**
+
+ - **Autocompletion:** Try typing a new property. As you type, your editor might suggest valid property names defined in the `character.json` schema (e.g., if you start typing `"level":` it should recognize if it's a valid field, and the type of value).
+ - **Descriptions:** Hover over a property name like `"name"` or `"ancestry"`. The editor might show you a description of what that field is for, straight from the schema.
+ - **Validation:** Try changing `"level": 1` to `"level": "boss"`. Your editor should flag this as an error because the schema expects `level` to be a number, not a string. Or, try deleting a required field – you might get a warning.
+
+### Why This is Cool:
+
+This immediate feedback loop is super helpful! It helps you:
+
+ - Write valid Daggerheart™ data from the start.
+ - Discover what properties are available and what they mean.
+ - Catch typos and structural errors quickly, without needing to run any code.
+
+:::caution[Heads-Up:]
+While most popular editors support this, your editor might require specific plugins or configuration to get it working smoothly with remote URLs.
+
+If it doesn't work out of the box, a quick search for "[Your Editor Name] JSON Schema support" might guide you.
+:::
+
+
+## Programmatic Validation:
+
+Editor assistance is great for when you're *writing* JSON, but what about when you need to handle JSON data in your code? That's where programmatic validation comes in.
+
+### How it works:
+
+Imagine you have a rest endpoint that returns a Daggerheart™ character as a JSON object. You also have the DH-F `character.json` schema. How can your program check if your character data actually follows all the rules set out in the schema?
+
+That's the job of a JSON Schema validator library. You pick one for your favorite programming language, feed it:
+
+1.  The DH-F schema (the rules).
+2.  Your JSON data (e.g., the data you want to check).
+
+The library then compares your data against the schema and tells you if it's valid. If not, it will usually provide a list of errors explaining what went wrong (e.g., "property 'level' is missing" or "property 'gold' should be a number but it was a string").
+
+This is incredibly useful for:
+
+ - Validating data submitted by users.
+ - Checking data coming from external APIs or files.
+ - Ensuring data is correct before saving it to a database or sending it to another system.
+
+### Example with `ajv` and Javascript
+
+For developers working in JavaScript (Node.js or the browser), [ajv](https://ajv.js.org/) is a very popular and powerful JSON Schema validator. Here’s a simple example of how you might use it.
+
+<Steps>
+
+1.  **Install `ajv`** (if you're in a Node.js project):
+
+    ```bash
+    npm install ajv
+    ```
+
+2.  **Basic Validation Example:**
+
+    ```javascript
+     // Import Ajv
+    import Ajv from "ajv";
+
+    // Define the URL for the DH-F character schema
+    const DHF_CHARACTER_SCHEMA_URL = "https://www.dh-forge.com/schema/0.0.0/character.json";
+
+    // Main logic in an async function to use 'await'
+    async function validateCharacterData() {
+      console.log(`Fetching schema from ${DHF_CHARACTER_SCHEMA_URL}...`);
+      let characterSchema;
+      let validate;
+
+      try {
+        // --- Step 1: Fetch and Parse the Schema ---
+        // Fetches the schema and parses it from JSON text into a JavaScript object.
+        characterSchema = await fetch(DHF_CHARACTER_SCHEMA_URL).then(res => res.json());
+        console.log("Schema fetched and parsed.");
+
+        // --- Step 2: Initialize Ajv and Compile the Schema ---
+        const ajv = new Ajv(); // Create an instance of the Ajv validator
+        validate = ajv.compile(characterSchema); // Prepares the schema for efficient validation
+        console.log("Schema compiled.");
+
+      } catch (error) {
+        console.error("Failed to load or compile schema:", error.message);
+        // Can't proceed if schema loading/compilation fails
+        return;
+      }
+
+      // --- Step 3: Prepare Your Data ---
+      // This data should be valid according to the 0.0.0/character.json schema.
+      // (Actual fields depend on the specific 0.0.0 schema definition)
+      const goodCharacterData = {
+        name: "Hero Name", // Assuming 'name' is a required string
+        // Add other fields as required by the 0.0.0 schema, e.g.:
+        // concept: "A brave warrior",
+        // ancestryId: "human_01"
+      };
+
+      // This data has intentional errors (e.g., wrong type for 'name')
+      const badCharacterData = {
+        name: 123, // 'name' should be a string
+        // Other required fields might also be missing here
+      };
+
+      // --- Step 4: Validate Your Data ---
+      console.log("\nValidating goodCharacterData...");
+      if (validate(goodCharacterData)) {
+        console.log("✅ Data is valid!");
+      } else {
+        // 'validate.errors' contains details about what's wrong
+        console.log("❌ Data is invalid. Errors:", validate.errors);
+      }
+
+      console.log("\nValidating badCharacterData...");
+      if (validate(badCharacterData)) {
+        console.log("✅ Data is valid? (This is unexpected)");
+      } else {
+        console.log("❌ Data is invalid. Errors:", validate.errors);
+      }
+    }
+
+    // Run the validation
+    validateCharacterData();
+    ```
+</Steps>
+
+#### Key Things to Note in This Example:
+
+ - **Simplified Fetch:** The schema is fetched and parsed in a single line.
+ - **Core Logic:** The example focuses on fetching, compiling the schema with `ajv`, and then validating data.
+ - **Sample Data:** `goodCharacterData` and `badCharacterData` are illustrative. For the example to work correctly against the *actual* `0.0.0/character.json`, you'd need to ensure `goodCharacterData` provides all required fields with correct types as defined in that specific schema version.
+ - **Error Info:** If validation fails, `validate.errors` is where `ajv` reports the issues.
+
+#### Important Notes for Real-World Use:
+
+ - **Schema Details:** The exact structure of `0.0.0/character.json` will determine what makes data "good" or "bad." Check the schema itself\!
+ - **Error Handling & Caching:** Production code would need more robust error handling and likely schema caching.
+ - **Consult Docs:** `ajv` and other validation libraries have many more features. Their official documentation is the best resource for advanced use.
+
+The key takeaway is that JSON Schemas, combined with a validator library, give you a robust way to ensure data quality in any application, regardless of the programming language.
+
+## What's Next?
+
+Hopefully, this gives you a good starting point! We encourage you to:
+
+ - Try the `$schema` trick in your editor with one of the character schemas.
+ - Browse the list of [available schemas](/json-schema/versions) to see what data structures are defined.
+ - If you're building something, think about how [schema validation](/json-schema/programmatic) could help your project.
+
+Happy forging!

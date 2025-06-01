@@ -14,10 +14,14 @@
 	},
 	"dependencies": {
 		"@astrojs/starlight": "^0.34.3",
-		"@forge/schema": "workspace:*",
+		"@astrojs/starlight-tailwind": "^4.0.1",
 		"@forge/helpers": "workspace:*",
+		"@forge/schema": "workspace:*",
+		"@tailwindcss/vite": "^4.1.8",
 		"astro": "^5.6.1",
 		"sharp": "^0.34.2",
+		"starlight-llms-txt": "^0.5.1",
+		"tailwindcss": "^4.1.8",
 		"zod": "^3.25.32"
 	},
 	"devDependencies": {

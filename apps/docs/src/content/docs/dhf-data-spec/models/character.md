@@ -1,0 +1,1013 @@
+---
+title: Character
+description: A character is a player or non-player character in a campaign.
+sidebar: 
+ order: 1
+---
+
+## Character Sheet
+
+ID: `Character`
+
+A character sheet
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "id": "Character",
+  "examples": [
+    {
+      "_type": "character",
+      "_meta": {
+        "campaignUrl": "https://dh-forge.com/schema.json",
+        "rulesetVersion": "1.0.0",
+        "dateCreated": "2025-05-30T12:00:00.000Z",
+        "dateUpdated": "2025-05-30T12:00:00.000Z"
+      },
+      "name": "Elara Meadowlight",
+      "nameAlternate": "Ela",
+      "pronouns": {
+        "_type": "pronouns",
+        "subject": "she",
+        "object": "her",
+        "possessive": "hers",
+        "reflexive": "herself"
+      },
+      "heritage": {
+        "_type": "heritage",
+        "community": {
+          "_type": "reference",
+          "_key": "heritage/community",
+          "value": "seaborne"
+        },
+        "ancestry": {
+          "_type": "dualAncestry",
+          "primary": {
+            "_type": "reference",
+            "_key": "heritage/ancestry",
+            "value": "elf"
+          },
+          "secondary": {
+            "_type": "reference",
+            "_key": "heritage/ancestry",
+            "value": "faun"
+          }
+        }
+      },
+      "roles": [
+        {
+          "_type": "characterRole",
+          "class": {
+            "_type": "reference",
+            "_key": "role/class",
+            "value": "bard"
+          },
+          "subclass": {
+            "_type": "reference",
+            "_key": "role/subclass",
+            "value": "troubadour"
+          }
+        },
+        {
+          "_type": "characterRole",
+          "class": {
+            "_type": "reference",
+            "_key": "role/class",
+            "value": "sorcerer"
+          },
+          "subclass": {
+            "_type": "reference",
+            "_key": "role/subclass",
+            "value": "pyromancer"
+          }
+        }
+      ],
+      "experiences": [
+        {
+          "_type": "experience",
+          "name": "Loremaster of the Ancient Texts",
+          "description": "Years spent deciphering forgotten scrolls."
+        },
+        {
+          "_type": "experience",
+          "name": "Survivor of the Whispering Woods",
+          "description": null
+        }
+      ],
+      "level": 5,
+      "evasion": 14,
+      "armorSlots": {
+        "_type": "dynamicResource",
+        "max": 5,
+        "current": 3
+      },
+      "hitPoints": {
+        "_type": "dynamicResource",
+        "max": 8,
+        "current": 7
+      },
+      "damageThresholds": {
+        "_type": "damageThresholds",
+        "major": 10,
+        "severe": 15
+      },
+      "hope": {
+        "_type": "dynamicResource",
+        "max": 8,
+        "current": 4
+      },
+      "stress": {
+        "_type": "dynamicResource",
+        "max": 5,
+        "current": 1
+      },
+      "traits": {
+        "Agility": {
+          "_type": "trait",
+          "value": 2,
+          "locked": false
+        },
+        "Strength": {
+          "_type": "trait",
+          "value": 0,
+          "locked": false
+        },
+        "Finesse": {
+          "_type": "trait",
+          "value": 3,
+          "locked": true
+        },
+        "Instinct": {
+          "_type": "trait",
+          "value": 1,
+          "locked": false
+        },
+        "Presence": {
+          "_type": "trait",
+          "value": 4,
+          "locked": false
+        },
+        "Knowledge": {
+          "_type": "trait",
+          "value": 1,
+          "locked": true
+        }
+      },
+      "gold": {
+        "_type": "gold",
+        "handfuls": 15,
+        "bags": 2,
+        "chests": 0
+      },
+      "equippedArmor": {
+        "primary": {
+          "_type": "reference",
+          "_key": "item/armor",
+          "value": "enchanted_leather"
+        },
+        "notes": "Glows faintly in moonlight"
+      },
+      "equippedWeapon": {
+        "primary": {
+          "_type": "reference",
+          "_key": "item/weapon",
+          "value": "singing_shortbow"
+        },
+        "secondary": null,
+        "notes": null
+      },
+      "inventory": [
+        {
+          "_type": "reference",
+          "_key": "item/weapon",
+          "value": "silvered_dagger"
+        },
+        {
+          "_type": "reference",
+          "_key": "item/thing",
+          "value": "healing_potion_greater"
+        },
+        {
+          "_type": "inventoryThing",
+          "name": "Bundle of Strange Herbs",
+          "description": "Found near the Shadowfen, smells of sulfur and roses."
+        },
+        {
+          "_type": "inventoryThing",
+          "name": "Tarnished Silver Locket",
+          "description": "Opens, but is empty inside."
+        }
+      ]
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "_type": {
+      "const": "character"
+    },
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "rulesetVersion": {
+          "$ref": "#/$defs/SchemaVersion"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))T([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(\\.\\d+)?(Z)$"
+        },
+        "dateUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^((\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-((0[13578]|1[02])-(0[1-9]|[12]\\d|3[01])|(0[469]|11)-(0[1-9]|[12]\\d|30)|(02)-(0[1-9]|1\\d|2[0-8])))T([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(\\.\\d+)?(Z)$"
+        },
+        "campaignUrl": {
+          "$ref": "#/$defs/CampaignUrl"
+        }
+      },
+      "required": [
+        "rulesetVersion",
+        "dateCreated",
+        "dateUpdated",
+        "campaignUrl"
+      ],
+      "additionalProperties": false
+    },
+    "name": {
+      "type": "string"
+    },
+    "nameAlternate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pronouns": {
+      "$ref": "#/$defs/Pronouns"
+    },
+    "heritage": {
+      "$ref": "#/$defs/Heritage"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CharacterRole"
+      }
+    },
+    "experiences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Experience"
+      }
+    },
+    "level": {
+      "$ref": "#/$defs/Level"
+    },
+    "evasion": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "armorSlots": {
+      "$ref": "#/$defs/DynamicResource"
+    },
+    "hitPoints": {
+      "$ref": "#/$defs/DynamicResource"
+    },
+    "damageThresholds": {
+      "$ref": "#/$defs/DamageThresholds"
+    },
+    "hope": {
+      "$ref": "#/$defs/DynamicResource"
+    },
+    "stress": {
+      "$ref": "#/$defs/DynamicResource"
+    },
+    "traits": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/TraitName"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/Trait"
+      }
+    },
+    "gold": {
+      "$ref": "#/$defs/Gold"
+    },
+    "equippedArmor": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReferenceArmor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "primary",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "equippedWeapon": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReferenceWeapon"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "secondary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReferenceWeapon"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "primary",
+        "secondary",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/ReferenceArmor"
+          },
+          {
+            "$ref": "#/$defs/ReferenceWeapon"
+          },
+          {
+            "$ref": "#/$defs/ReferenceThing"
+          },
+          {
+            "$ref": "#/$defs/Thing"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "_type",
+    "_meta",
+    "name",
+    "nameAlternate",
+    "pronouns",
+    "heritage",
+    "roles",
+    "experiences",
+    "level",
+    "evasion",
+    "armorSlots",
+    "hitPoints",
+    "damageThresholds",
+    "hope",
+    "stress",
+    "traits",
+    "gold",
+    "equippedArmor",
+    "equippedWeapon",
+    "inventory"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "SchemaVersion": {
+      "id": "SchemaVersion",
+      "title": "Schema Version",
+      "description": "A version number",
+      "examples": [
+        "0.0.0"
+      ],
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "CampaignUrl": {
+      "id": "CampaignUrl",
+      "title": "Campaign URL",
+      "description": "The URL of the campaign",
+      "examples": [
+        "https://docs.dh-forge.com/schema/0.0.0/campaign.json",
+        "https://docs.dh-forge.com/schema/1.0.0/campaign.json"
+      ],
+      "type": "string",
+      "format": "uri"
+    },
+    "Pronouns": {
+      "id": "Pronouns",
+      "title": "Pronouns",
+      "description": "The pronouns of a character",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "pronouns"
+        },
+        "subject": {
+          "$ref": "#/$defs/PronounsSubject"
+        },
+        "object": {
+          "$ref": "#/$defs/PronounsObject"
+        },
+        "possessive": {
+          "$ref": "#/$defs/PronounsPossessive"
+        },
+        "reflexive": {
+          "$ref": "#/$defs/PronounsReflexive"
+        }
+      },
+      "required": [
+        "_type",
+        "subject",
+        "object",
+        "possessive",
+        "reflexive"
+      ],
+      "additionalProperties": false
+    },
+    "PronounsSubject": {
+      "id": "PronounsSubject",
+      "title": "Subject Pronoun",
+      "description": "A pronoun form used when it performs the verb’s action.",
+      "examples": [
+        "she",
+        "he",
+        "they"
+      ],
+      "type": "string"
+    },
+    "PronounsObject": {
+      "id": "PronounsObject",
+      "title": "Object Pronoun",
+      "description": "A pronoun form used when it receives the action or follows a preposition.",
+      "examples": [
+        "her",
+        "him",
+        "them"
+      ],
+      "type": "string"
+    },
+    "PronounsPossessive": {
+      "id": "PronounsPossessive",
+      "title": "Possessive Pronoun",
+      "description": "A pronoun form that replaces a noun to show ownership or relationship.",
+      "examples": [
+        "hers",
+        "his",
+        "theirs"
+      ],
+      "type": "string"
+    },
+    "PronounsReflexive": {
+      "id": "PronounsReflexive",
+      "title": "Reflexive Pronoun",
+      "description": "A pronoun form ending in “-self” or “-selves” that refers back to the clause’s subject.",
+      "examples": [
+        "herself",
+        "himself",
+        "themselves"
+      ],
+      "type": "string"
+    },
+    "Heritage": {
+      "id": "Heritage",
+      "title": "Character Heritage",
+      "description": "A character's heritage",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "heritage",
+          "const": "heritage"
+        },
+        "community": {
+          "$ref": "#/$defs/ReferenceCommunity"
+        },
+        "ancestry": {
+          "$ref": "#/$defs/CharacterAncestry"
+        }
+      },
+      "required": [
+        "_type",
+        "community",
+        "ancestry"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceCommunity": {
+      "id": "ReferenceCommunity",
+      "title": "Reference to a Community",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "heritage/community"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "CharacterAncestry": {
+      "id": "CharacterAncestry",
+      "title": "Character Ancestry",
+      "description": "A character's ancestry",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "_type": {
+              "default": "singleAncestry",
+              "const": "singleAncestry"
+            },
+            "ancestry": {
+              "$ref": "#/$defs/ReferenceAncestry"
+            }
+          },
+          "required": [
+            "_type",
+            "ancestry"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "_type": {
+              "default": "dualAncestry",
+              "const": "dualAncestry"
+            },
+            "primary": {
+              "$ref": "#/$defs/ReferenceAncestry"
+            },
+            "secondary": {
+              "$ref": "#/$defs/ReferenceAncestry"
+            }
+          },
+          "required": [
+            "_type",
+            "primary",
+            "secondary"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ReferenceAncestry": {
+      "id": "ReferenceAncestry",
+      "title": "Reference to an Ancestry",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "heritage/ancestry"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "CharacterRole": {
+      "id": "CharacterRole",
+      "title": "Character Role",
+      "description": "Ruleset references to the class and subclass of a character",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "characterRole",
+          "const": "characterRole"
+        },
+        "class": {
+          "$ref": "#/$defs/ReferenceClass"
+        },
+        "subclass": {
+          "$ref": "#/$defs/ReferenceSubclass"
+        }
+      },
+      "required": [
+        "_type",
+        "class",
+        "subclass"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceClass": {
+      "id": "ReferenceClass",
+      "title": "Reference to a Class",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "role/class"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceSubclass": {
+      "id": "ReferenceSubclass",
+      "title": "Reference to a Subclass",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "role/subclass"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "Experience": {
+      "id": "Experience",
+      "title": "Character Experience",
+      "description": "Experience represents a character specialization.",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "experience",
+          "const": "experience"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "_type",
+        "name",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "Level": {
+      "id": "Level",
+      "title": "Level",
+      "description": "The level of the character",
+      "examples": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "DynamicResource": {
+      "id": "DynamicResource",
+      "title": "Dynamic Resource",
+      "description": "A dynamic resource used by a character",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "dynamicResource"
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "_type",
+        "max",
+        "current"
+      ],
+      "additionalProperties": false
+    },
+    "DamageThresholds": {
+      "id": "DamageThresholds",
+      "title": "Damage Thresholds",
+      "description": "The damage thresholds of a character",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "damageThresholds",
+          "const": "damageThresholds"
+        },
+        "major": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "severe": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "_type",
+        "major",
+        "severe"
+      ],
+      "additionalProperties": false
+    },
+    "TraitName": {
+      "id": "TraitName",
+      "title": "Trait Name",
+      "description": "The name of a character trait",
+      "examples": [
+        "Agility",
+        "Strength",
+        "Finesse",
+        "Instinct",
+        "Presence",
+        "Knowledge"
+      ],
+      "anyOf": [
+        {
+          "const": "Agility"
+        },
+        {
+          "const": "Strength"
+        },
+        {
+          "const": "Finesse"
+        },
+        {
+          "const": "Instinct"
+        },
+        {
+          "const": "Presence"
+        },
+        {
+          "const": "Knowledge"
+        }
+      ]
+    },
+    "Trait": {
+      "id": "Trait",
+      "title": "Trait",
+      "description": "The details of a character trait",
+      "examples": [
+        {
+          "_type": "trait",
+          "value": 2,
+          "locked": true
+        },
+        {
+          "_type": "trait",
+          "value": -1,
+          "locked": false
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "trait",
+          "const": "trait"
+        },
+        "value": {
+          "default": 0,
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "locked": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "_type",
+        "value",
+        "locked"
+      ],
+      "additionalProperties": false
+    },
+    "Gold": {
+      "id": "Gold",
+      "title": "Gold",
+      "description": "The amount of gold held by a character",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "gold"
+        },
+        "handfuls": {
+          "default": 0,
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "bags": {
+          "default": 0,
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "chests": {
+          "default": 0,
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "_type",
+        "handfuls",
+        "bags",
+        "chests"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceArmor": {
+      "id": "ReferenceArmor",
+      "title": "Reference to a piece of Armor",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "item/armor"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceWeapon": {
+      "id": "ReferenceWeapon",
+      "title": "Reference to a Weapon",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "item/weapon"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceThing": {
+      "id": "ReferenceThing",
+      "title": "Reference to a Thing",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "const": "reference"
+        },
+        "_key": {
+          "const": "item/thing"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "_type",
+        "_key",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "Thing": {
+      "id": "Thing",
+      "title": "Thing",
+      "description": "A thing that can be added to a character's inventory",
+      "type": "object",
+      "properties": {
+        "_type": {
+          "default": "inventoryThing",
+          "const": "inventoryThing"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "_type",
+        "name",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
+```

@@ -1,4 +1,4 @@
-# DH Forge Community Code of Conduct
+# DH-Forge Community Code of Conduct
 
 ## Our Pledge
 
@@ -14,7 +14,7 @@ Examples of behavior that contributes to a positive environment include:
 - Being respectful of differing opinions, viewpoints, and experiences.
 - Giving and gracefully accepting **constructive** feedback.
 - **Assuming good intent** in others' actions and words, while being open to clarification.
-- Focusing on what is best for the overall community and the DHFS project.
+- Focusing on what is best for the overall community and the DH-F project.
 - Showing appreciation for the voluntary efforts of others – **nobody is paid to be here, so please be appreciative of the community support you receive.**
 - Helping others learn – **when looking for support, share your context and learnings so others can learn from your experience.**
 - Using welcoming and **inclusive** language.

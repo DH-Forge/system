@@ -1,6 +1,6 @@
-# Contributing to DH Forge System (DHFS)
+# Contributing to DH Forge System (DH-F)
 
-First off, thank you for considering contributing to DHFS! It's people like you that make the open-source community such a great place.
+First off, thank you for considering contributing to DH-F! It's people like you that make the open-source community such a great place.
 
 > [!IMPORTANT]
 > 1. All contributors should read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
@@ -8,7 +8,7 @@ First off, thank you for considering contributing to DHFS! It's people like you 
 
 ## Table of Contents
 
-- [Contributing to DH Forge System (DHFS)](#contributing-to-dh-forge-system-dhfs)
+- [Contributing to DH Forge System (DH-F)](#contributing-to-dh-forge-system-dh-f)
 	- [Table of Contents](#table-of-contents)
 	- [Getting Started](#getting-started)
 		- [Prerequisites](#prerequisites)
@@ -70,11 +70,11 @@ Houses the individual, publishable Node.js packages.
 
 #### 📦 Models
 `/packages/forge-schema`
-This is the core of DHFS. It contains the Zod schemas that define all DHFS data structures. TypeScript types and JSON Schemas are generated from these schemas.
+This is the core of DH-F. It contains the Zod schemas that define all DH-F data structures. TypeScript types and JSON Schemas are generated from these schemas.
 
 #### 📦 Helpers
 `/packages/forge-helpers`
-Provides utility functions for resolving and formatting data related to DHFS.
+Provides utility functions for resolving and formatting data related to DH-F.
 
 #### 📦 TypeScript Config
 `/packages/forge-tsconfig`
@@ -82,7 +82,7 @@ Contains shared TypeScript configurations used across the monorepo to ensure con
 
 ### Apps
 `/apps/`
-Contains applications built using the DHFS packages.
+Contains applications built using the DH-F packages.
 
 #### ⚡️ Docs
 `/apps/docs`

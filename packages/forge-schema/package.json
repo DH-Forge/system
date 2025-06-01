@@ -16,7 +16,7 @@
 		"./models/*": "./src/models/*"
 	},
 	"scripts": {
-		"schema:gen": "tsx ./scripts/generate-json-schema.ts",
+		"schema:gen": "tsx ./scripts/generate.ts",
 		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
 		"check": "tsc --noEmit"
 	},

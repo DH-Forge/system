@@ -12,12 +12,12 @@ const schemaFiles = listSchemaFiles(monorepoRoot);
 {
 	getGroupedSchemaVersions(schemaFiles).map((major) => (
 		<section>
-			<h3>Version {major.version}</h3>
+			<h2>Version {major.version}</h2>
 			<ul>
 				{major.schemas
 					.map((minor) => (
 						<li>
-							<h4>{minor.version}</h4>
+							<h3>{minor.version}</h3>
 							<ul>
 								{minor.schemas
 									.map((patch) => (
