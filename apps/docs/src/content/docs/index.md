@@ -4,6 +4,10 @@ description: DH-F is an open-source system for defining, structuring, and sharin
 sidebar:
   label: "Introduction"
   order: 0
+banner:
+  content: |
+    This project is in early access.
+    <a href="https://github.com/DH-Forge/system/issues">Report issues</a>
 ---
 DH-Forge (DH-F) is an open-source toolkit for wrangling character and game data for the Daggerheart™ TTRPG.
 
@@ -47,4 +51,4 @@ So what Adventures Can This Unlock? When our tools speak the same language using
 
 ## Ready to Forge?
 
-We invite you to **explore the DHFS data models** or dive into **getting started with the JSON Schemas**!
+We invite you to **explore the DH-F data models** or dive into **getting started with the JSON Schemas**!

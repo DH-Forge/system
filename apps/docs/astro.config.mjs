@@ -32,13 +32,7 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: "Start Here",
-					items: [
-						"index",
-						"overview/compatibility",
-						"overview/homebrew",
-						"overview/typescript",
-						"overview/llms",
-					],
+					items: ["index", "overview/concepts", "overview/llms"],
 				},
 				{
 					label: "JSON Schema",
@@ -68,6 +62,19 @@ export default defineConfig({
 							url: "https://www.daggerheart.com",
 							description: "The official website for the Daggerheart™ game.",
 						},
+					],
+					promote: [
+						"documentation/dhf-data-spec",
+						"documentation/dhf-dereference-spec",
+						"documentation/dhf-typescript-api",
+					],
+					demote: ["schema/versions"],
+					exclude: [
+						"overview/concepts",
+						"overview/llms",
+						"schema",
+						"index",
+						"404",
 					],
 				}),
 			],
