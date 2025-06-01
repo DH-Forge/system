@@ -41,8 +41,18 @@ export default defineConfig({
 				/*  */
 
 				{
-					label: "Documentation",
-					autogenerate: { directory: "documentation" },
+					label: "DH-F Data Spec",
+					autogenerate: { directory: "dhf-data-spec" },
+				},
+
+				{
+					label: "DH-F Dereference Spec",
+					autogenerate: { directory: "dhf-dereference-spec" },
+				},
+
+				{
+					label: "DH-F Typescript API",
+					autogenerate: { directory: "dhf-typescript-api" },
 				},
 			],
 			plugins: [
@@ -64,9 +74,9 @@ export default defineConfig({
 						},
 					],
 					promote: [
-						"documentation/dhf-data-spec",
-						"documentation/dhf-dereference-spec",
-						"documentation/dhf-typescript-api",
+						"documentation/dhf-data-spec/overview",
+						"documentation/dhf-dereference-spec/overview",
+						"documentation/dhf-typescript-api/overview",
 					],
 					demote: ["schema/versions"],
 					exclude: [

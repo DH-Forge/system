@@ -78,7 +78,7 @@ const useDirectory = async (version: string): Promise<string> => {
  * Writes each imported schema as a JSON file at the monorepo root.
  * @returns Promise<void>
  */
-const generateSchemas = async (): Promise<void> => {
+export const generateSchemas = async (): Promise<void> => {
 	const version = await getVersion();
 
 	const directory = await useDirectory(version);
@@ -94,6 +94,3 @@ const generateSchemas = async (): Promise<void> => {
 		}),
 	);
 };
-
-// Run the script
-void generateSchemas();
